@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.org/dtd/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+  <table-filter match-catalog="heroku_4ee2ecbe460bfa4" match-name="activity_list"/>
+  <table-filter match-catalog="heroku_4ee2ecbe460bfa4" match-name="activity_type"/>
+  <table-filter match-catalog="heroku_4ee2ecbe460bfa4" match-name="address"/>
+  <table-filter match-catalog="heroku_4ee2ecbe460bfa4" match-name="contact"/>
+  <table-filter match-catalog="heroku_4ee2ecbe460bfa4" match-name="contact_type"/>
+  <table-filter match-catalog="heroku_4ee2ecbe460bfa4" match-name="group"/>
+  <table-filter match-catalog="heroku_4ee2ecbe460bfa4" match-name="group_customer"/>
+  <table-filter match-catalog="heroku_4ee2ecbe460bfa4" match-name="group_weekdays"/>
+  <table-filter match-catalog="heroku_4ee2ecbe460bfa4" match-name="group_worker"/>
+  <table-filter match-catalog="heroku_4ee2ecbe460bfa4" match-name="membership_fee_type"/>
+  <table-filter match-catalog="heroku_4ee2ecbe460bfa4" match-name="private_coach"/>
+  <table-filter match-catalog="heroku_4ee2ecbe460bfa4" match-name="private_coach_weekdays"/>
+  <table-filter match-catalog="heroku_4ee2ecbe460bfa4" match-name="user"/>
+  <table-filter match-catalog="heroku_4ee2ecbe460bfa4" match-name="user_customer"/>
+  <table-filter match-catalog="heroku_4ee2ecbe460bfa4" match-name="user_membership_fee"/>
+  <table-filter match-catalog="heroku_4ee2ecbe460bfa4" match-name="user_type"/>
+  <table-filter match-catalog="heroku_4ee2ecbe460bfa4" match-name="user_worker"/>
+  <table-filter match-catalog="heroku_4ee2ecbe460bfa4" match-name="user_worker_worker_rights"/>
+  <table-filter match-catalog="heroku_4ee2ecbe460bfa4" match-name="weekdays"/>
+  <table-filter match-catalog="heroku_4ee2ecbe460bfa4" match-name="worker_rights"/>
+  <table-filter match-catalog="heroku_4ee2ecbe460bfa4" match-name="worker_rights_type"/>
+  <table-filter match-catalog="heroku_4ee2ecbe460bfa4" match-name="worker_type"/>
+</hibernate-reverse-engineering>

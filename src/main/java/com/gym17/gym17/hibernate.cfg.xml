@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.password">396fcf88</property>
+        <property name="hibernate.connection.url">jdbc:mysql://eu-cdbr-west-03.cleardb.net:3306/heroku_4ee2ecbe460bfa4</property>
+        <property name="hibernate.connection.username">b5966e54b499e4</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.search.autoregister_listeners">true</property>
+        <property name="hibernate.validator.apply_to_ddl">false</property>
+        <mapping class="model.GroupCustomer" />
+        <mapping class="model.ContactType" />
+        <mapping class="model.GroupWeekdays" />
+        <mapping class="model.WorkerRightsType" />
+        <mapping class="model.ActivityType" />
+        <mapping class="model.PrivateCoach" />
+        <mapping class="model.User" />
+        <mapping class="model.Address" />
+        <mapping class="model.GroupWorker" />
+        <mapping class="model.PrivateCoachWeekdays" />
+        <mapping class="model.UserWorker" />
+        <mapping class="model.UserMembershipFee" />
+        <mapping class="model.Group" />
+        <mapping class="model.UserType" />
+        <mapping class="model.MembershipFeeType" />
+        <mapping class="model.UserWorkerWorkerRights" />
+        <mapping class="model.WorkerType" />
+        <mapping class="model.ActivityList" />
+        <mapping class="model.WorkerRights" />
+        <mapping class="model.UserCustomer" />
+        <mapping class="model.Weekdays" />
+        <mapping class="model.Contact" />
+    </session-factory>
+</hibernate-configuration>
