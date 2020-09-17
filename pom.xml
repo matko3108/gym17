@@ -14,7 +14,9 @@
 	<name>gym17</name>
 	<description>Demo project for Spring Boot</description>
 
-
+	<properties>
+		<java.version>14</java.version>
+	</properties>
 
 	<dependencies>
 		<dependency>
@@ -87,37 +89,11 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-tomcat</artifactId>
 </dependency>
-
-    <dependency>
-         <groupId>org.hibernate</groupId>
-         <artifactId>hibernate-core</artifactId>
-         <version>5.1.0.Final</version>
-     </dependency>
- 
-     <!-- http://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
-     <dependency>
-         <groupId>org.hibernate</groupId>
-         <artifactId>hibernate-entitymanager</artifactId>
-         <version>5.1.0.Final</version>
-     </dependency>
- 
- 
-     <!-- http://mvnrepository.com/artifact/org.hibernate/hibernate-c3p0 -->
-     <dependency>
-         <groupId>org.hibernate</groupId>
-         <artifactId>hibernate-c3p0</artifactId>
-         <version>5.1.0.Final</version>
-     </dependency>
-     
-   
 	</dependencies>
 	
 
 	<build>
-	
 		<plugins>
-
- 		
 			  <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
@@ -125,8 +101,7 @@
             <skip>true</skip>
         </configuration>
     </plugin>
-
-    </plugins>
+		</plugins>
 	</build>
 
 </project>
