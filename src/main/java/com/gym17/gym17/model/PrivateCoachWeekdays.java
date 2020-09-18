@@ -1,5 +1,5 @@
 package src.main.java.com.gym17.gym17.model;
-// Generated Sep 16, 2020, 7:54:25 PM by Hibernate Tools 4.3.5.Final
+// Generated Sep 18, 2020, 8:04:59 PM by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -22,18 +22,18 @@ import javax.persistence.TemporalType;
 public class PrivateCoachWeekdays implements java.io.Serializable {
 
 	private Integer id;
+	private UserWorker userWorker;
 	private Weekdays weekdays;
 	private Integer duradion;
-	private Integer fkPrivateCoach;
 	private Date hour;
 
 	public PrivateCoachWeekdays() {
 	}
 
-	public PrivateCoachWeekdays(Weekdays weekdays, Integer duradion, Integer fkPrivateCoach, Date hour) {
+	public PrivateCoachWeekdays(UserWorker userWorker, Weekdays weekdays, Integer duradion, Date hour) {
+		this.userWorker = userWorker;
 		this.weekdays = weekdays;
 		this.duradion = duradion;
-		this.fkPrivateCoach = fkPrivateCoach;
 		this.hour = hour;
 	}
 
@@ -47,6 +47,16 @@ public class PrivateCoachWeekdays implements java.io.Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "fk_private_coach")
+	public UserWorker getUserWorker() {
+		return this.userWorker;
+	}
+
+	public void setUserWorker(UserWorker userWorker) {
+		this.userWorker = userWorker;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -66,15 +76,6 @@ public class PrivateCoachWeekdays implements java.io.Serializable {
 
 	public void setDuradion(Integer duradion) {
 		this.duradion = duradion;
-	}
-
-	@Column(name = "fk_private_coach")
-	public Integer getFkPrivateCoach() {
-		return this.fkPrivateCoach;
-	}
-
-	public void setFkPrivateCoach(Integer fkPrivateCoach) {
-		this.fkPrivateCoach = fkPrivateCoach;
 	}
 
 	@Temporal(TemporalType.TIME)

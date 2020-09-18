@@ -1,13 +1,15 @@
 package src.main.java.com.gym17.gym17.model;
-// Generated Sep 16, 2020, 7:54:25 PM by Hibernate Tools 4.3.5.Final
+// Generated Sep 18, 2020, 7:41:35 PM by Hibernate Tools 4.3.5.Final
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -18,9 +20,9 @@ import javax.persistence.Table;
 public class UserType implements java.io.Serializable {
 
 	private Integer id;
-	private String name;
 	private String description;
-	private User user;
+	private String name;
+	private Set<User> users = new HashSet<User>(0);
 
 	public UserType() {
 	}
@@ -29,10 +31,10 @@ public class UserType implements java.io.Serializable {
 		this.name = name;
 	}
 
-	public UserType(String name, String description, User user) {
-		this.name = name;
+	public UserType(String description, String name, Set<User> users) {
 		this.description = description;
-		this.user = user;
+		this.name = name;
+		this.users = users;
 	}
 
 	@Id
@@ -47,15 +49,6 @@ public class UserType implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "name", nullable = false, length = 100)
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	@Column(name = "description")
 	public String getDescription() {
 		return this.description;
@@ -65,13 +58,22 @@ public class UserType implements java.io.Serializable {
 		this.description = description;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "address")
-	public User getUser() {
-		return this.user;
+	@Column(name = "name", nullable = false, length = 100)
+	public String getName() {
+		return this.name;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userType")
+	public Set<User> getUsers() {
+		return this.users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 
 }

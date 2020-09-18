@@ -1,11 +1,15 @@
 package src.main.java.com.gym17.gym17.model;
-// Generated Sep 16, 2020, 7:54:25 PM by Hibernate Tools 4.3.5.Final
+// Generated Sep 18, 2020, 8:04:59 PM by Hibernate Tools 4.3.5.Final
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -20,6 +24,8 @@ public class MembershipFeeType implements java.io.Serializable {
 	private String description;
 	private String name;
 	private byte validityPeriod;
+	private Set<CustomerMembershipFee> customerMembershipFees = new HashSet<CustomerMembershipFee>(0);
+	private Set<UserMembershipFee> userMembershipFees = new HashSet<UserMembershipFee>(0);
 
 	public MembershipFeeType() {
 	}
@@ -30,11 +36,14 @@ public class MembershipFeeType implements java.io.Serializable {
 		this.validityPeriod = validityPeriod;
 	}
 
-	public MembershipFeeType(long amount, String description, String name, byte validityPeriod) {
+	public MembershipFeeType(long amount, String description, String name, byte validityPeriod,
+			Set<CustomerMembershipFee> customerMembershipFees, Set<UserMembershipFee> userMembershipFees) {
 		this.amount = amount;
 		this.description = description;
 		this.name = name;
 		this.validityPeriod = validityPeriod;
+		this.customerMembershipFees = customerMembershipFees;
+		this.userMembershipFees = userMembershipFees;
 	}
 
 	@Id
@@ -49,7 +58,7 @@ public class MembershipFeeType implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "amount", nullable = false, precision = 10, scale = 0)
+	@Column(name = "amount", nullable = false)
 	public long getAmount() {
 		return this.amount;
 	}
@@ -83,6 +92,24 @@ public class MembershipFeeType implements java.io.Serializable {
 
 	public void setValidityPeriod(byte validityPeriod) {
 		this.validityPeriod = validityPeriod;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "membershipFeeType")
+	public Set<CustomerMembershipFee> getCustomerMembershipFees() {
+		return this.customerMembershipFees;
+	}
+
+	public void setCustomerMembershipFees(Set<CustomerMembershipFee> customerMembershipFees) {
+		this.customerMembershipFees = customerMembershipFees;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "membershipFeeType")
+	public Set<UserMembershipFee> getUserMembershipFees() {
+		return this.userMembershipFees;
+	}
+
+	public void setUserMembershipFees(Set<UserMembershipFee> userMembershipFees) {
+		this.userMembershipFees = userMembershipFees;
 	}
 
 }

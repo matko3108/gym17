@@ -1,11 +1,14 @@
 package src.main.java.com.gym17.gym17.model;
-// Generated Sep 16, 2020, 7:54:25 PM by Hibernate Tools 4.3.5.Final
+// Generated Sep 18, 2020, 8:04:59 PM by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -16,15 +19,15 @@ import javax.persistence.Table;
 public class GroupWorker implements java.io.Serializable {
 
 	private Integer id;
-	private int fkGroup;
-	private int fkWorker;
+	private Group group;
+	private UserWorker userWorker;
 
 	public GroupWorker() {
 	}
 
-	public GroupWorker(int fkGroup, int fkWorker) {
-		this.fkGroup = fkGroup;
-		this.fkWorker = fkWorker;
+	public GroupWorker(Group group, UserWorker userWorker) {
+		this.group = group;
+		this.userWorker = userWorker;
 	}
 
 	@Id
@@ -39,22 +42,24 @@ public class GroupWorker implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "fk_group", nullable = false)
-	public int getFkGroup() {
-		return this.fkGroup;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "fk_group", nullable = false)
+	public Group getGroup() {
+		return this.group;
 	}
 
-	public void setFkGroup(int fkGroup) {
-		this.fkGroup = fkGroup;
+	public void setGroup(Group group) {
+		this.group = group;
 	}
 
-	@Column(name = "fk_worker", nullable = false)
-	public int getFkWorker() {
-		return this.fkWorker;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "fk_worker", nullable = false)
+	public UserWorker getUserWorker() {
+		return this.userWorker;
 	}
 
-	public void setFkWorker(int fkWorker) {
-		this.fkWorker = fkWorker;
+	public void setUserWorker(UserWorker userWorker) {
+		this.userWorker = userWorker;
 	}
 
 }

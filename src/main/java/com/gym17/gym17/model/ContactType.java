@@ -1,13 +1,11 @@
 package src.main.java.com.gym17.gym17.model;
-// Generated Sep 16, 2020, 7:54:25 PM by Hibernate Tools 4.3.5.Final
+// Generated Sep 18, 2020, 8:09:18 PM by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -18,9 +16,8 @@ import javax.persistence.Table;
 public class ContactType implements java.io.Serializable {
 
 	private Integer id;
-	private String name;
 	private String description;
-	private Contact contact;
+	private String name;
 
 	public ContactType() {
 	}
@@ -29,10 +26,9 @@ public class ContactType implements java.io.Serializable {
 		this.name = name;
 	}
 
-	public ContactType(String name, String description, Contact contact) {
-		this.name = name;
+	public ContactType(String description, String name) {
 		this.description = description;
-		this.contact = contact;
+		this.name = name;
 	}
 
 	@Id
@@ -47,15 +43,6 @@ public class ContactType implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "name", nullable = false, length = 20)
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	@Column(name = "description")
 	public String getDescription() {
 		return this.description;
@@ -65,13 +52,13 @@ public class ContactType implements java.io.Serializable {
 		this.description = description;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "contactType")
-	public Contact getContact() {
-		return this.contact;
+	@Column(name = "name", nullable = false, length = 20)
+	public String getName() {
+		return this.name;
 	}
 
-	public void setContact(Contact contact) {
-		this.contact = contact;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

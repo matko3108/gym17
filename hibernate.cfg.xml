@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.password">396fcf88</property>
+        <property name="hibernate.connection.url">jdbc:mysql://eu-cdbr-west-03.cleardb.net:3306/heroku_4ee2ecbe460bfa4</property>
+        <property name="hibernate.connection.username">b5966e54b499e4</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
+        <property name="hibernate.search.autoregister_listeners">true</property>
+        <property name="hibernate.validator.apply_to_ddl">false</property>
+        <mapping class="src.main.java.com.gym17.gym17.model.ActivityType" />
+        <mapping class="src.main.java.com.gym17.gym17.model.UserWorkerWorkerRights" />
+        <mapping class="src.main.java.com.gym17.gym17.model.UserType" />
+        <mapping class="src.main.java.com.gym17.gym17.model.UserMembershipFee" />
+        <mapping class="src.main.java.com.gym17.gym17.model.GroupWorker" />
+        <mapping class="src.main.java.com.gym17.gym17.model.Worker" />
+        <mapping class="src.main.java.com.gym17.gym17.model.ActivityList" />
+        <mapping class="src.main.java.com.gym17.gym17.model.UserCustomer" />
+        <mapping class="src.main.java.com.gym17.gym17.model.UserWorker" />
+        <mapping class="src.main.java.com.gym17.gym17.model.WorkerRights" />
+        <mapping class="src.main.java.com.gym17.gym17.model.WorkerRightsType" />
+        <mapping class="src.main.java.com.gym17.gym17.model.Contact" />
+        <mapping class="src.main.java.com.gym17.gym17.model.Group" />
+        <mapping class="src.main.java.com.gym17.gym17.model.GroupCustomer" />
+        <mapping class="src.main.java.com.gym17.gym17.model.ContactType" />
+        <mapping class="src.main.java.com.gym17.gym17.model.GroupWeekdays" />
+        <mapping class="src.main.java.com.gym17.gym17.model.MembershipFeeType" />
+        <mapping class="src.main.java.com.gym17.gym17.model.Address" />
+        <mapping class="src.main.java.com.gym17.gym17.model.PrivateCoach" />
+        <mapping class="src.main.java.com.gym17.gym17.model.CustomerMembershipFee" />
+        <mapping class="src.main.java.com.gym17.gym17.model.PrivateCoachWeekdays" />
+        <mapping class="src.main.java.com.gym17.gym17.model.WorkerType" />
+        <mapping class="src.main.java.com.gym17.gym17.model.User" />
+        <mapping class="src.main.java.com.gym17.gym17.model.Weekdays" />
+    </session-factory>
+</hibernate-configuration>

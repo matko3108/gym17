@@ -1,5 +1,5 @@
 package src.main.java.com.gym17.gym17.model;
-// Generated Sep 16, 2020, 7:54:25 PM by Hibernate Tools 4.3.5.Final
+// Generated Sep 18, 2020, 8:04:59 PM by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -22,18 +22,18 @@ import javax.persistence.TemporalType;
 public class GroupWeekdays implements java.io.Serializable {
 
 	private Integer id;
+	private Group group;
 	private Weekdays weekdays;
 	private Integer duration;
-	private Integer fkGroup;
 	private Date hour;
 
 	public GroupWeekdays() {
 	}
 
-	public GroupWeekdays(Weekdays weekdays, Integer duration, Integer fkGroup, Date hour) {
+	public GroupWeekdays(Group group, Weekdays weekdays, Integer duration, Date hour) {
+		this.group = group;
 		this.weekdays = weekdays;
 		this.duration = duration;
-		this.fkGroup = fkGroup;
 		this.hour = hour;
 	}
 
@@ -47,6 +47,16 @@ public class GroupWeekdays implements java.io.Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "fk_group")
+	public Group getGroup() {
+		return this.group;
+	}
+
+	public void setGroup(Group group) {
+		this.group = group;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -66,15 +76,6 @@ public class GroupWeekdays implements java.io.Serializable {
 
 	public void setDuration(Integer duration) {
 		this.duration = duration;
-	}
-
-	@Column(name = "fk_group")
-	public Integer getFkGroup() {
-		return this.fkGroup;
-	}
-
-	public void setFkGroup(Integer fkGroup) {
-		this.fkGroup = fkGroup;
 	}
 
 	@Temporal(TemporalType.TIME)

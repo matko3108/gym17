@@ -1,5 +1,5 @@
 package src.main.java.com.gym17.gym17.model;
-// Generated Sep 16, 2020, 7:54:25 PM by Hibernate Tools 4.3.5.Final
+// Generated Sep 18, 2020, 8:04:59 PM by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;

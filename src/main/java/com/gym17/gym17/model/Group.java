@@ -1,12 +1,16 @@
 package src.main.java.com.gym17.gym17.model;
-// Generated Sep 16, 2020, 7:54:25 PM by Hibernate Tools 4.3.5.Final
+// Generated Sep 18, 2020, 8:04:59 PM by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -26,6 +30,9 @@ public class Group implements java.io.Serializable {
 	private String name;
 	private Date start;
 	private Integer valid;
+	private Set<GroupWeekdays> groupWeekdayses = new HashSet<GroupWeekdays>(0);
+	private Set<GroupCustomer> groupCustomers = new HashSet<GroupCustomer>(0);
+	private Set<GroupWorker> groupWorkers = new HashSet<GroupWorker>(0);
 
 	public Group() {
 	}
@@ -35,7 +42,8 @@ public class Group implements java.io.Serializable {
 	}
 
 	public Group(Boolean active, Date created, String description, Integer maxCustomer, String name, Date start,
-			Integer valid) {
+			Integer valid, Set<GroupWeekdays> groupWeekdayses, Set<GroupCustomer> groupCustomers,
+			Set<GroupWorker> groupWorkers) {
 		this.active = active;
 		this.created = created;
 		this.description = description;
@@ -43,6 +51,9 @@ public class Group implements java.io.Serializable {
 		this.name = name;
 		this.start = start;
 		this.valid = valid;
+		this.groupWeekdayses = groupWeekdayses;
+		this.groupCustomers = groupCustomers;
+		this.groupWorkers = groupWorkers;
 	}
 
 	@Id
@@ -120,6 +131,33 @@ public class Group implements java.io.Serializable {
 
 	public void setValid(Integer valid) {
 		this.valid = valid;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "group")
+	public Set<GroupWeekdays> getGroupWeekdayses() {
+		return this.groupWeekdayses;
+	}
+
+	public void setGroupWeekdayses(Set<GroupWeekdays> groupWeekdayses) {
+		this.groupWeekdayses = groupWeekdayses;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "group")
+	public Set<GroupCustomer> getGroupCustomers() {
+		return this.groupCustomers;
+	}
+
+	public void setGroupCustomers(Set<GroupCustomer> groupCustomers) {
+		this.groupCustomers = groupCustomers;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "group")
+	public Set<GroupWorker> getGroupWorkers() {
+		return this.groupWorkers;
+	}
+
+	public void setGroupWorkers(Set<GroupWorker> groupWorkers) {
+		this.groupWorkers = groupWorkers;
 	}
 
 }

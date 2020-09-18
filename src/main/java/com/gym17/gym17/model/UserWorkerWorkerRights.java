@@ -1,5 +1,5 @@
 package src.main.java.com.gym17.gym17.model;
-// Generated Sep 16, 2020, 7:54:25 PM by Hibernate Tools 4.3.5.Final
+// Generated Sep 18, 2020, 8:04:59 PM by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -22,24 +22,24 @@ import javax.persistence.TemporalType;
 public class UserWorkerWorkerRights implements java.io.Serializable {
 
 	private Integer id;
+	private UserWorker userWorker;
 	private WorkerRights workerRights;
 	private Boolean active;
 	private Date created;
-	private int fkWorker;
 
 	public UserWorkerWorkerRights() {
 	}
 
-	public UserWorkerWorkerRights(WorkerRights workerRights, int fkWorker) {
+	public UserWorkerWorkerRights(UserWorker userWorker, WorkerRights workerRights) {
+		this.userWorker = userWorker;
 		this.workerRights = workerRights;
-		this.fkWorker = fkWorker;
 	}
 
-	public UserWorkerWorkerRights(WorkerRights workerRights, Boolean active, Date created, int fkWorker) {
+	public UserWorkerWorkerRights(UserWorker userWorker, WorkerRights workerRights, Boolean active, Date created) {
+		this.userWorker = userWorker;
 		this.workerRights = workerRights;
 		this.active = active;
 		this.created = created;
-		this.fkWorker = fkWorker;
 	}
 
 	@Id
@@ -52,6 +52,16 @@ public class UserWorkerWorkerRights implements java.io.Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "fk_worker", nullable = false)
+	public UserWorker getUserWorker() {
+		return this.userWorker;
+	}
+
+	public void setUserWorker(UserWorker userWorker) {
+		this.userWorker = userWorker;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -81,15 +91,6 @@ public class UserWorkerWorkerRights implements java.io.Serializable {
 
 	public void setCreated(Date created) {
 		this.created = created;
-	}
-
-	@Column(name = "fk_worker", nullable = false)
-	public int getFkWorker() {
-		return this.fkWorker;
-	}
-
-	public void setFkWorker(int fkWorker) {
-		this.fkWorker = fkWorker;
 	}
 
 }

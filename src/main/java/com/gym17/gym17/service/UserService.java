@@ -1,7 +1,11 @@
 package src.main.java.com.gym17.gym17.service;
 
-//import src.main.java.com.gym17.gym17.model.ModelUtilities;
 import src.main.java.com.gym17.gym17.model.User;
+import src.main.java.com.gym17.gym17.model.UserCustomer;
+//import src.main.java.com.gym17.gym17.model.ModelUtilities;
+import src.main.java.com.gym17.gym17.model.UserData;
+import src.main.java.com.gym17.gym17.model.UserWorker;
+
 import java.util.Iterator;
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -9,10 +13,17 @@ import java.util.function.Consumer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import src.main.java.com.gym17.gym17.repositories.UserRepository;
+import src.main.java.com.gym17.gym17.repositories.UserCustomerRepository;
+import src.main.java.com.gym17.gym17.repositories.UserTypeRepository;
+
+
 
 @Service
 public class UserService {
 	private UserRepository UserRepository;
+	private UserCustomerRepository UserCustomerRepository;
+	private UserTypeRepository UserTypeRepository;
+
 
 	@Autowired
 	public UserService(UserRepository UserRepository) {
@@ -57,7 +68,6 @@ public class UserService {
 
 	private void performAction(int idUser, Consumer<User> consumer) {
 		Optional<User> orgOptional = findById(idUser);
-
 		if (orgOptional.isPresent()) {
 			User User = orgOptional.get();
 			consumer.accept(User);
@@ -77,5 +87,25 @@ public class UserService {
 			}
 		}
 		return false;
+	}
+
+	public User saveNewUser(UserData data) {
+		if(data.getUserType().equals("WORKER")) {
+			User user = UserRepository.save(data.getUser());
+			user.setUserWorker(new UserWorker(user));
+			//user.setUserType(UserTypeRepository.findByName);
+			UserRepository.save(user);
+			return user;
+			
+		}else {
+			User user = UserRepository.save(data.getUser());
+			user.setUserCustomer(new UserCustomer(user));
+			UserRepository.save(user);
+			return 	user;
+		}
+		}
+	
+	public User updateUser(User user) {
+		return UserRepository.save(user);
 	}
 }

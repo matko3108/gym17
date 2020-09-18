@@ -16,12 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import src.main.java.com.gym17.gym17.model.User;
+import src.main.java.com.gym17.gym17.model.UserData;
 import src.main.java.com.gym17.gym17.response.ErrorResponse;
 import src.main.java.com.gym17.gym17.response.ErrorType;
 import src.main.java.com.gym17.gym17.service.UserService;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("")
 public class UserController {
 
 
@@ -32,7 +33,7 @@ public class UserController {
 		this.UserService = UserService;
 	}
 
-	@GetMapping("/v1/list")
+	@GetMapping("/v1/user/list")
 	public Iterable<User> list() {
 		//log.info("Requested: a list of Users.");
 		Iterable<User> UserList = UserService.list();
@@ -96,6 +97,25 @@ public class UserController {
 		return ResponseEntity.ok().body(User.get());
 	}
 
+	
+	@PostMapping("/v100/user")
+	public ResponseEntity<Object> saveUser(@RequestBody UserData userdata) {
+
+		/*
+		 * log.
+		 * info("Requested: update User with a specifid id. Request data: [UserId={}]",
+		 * UserId);
+		 */
+			//log.info("Response: [{}].", ErrorType.USER_NOT_FOUND.toString());
+			User usersaved = UserService.saveNewUser(userdata);
+			return ResponseEntity.ok().body(usersaved);
+			//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
+		
+
+		//UserService.update(User.get(), data);
+		//log.info("Requested User successfully updated! Response: [{}].", User.get());
+		//return ResponseEntity.ok().body(User.get());
+	}
 	/*
 	 * @RestController() public class UserinfoController {
 	 * 

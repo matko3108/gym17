@@ -1,11 +1,14 @@
 package src.main.java.com.gym17.gym17.model;
-// Generated Sep 16, 2020, 7:54:25 PM by Hibernate Tools 4.3.5.Final
+// Generated Sep 18, 2020, 8:04:59 PM by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -16,15 +19,15 @@ import javax.persistence.Table;
 public class GroupCustomer implements java.io.Serializable {
 
 	private Integer id;
-	private int fkCustomer;
-	private int fkGroup;
+	private Group group;
+	private UserCustomer userCustomer;
 
 	public GroupCustomer() {
 	}
 
-	public GroupCustomer(int fkCustomer, int fkGroup) {
-		this.fkCustomer = fkCustomer;
-		this.fkGroup = fkGroup;
+	public GroupCustomer(Group group, UserCustomer userCustomer) {
+		this.group = group;
+		this.userCustomer = userCustomer;
 	}
 
 	@Id
@@ -39,22 +42,24 @@ public class GroupCustomer implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "fk_customer", nullable = false)
-	public int getFkCustomer() {
-		return this.fkCustomer;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "fk_group", nullable = false)
+	public Group getGroup() {
+		return this.group;
 	}
 
-	public void setFkCustomer(int fkCustomer) {
-		this.fkCustomer = fkCustomer;
+	public void setGroup(Group group) {
+		this.group = group;
 	}
 
-	@Column(name = "fk_group", nullable = false)
-	public int getFkGroup() {
-		return this.fkGroup;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "fk_customer", nullable = false)
+	public UserCustomer getUserCustomer() {
+		return this.userCustomer;
 	}
 
-	public void setFkGroup(int fkGroup) {
-		this.fkGroup = fkGroup;
+	public void setUserCustomer(UserCustomer userCustomer) {
+		this.userCustomer = userCustomer;
 	}
 
 }
