@@ -1,5 +1,5 @@
 package src.main.java.com.gym17.gym17.model;
-// Generated Sep 19, 2020, 1:05:34 PM by Hibernate Tools 4.3.5.Final
+// Generated Sep 19, 2020, 3:20:31 PM by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
 public class PrivateCoachWeekdays implements java.io.Serializable {
 
 	private Integer id;
-	private UserWorker userWorker;
+	private PrivateCoach privateCoach;
 	private Weekdays weekdays;
 	private Integer duradion;
 	private Date hour;
@@ -30,8 +30,8 @@ public class PrivateCoachWeekdays implements java.io.Serializable {
 	public PrivateCoachWeekdays() {
 	}
 
-	public PrivateCoachWeekdays(UserWorker userWorker, Weekdays weekdays, Integer duradion, Date hour) {
-		this.userWorker = userWorker;
+	public PrivateCoachWeekdays(PrivateCoach privateCoach, Weekdays weekdays, Integer duradion, Date hour) {
+		this.privateCoach = privateCoach;
 		this.weekdays = weekdays;
 		this.duradion = duradion;
 		this.hour = hour;
@@ -51,12 +51,12 @@ public class PrivateCoachWeekdays implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_private_coach")
-	public UserWorker getUserWorker() {
-		return this.userWorker;
+	public PrivateCoach getPrivateCoach() {
+		return this.privateCoach;
 	}
 
-	public void setUserWorker(UserWorker userWorker) {
-		this.userWorker = userWorker;
+	public void setPrivateCoach(PrivateCoach privateCoach) {
+		this.privateCoach = privateCoach;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

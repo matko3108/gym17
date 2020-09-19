@@ -1,7 +1,9 @@
 package src.main.java.com.gym17.gym17.model;
-// Generated Sep 19, 2020, 1:05:34 PM by Hibernate Tools 4.3.5.Final
+// Generated Sep 19, 2020, 3:20:31 PM by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +12,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -27,6 +30,7 @@ public class PrivateCoach implements java.io.Serializable {
 	private String description;
 	private Date end;
 	private Date start;
+	private Set<PrivateCoachWeekdays> privateCoachWeekdayses = new HashSet<PrivateCoachWeekdays>(0);
 
 	public PrivateCoach() {
 	}
@@ -37,12 +41,14 @@ public class PrivateCoach implements java.io.Serializable {
 		this.start = start;
 	}
 
-	public PrivateCoach(UserCustomer userCustomer, UserWorker userWorker, String description, Date end, Date start) {
+	public PrivateCoach(UserCustomer userCustomer, UserWorker userWorker, String description, Date end, Date start,
+			Set<PrivateCoachWeekdays> privateCoachWeekdayses) {
 		this.userCustomer = userCustomer;
 		this.userWorker = userWorker;
 		this.description = description;
 		this.end = end;
 		this.start = start;
+		this.privateCoachWeekdayses = privateCoachWeekdayses;
 	}
 
 	@Id
@@ -104,6 +110,15 @@ public class PrivateCoach implements java.io.Serializable {
 
 	public void setStart(Date start) {
 		this.start = start;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "privateCoach")
+	public Set<PrivateCoachWeekdays> getPrivateCoachWeekdayses() {
+		return this.privateCoachWeekdayses;
+	}
+
+	public void setPrivateCoachWeekdayses(Set<PrivateCoachWeekdays> privateCoachWeekdayses) {
+		this.privateCoachWeekdayses = privateCoachWeekdayses;
 	}
 
 }

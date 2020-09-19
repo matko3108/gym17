@@ -1,5 +1,5 @@
 package src.main.java.com.gym17.gym17.model;
-// Generated Sep 19, 2020, 1:05:34 PM by Hibernate Tools 4.3.5.Final
+// Generated Sep 19, 2020, 3:20:31 PM by Hibernate Tools 4.3.5.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -31,7 +31,6 @@ public class UserWorker implements java.io.Serializable {
 	private WorkerType workerType;
 	private String additionalData;
 	private Set<PrivateCoach> privateCoaches = new HashSet<PrivateCoach>(0);
-	private Set<PrivateCoachWeekdays> privateCoachWeekdayses = new HashSet<PrivateCoachWeekdays>(0);
 	private Set<UserWorkerWorkerRights> userWorkerWorkerRightses = new HashSet<UserWorkerWorkerRights>(0);
 	private Set<GroupWorker> groupWorkers = new HashSet<GroupWorker>(0);
 
@@ -43,13 +42,11 @@ public class UserWorker implements java.io.Serializable {
 	}
 
 	public UserWorker(User user, WorkerType workerType, String additionalData, Set<PrivateCoach> privateCoaches,
-			Set<PrivateCoachWeekdays> privateCoachWeekdayses, Set<UserWorkerWorkerRights> userWorkerWorkerRightses,
-			Set<GroupWorker> groupWorkers) {
+			Set<UserWorkerWorkerRights> userWorkerWorkerRightses, Set<GroupWorker> groupWorkers) {
 		this.user = user;
 		this.workerType = workerType;
 		this.additionalData = additionalData;
 		this.privateCoaches = privateCoaches;
-		this.privateCoachWeekdayses = privateCoachWeekdayses;
 		this.userWorkerWorkerRightses = userWorkerWorkerRightses;
 		this.groupWorkers = groupWorkers;
 	}
@@ -103,15 +100,6 @@ public class UserWorker implements java.io.Serializable {
 
 	public void setPrivateCoaches(Set<PrivateCoach> privateCoaches) {
 		this.privateCoaches = privateCoaches;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userWorker")
-	public Set<PrivateCoachWeekdays> getPrivateCoachWeekdayses() {
-		return this.privateCoachWeekdayses;
-	}
-
-	public void setPrivateCoachWeekdayses(Set<PrivateCoachWeekdays> privateCoachWeekdayses) {
-		this.privateCoachWeekdayses = privateCoachWeekdayses;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userWorker")
