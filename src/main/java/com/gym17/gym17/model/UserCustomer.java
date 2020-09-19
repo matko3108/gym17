@@ -1,5 +1,5 @@
 package src.main.java.com.gym17.gym17.model;
-// Generated Sep 18, 2020, 7:41:35 PM by Hibernate Tools 4.3.5.Final
+// Generated Sep 19, 2020, 1:05:34 PM by Hibernate Tools 4.3.5.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,14 +24,13 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Table(name = "user_customer", catalog = "heroku_4ee2ecbe460bfa4")
 public class UserCustomer implements java.io.Serializable {
 
-	private Integer id;
-	@JsonBackReference
+	private int id;
 	private User user;
 	private String additionalData;
+	private Set<CustomerMembershipFee> customerMembershipFees = new HashSet<CustomerMembershipFee>(0);
+	private Set<UserMembershipFee> userMembershipFees = new HashSet<UserMembershipFee>(0);
 	private Set<PrivateCoach> privateCoaches = new HashSet<PrivateCoach>(0);
 	private Set<GroupCustomer> groupCustomers = new HashSet<GroupCustomer>(0);
-	private Set<UserMembershipFee> userMembershipFees = new HashSet<UserMembershipFee>(0);
-	private Set<CustomerMembershipFee> customerMembershipFees = new HashSet<CustomerMembershipFee>(0);
 
 	public UserCustomer() {
 	}
@@ -39,21 +38,16 @@ public class UserCustomer implements java.io.Serializable {
 	public UserCustomer(User user) {
 		this.user = user;
 	}
-	
-	public UserCustomer(User user, int id) {
-		this.user = user;
-		this.id = id;
-	}
 
-	public UserCustomer(User user, String additionalData, Set<PrivateCoach> privateCoaches,
-			Set<GroupCustomer> groupCustomers, Set<UserMembershipFee> userMembershipFees,
-			Set<CustomerMembershipFee> customerMembershipFees) {
+	public UserCustomer(User user, String additionalData, Set<CustomerMembershipFee> customerMembershipFees,
+			Set<UserMembershipFee> userMembershipFees, Set<PrivateCoach> privateCoaches,
+			Set<GroupCustomer> groupCustomers) {
 		this.user = user;
 		this.additionalData = additionalData;
+		this.customerMembershipFees = customerMembershipFees;
+		this.userMembershipFees = userMembershipFees;
 		this.privateCoaches = privateCoaches;
 		this.groupCustomers = groupCustomers;
-		this.userMembershipFees = userMembershipFees;
-		this.customerMembershipFees = customerMembershipFees;
 	}
 
 	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "user"))
@@ -61,11 +55,11 @@ public class UserCustomer implements java.io.Serializable {
 	@GeneratedValue(generator = "generator")
 
 	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
+	public int getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -90,6 +84,24 @@ public class UserCustomer implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userCustomer")
+	public Set<CustomerMembershipFee> getCustomerMembershipFees() {
+		return this.customerMembershipFees;
+	}
+
+	public void setCustomerMembershipFees(Set<CustomerMembershipFee> customerMembershipFees) {
+		this.customerMembershipFees = customerMembershipFees;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userCustomer")
+	public Set<UserMembershipFee> getUserMembershipFees() {
+		return this.userMembershipFees;
+	}
+
+	public void setUserMembershipFees(Set<UserMembershipFee> userMembershipFees) {
+		this.userMembershipFees = userMembershipFees;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userCustomer")
 	public Set<PrivateCoach> getPrivateCoaches() {
 		return this.privateCoaches;
 	}
@@ -105,24 +117,6 @@ public class UserCustomer implements java.io.Serializable {
 
 	public void setGroupCustomers(Set<GroupCustomer> groupCustomers) {
 		this.groupCustomers = groupCustomers;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userCustomer")
-	public Set<UserMembershipFee> getUserMembershipFees() {
-		return this.userMembershipFees;
-	}
-
-	public void setUserMembershipFees(Set<UserMembershipFee> userMembershipFees) {
-		this.userMembershipFees = userMembershipFees;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userCustomer")
-	public Set<CustomerMembershipFee> getCustomerMembershipFees() {
-		return this.customerMembershipFees;
-	}
-
-	public void setCustomerMembershipFees(Set<CustomerMembershipFee> customerMembershipFees) {
-		this.customerMembershipFees = customerMembershipFees;
 	}
 
 }

@@ -1,5 +1,5 @@
 package src.main.java.com.gym17.gym17.model;
-// Generated Sep 18, 2020, 7:41:35 PM by Hibernate Tools 4.3.5.Final
+// Generated Sep 19, 2020, 1:05:34 PM by Hibernate Tools 4.3.5.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -27,14 +27,13 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 public class UserWorker implements java.io.Serializable {
 
 	private int id;
-	@JsonBackReference
 	private User user;
 	private WorkerType workerType;
 	private String additionalData;
-	private Set<UserWorkerWorkerRights> userWorkerWorkerRightses = new HashSet<UserWorkerWorkerRights>(0);
 	private Set<PrivateCoach> privateCoaches = new HashSet<PrivateCoach>(0);
-	private Set<GroupWorker> groupWorkers = new HashSet<GroupWorker>(0);
 	private Set<PrivateCoachWeekdays> privateCoachWeekdayses = new HashSet<PrivateCoachWeekdays>(0);
+	private Set<UserWorkerWorkerRights> userWorkerWorkerRightses = new HashSet<UserWorkerWorkerRights>(0);
+	private Set<GroupWorker> groupWorkers = new HashSet<GroupWorker>(0);
 
 	public UserWorker() {
 	}
@@ -43,16 +42,16 @@ public class UserWorker implements java.io.Serializable {
 		this.user = user;
 	}
 
-	public UserWorker(User user, WorkerType workerType, String additionalData,
-			Set<UserWorkerWorkerRights> userWorkerWorkerRightses, Set<PrivateCoach> privateCoaches,
-			Set<GroupWorker> groupWorkers, Set<PrivateCoachWeekdays> privateCoachWeekdayses) {
+	public UserWorker(User user, WorkerType workerType, String additionalData, Set<PrivateCoach> privateCoaches,
+			Set<PrivateCoachWeekdays> privateCoachWeekdayses, Set<UserWorkerWorkerRights> userWorkerWorkerRightses,
+			Set<GroupWorker> groupWorkers) {
 		this.user = user;
 		this.workerType = workerType;
 		this.additionalData = additionalData;
-		this.userWorkerWorkerRightses = userWorkerWorkerRightses;
 		this.privateCoaches = privateCoaches;
-		this.groupWorkers = groupWorkers;
 		this.privateCoachWeekdayses = privateCoachWeekdayses;
+		this.userWorkerWorkerRightses = userWorkerWorkerRightses;
+		this.groupWorkers = groupWorkers;
 	}
 
 	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "user"))
@@ -67,7 +66,6 @@ public class UserWorker implements java.io.Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-
 	@JsonBackReference
 	@OneToOne(fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn
@@ -99,15 +97,6 @@ public class UserWorker implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userWorker")
-	public Set<UserWorkerWorkerRights> getUserWorkerWorkerRightses() {
-		return this.userWorkerWorkerRightses;
-	}
-
-	public void setUserWorkerWorkerRightses(Set<UserWorkerWorkerRights> userWorkerWorkerRightses) {
-		this.userWorkerWorkerRightses = userWorkerWorkerRightses;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userWorker")
 	public Set<PrivateCoach> getPrivateCoaches() {
 		return this.privateCoaches;
 	}
@@ -117,21 +106,30 @@ public class UserWorker implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userWorker")
-	public Set<GroupWorker> getGroupWorkers() {
-		return this.groupWorkers;
-	}
-
-	public void setGroupWorkers(Set<GroupWorker> groupWorkers) {
-		this.groupWorkers = groupWorkers;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userWorker")
 	public Set<PrivateCoachWeekdays> getPrivateCoachWeekdayses() {
 		return this.privateCoachWeekdayses;
 	}
 
 	public void setPrivateCoachWeekdayses(Set<PrivateCoachWeekdays> privateCoachWeekdayses) {
 		this.privateCoachWeekdayses = privateCoachWeekdayses;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userWorker")
+	public Set<UserWorkerWorkerRights> getUserWorkerWorkerRightses() {
+		return this.userWorkerWorkerRightses;
+	}
+
+	public void setUserWorkerWorkerRightses(Set<UserWorkerWorkerRights> userWorkerWorkerRightses) {
+		this.userWorkerWorkerRightses = userWorkerWorkerRightses;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userWorker")
+	public Set<GroupWorker> getGroupWorkers() {
+		return this.groupWorkers;
+	}
+
+	public void setGroupWorkers(Set<GroupWorker> groupWorkers) {
+		this.groupWorkers = groupWorkers;
 	}
 
 }

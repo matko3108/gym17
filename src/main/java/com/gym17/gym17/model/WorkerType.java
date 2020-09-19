@@ -1,5 +1,5 @@
 package src.main.java.com.gym17.gym17.model;
-// Generated Sep 18, 2020, 8:04:59 PM by Hibernate Tools 4.3.5.Final
+// Generated Sep 19, 2020, 1:05:34 PM by Hibernate Tools 4.3.5.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,7 +22,6 @@ public class WorkerType implements java.io.Serializable {
 	private Integer id;
 	private String description;
 	private String name;
-	private Set<Worker> workers = new HashSet<Worker>(0);
 	private Set<UserWorker> userWorkers = new HashSet<UserWorker>(0);
 
 	public WorkerType() {
@@ -32,10 +31,9 @@ public class WorkerType implements java.io.Serializable {
 		this.name = name;
 	}
 
-	public WorkerType(String description, String name, Set<Worker> workers, Set<UserWorker> userWorkers) {
+	public WorkerType(String description, String name, Set<UserWorker> userWorkers) {
 		this.description = description;
 		this.name = name;
-		this.workers = workers;
 		this.userWorkers = userWorkers;
 	}
 
@@ -67,15 +65,6 @@ public class WorkerType implements java.io.Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "workerType")
-	public Set<Worker> getWorkers() {
-		return this.workers;
-	}
-
-	public void setWorkers(Set<Worker> workers) {
-		this.workers = workers;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "workerType")

@@ -76,9 +76,8 @@ public class UserController {
 		return ResponseEntity.ok().body(User.get());
 	}
 
-	@PostMapping("/v100/update/{UserId}")
-	public ResponseEntity<Object> updateUser(@PathVariable("UserId") String UserId,
-			@RequestBody User data) {
+	@PostMapping("/v100/user/update")
+	public ResponseEntity<Object> updateUser(@RequestBody User data) {
 
 		/*
 		 * log.
@@ -86,10 +85,12 @@ public class UserController {
 		 * UserId);
 		 */
 
-		Optional<User> User = UserService.findById(Integer.parseInt(UserId));
-		if (!User.isPresent()) {
+		Optional<User> User = UserService.findById(data.getId());
+		if (User.isPresent()) {
+			User usersaved = UserService.updateUser(data);
 			//log.info("Response: [{}].", ErrorType.USER_NOT_FOUND.toString());
-			return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
+			return ResponseEntity.ok().body(usersaved);
+			//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
 		}
 
 		//UserService.update(User.get(), data);
@@ -97,7 +98,6 @@ public class UserController {
 		return ResponseEntity.ok().body(User.get());
 	}
 
-	
 	@PostMapping("/v100/user")
 	public ResponseEntity<Object> saveUser(@RequestBody UserData userdata) {
 

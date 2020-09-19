@@ -1,5 +1,5 @@
 package src.main.java.com.gym17.gym17.model;
-// Generated Sep 18, 2020, 7:41:35 PM by Hibernate Tools 4.3.5.Final
+// Generated Sep 19, 2020, 1:05:34 PM by Hibernate Tools 4.3.5.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
@@ -35,9 +36,10 @@ public class User implements java.io.Serializable {
 	private String username;
 	private String email;
 	private String phone;
+	private String externalId;
 	private UserCustomer userCustomer;
-	private Set<ActivityList> activityLists = new HashSet<ActivityList>(0);
 	private UserWorker userWorker;
+	private Set<ActivityList> activityLists = new HashSet<ActivityList>(0);
 
 	public User() {
 	}
@@ -48,8 +50,8 @@ public class User implements java.io.Serializable {
 	}
 
 	public User(Address address, UserType userType, String lastname, String name, String password, String username,
-			String email, String phone, UserCustomer userCustomer, Set<ActivityList> activityLists,
-			UserWorker userWorker) {
+			String email, String phone, String externalId, UserCustomer userCustomer, UserWorker userWorker,
+			Set<ActivityList> activityLists) {
 		this.address = address;
 		this.userType = userType;
 		this.lastname = lastname;
@@ -58,9 +60,10 @@ public class User implements java.io.Serializable {
 		this.username = username;
 		this.email = email;
 		this.phone = phone;
+		this.externalId = externalId;
 		this.userCustomer = userCustomer;
-		this.activityLists = activityLists;
 		this.userWorker = userWorker;
+		this.activityLists = activityLists;
 	}
 
 	@Id
@@ -74,7 +77,6 @@ public class User implements java.io.Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_adress")
 	public Address getAddress() {
@@ -84,7 +86,6 @@ public class User implements java.io.Serializable {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-	@JsonManagedReference
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_user_type")
 	public UserType getUserType() {
@@ -148,6 +149,16 @@ public class User implements java.io.Serializable {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
+	@Column(name = "externalid", length = 50)
+	public String getExternalId() {
+		return this.externalId;
+	}
+
+	public void setExternalId(String externalId) {
+		this.externalId = externalId;
+	}
+	
 	@JsonManagedReference
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
 	public UserCustomer getUserCustomer() {
@@ -157,16 +168,7 @@ public class User implements java.io.Serializable {
 	public void setUserCustomer(UserCustomer userCustomer) {
 		this.userCustomer = userCustomer;
 	}
-
-	@JsonManagedReference
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
-	public Set<ActivityList> getActivityLists() {
-		return this.activityLists;
-	}
-
-	public void setActivityLists(Set<ActivityList> activityLists) {
-		this.activityLists = activityLists;
-	}
+	
 	@JsonManagedReference
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
 	public UserWorker getUserWorker() {
@@ -175,6 +177,15 @@ public class User implements java.io.Serializable {
 
 	public void setUserWorker(UserWorker userWorker) {
 		this.userWorker = userWorker;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+	public Set<ActivityList> getActivityLists() {
+		return this.activityLists;
+	}
+
+	public void setActivityLists(Set<ActivityList> activityLists) {
+		this.activityLists = activityLists;
 	}
 
 }

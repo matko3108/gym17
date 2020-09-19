@@ -17,7 +17,6 @@
         <mapping class="src.main.java.com.gym17.gym17.model.UserType" />
         <mapping class="src.main.java.com.gym17.gym17.model.UserMembershipFee" />
         <mapping class="src.main.java.com.gym17.gym17.model.GroupWorker" />
-        <mapping class="src.main.java.com.gym17.gym17.model.Worker" />
         <mapping class="src.main.java.com.gym17.gym17.model.ActivityList" />
         <mapping class="src.main.java.com.gym17.gym17.model.UserCustomer" />
         <mapping class="src.main.java.com.gym17.gym17.model.UserWorker" />
