@@ -25,7 +25,7 @@ public class WorkerRights implements java.io.Serializable {
 	private WorkerRightsType workerRightsType;
 	private String description;
 	private String name;
-	private Set<UserWorkerWorkerRights> userWorkerWorkerRightses = new HashSet<UserWorkerWorkerRights>(0);
+	//private Set<UserWorkerWorkerRights> userWorkerWorkerRightses = new HashSet<UserWorkerWorkerRights>(0);
 
 	public WorkerRights() {
 	}
@@ -39,7 +39,7 @@ public class WorkerRights implements java.io.Serializable {
 		this.workerRightsType = workerRightsType;
 		this.description = description;
 		this.name = name;
-		this.userWorkerWorkerRightses = userWorkerWorkerRightses;
+		//this.userWorkerWorkerRightses = userWorkerWorkerRightses;
 	}
 
 	@Id
@@ -82,13 +82,14 @@ public class WorkerRights implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "workerRights")
-	public Set<UserWorkerWorkerRights> getUserWorkerWorkerRightses() {
-		return this.userWorkerWorkerRightses;
-	}
-
-	public void setUserWorkerWorkerRightses(Set<UserWorkerWorkerRights> userWorkerWorkerRightses) {
-		this.userWorkerWorkerRightses = userWorkerWorkerRightses;
-	}
+	/*
+	 * @OneToMany(fetch = FetchType.LAZY, mappedBy = "workerRights") public
+	 * Set<UserWorkerWorkerRights> getUserWorkerWorkerRightses() { return
+	 * this.userWorkerWorkerRightses; }
+	 * 
+	 * public void setUserWorkerWorkerRightses(Set<UserWorkerWorkerRights>
+	 * userWorkerWorkerRightses) { this.userWorkerWorkerRightses =
+	 * userWorkerWorkerRightses; }
+	 */
 
 }

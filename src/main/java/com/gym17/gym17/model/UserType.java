@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
@@ -25,7 +26,8 @@ public class UserType implements java.io.Serializable {
 	private Integer id;
 	private String description;
 	private String name;
-	//private Set<User> users = new HashSet<User>(0);
+	@JsonIgnore
+	private Set<User> users = new HashSet<User>(0);
 
 	public UserType() {
 	}
@@ -37,7 +39,7 @@ public class UserType implements java.io.Serializable {
 	public UserType(String description, String name, Set<User> users) {
 		this.description = description;
 		this.name = name;
-		//this.users = users;
+		this.users = users;
 	}
 
 	@Id
@@ -70,11 +72,11 @@ public class UserType implements java.io.Serializable {
 		this.name = name;
 	}
 	
-	/*
-	 * @OneToMany(fetch = FetchType.LAZY, mappedBy = "userType") public Set<User>
-	 * getUsers() { return this.users; }
-	 * 
-	 * public void setUsers(Set<User> users) { this.users = users; }
-	 */
+	
+	  @OneToMany(fetch = FetchType.LAZY, mappedBy = "userType") public Set<User>
+	  getUsers() { return this.users; }
+	  
+	  public void setUsers(Set<User> users) { this.users = users; }
+	 
 
 }

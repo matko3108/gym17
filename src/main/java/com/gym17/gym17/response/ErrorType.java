@@ -5,7 +5,10 @@ public enum ErrorType {
 
 	// @SerializedName("blabla")
 
-	USER_NOT_FOUND("461", "User not found");
+	USER_NOT_FOUND("461", "User not found"),
+	ACTIVITY_NOT_FOUND("471", "Activity not found"),
+	BAD_CREDENTIALS("481", "Bad credentials");
+
 
 
 	private final String code;

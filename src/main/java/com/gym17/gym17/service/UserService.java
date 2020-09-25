@@ -4,6 +4,7 @@ import src.main.java.com.gym17.gym17.model.User;
 import src.main.java.com.gym17.gym17.model.UserCustomer;
 //import src.main.java.com.gym17.gym17.model.ModelUtilities;
 import src.main.java.com.gym17.gym17.model.UserData;
+import src.main.java.com.gym17.gym17.model.UserType;
 import src.main.java.com.gym17.gym17.model.UserWorker;
 
 import java.util.Iterator;
@@ -30,19 +31,14 @@ public class UserService {
 		this.UserRepository = UserRepository;
 	}
 
-	public User findByUsername1(String username) {
-		User User = UserRepository.findByUsername1(username);
-		User.setPassword(null);
+	public Optional<User> findByUsername1(String username) {
+		Optional<User> User = UserRepository.findByUsername1(username);
 		return User;
 	}
 
 	public Iterable<User> list() {
-		Iterable<User> orgCollection = UserRepository.findAll();
-		Iterator<User> iter = orgCollection.iterator();
-		while (iter.hasNext()) {
-			iter.next().setPassword(null);
-		}
-		return orgCollection;
+		Iterable<User> userCollection = UserRepository.findAll();
+		return userCollection;
 	}
 
 	public Optional<User> findById(int id) {
@@ -80,32 +76,65 @@ public class UserService {
 	}
 
 	public boolean authenticate(String username, String password) {
-		User User = UserRepository.findByUsername1(username);
-		if (User != null) {
-			if (User.getPassword().equals(password)) {
-				return true;
-			}
-		}
+		//User User = UserRepository.findByUsername1(username);
+		//if (User != null) {
+		//	if (User.getPassword().equals(password)) {
+			////	return true;
+			//}
+		//}
 		return false;
 	}
 
 	public User saveNewUser(UserData data) {
+		
 		if(data.getUserType().equals("WORKER")) {
 			User user = UserRepository.save(data.getUser());
 			user.setUserWorker(new UserWorker(user));
-			//user.setUserType(UserTypeRepository.findByName);
+			//user.setUserType(UserTypeRepository.);
 			UserRepository.save(user);
+			user.setPassword(null);
 			return user;
 			
 		}else {
 			User user = UserRepository.save(data.getUser());
 			user.setUserCustomer(new UserCustomer(user));
 			UserRepository.save(user);
+			user.setPassword(null);
 			return 	user;
 		}
 		}
 	
 	public User updateUser(User user) {
-		return UserRepository.save(user);
+		 User updateduser = UserRepository.save(user);
+		 updateduser.setPassword(null);
+		 return updateduser;
 	}
+
+	public void delete(User user) {
+		 UserRepository.delete(user);		
+	}
+
+	public Iterable<User> customerlist() {
+		Iterable<User> userCollection = UserRepository.findlistByType(1);
+		return userCollection;
+	}
+
+	public Iterable<User> workerlist() {
+		Iterable<User> userCollection = UserRepository.findlistByType(11);
+		return userCollection;
+	}
+
+	public Optional<User> findByExternalId(String externalId) {
+		Optional<User> optOrg = UserRepository.findByIdExternalId(externalId);
+		//if (optOrg.isPresent()) {
+		//	optOrg.get().setPassword(null);
+		//}
+		return optOrg;
+	}
+
+	public User updateExternalUser(User newuser, Optional<User> olduser) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import src.main.java.com.gym17.gym17.model.LoginCredentials;
 import src.main.java.com.gym17.gym17.model.User;
 import src.main.java.com.gym17.gym17.model.UserData;
 import src.main.java.com.gym17.gym17.response.ErrorResponse;
@@ -40,23 +41,25 @@ public class UserController {
 		//log.info("Response contains the following list of Users: [{}]", UserList);
 		return UserList;
 	}
-
-	@GetMapping(path = "/v100/list/{UserId}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Object> findUserById(@PathVariable("UserId") String UserId) {
-
-		//log.info("Requested: User with a specifid id. Request data: [UserId={}]", UserId);
-		Optional<User> User = UserService.findById(Integer.parseInt(UserId));
-
-		if (!User.isPresent()) {
-			//log.info("Response: [{}].", ErrorType.USER_NOT_FOUND.toString());
-			return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
-		}
-
-		//log.info("Requested User successfully found! Response: [{}].", User.get());
-		return ResponseEntity.ok().body(User.get());
+	
+	@GetMapping("/v1/user/customerlist")
+	public Iterable<User> customerlist() {
+		//log.info("Requested: a list of Users.");
+		Iterable<User> UserList = UserService.customerlist();
+		//log.info("Response contains the following list of Users: [{}]", UserList);
+		return UserList;
 	}
 
-	@DeleteMapping("/v100/delete/{UserId}")
+	@GetMapping("/v1/user/workerlist")
+	public Iterable<User> workerlist() {
+		//log.info("Requested: a list of Users.");
+		Iterable<User> UserList = UserService.workerlist();
+		//log.info("Response contains the following list of Users: [{}]", UserList);
+		return UserList;
+	}
+	
+
+	@DeleteMapping("/v1/delete/{UserId}")
 	public ResponseEntity<Object> deleteUser(@PathVariable("UserId") String UserId) {
 
 		/*
@@ -71,12 +74,12 @@ public class UserController {
 			return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
 		}
 
-		//UserService.delete(User.get());
+		UserService.delete(User.get());
 		//log.info("Requested User successfully deleted! Response: [{}].", User.get());
 		return ResponseEntity.ok().body(User.get());
 	}
 
-	@PostMapping("/v100/user/update")
+	@PostMapping("/v1/user/update")
 	public ResponseEntity<Object> updateUser(@RequestBody User data) {
 
 		/*
@@ -97,20 +100,45 @@ public class UserController {
 		//log.info("Requested User successfully updated! Response: [{}].", User.get());
 		return ResponseEntity.ok().body(User.get());
 	}
-
-	@PostMapping("/v100/user")
-	public ResponseEntity<Object> saveUser(@RequestBody UserData userdata) {
+	
+	@PostMapping("/v1/userworker/login")
+	public ResponseEntity<Object> userLogin(@RequestBody LoginCredentials data) {
 
 		/*
 		 * log.
 		 * info("Requested: update User with a specifid id. Request data: [UserId={}]",
 		 * UserId);
 		 */
+
+		Optional<User> User = UserService.findByUsername1(data.getUsername());
+		if (User.isPresent()) {
+			if(User.get().getPassword().equals(data.getPassword())) {
+				User.get().setPassword(null);
+				return ResponseEntity.ok().body(User);
+
+			}
+			return ResponseEntity.ok().body(new ErrorResponse(ErrorType.BAD_CREDENTIALS));
+
+		}
+
+		return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
+
+		}
+
+	@PostMapping("/v1/user")
+	public ResponseEntity<Object> saveUser(@RequestBody UserData userdata) {
+
+		Optional<User> User = UserService.findByExternalId(userdata.getUser().getExternalId());
+		if (User.isPresent()) {
+			User usersaved = UserService.updateExternalUser(userdata.getUser(), User);
 			//log.info("Response: [{}].", ErrorType.USER_NOT_FOUND.toString());
+			return ResponseEntity.ok().body(usersaved);
+			//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
+		}else {
 			User usersaved = UserService.saveNewUser(userdata);
 			return ResponseEntity.ok().body(usersaved);
 			//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
-		
+		}
 
 		//UserService.update(User.get(), data);
 		//log.info("Requested User successfully updated! Response: [{}].", User.get());
@@ -127,11 +155,11 @@ public class UserController {
 	 */
 
 	// Controller
-	@GetMapping(path = "/v100/user/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> findByUsername(@PathVariable("username") String username) {
+	@GetMapping(path = "/v1/user/{userid}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> findById(@PathVariable("userid") String userid) {
 		/*
 		 * //log.info("Requested: User with [username={}]", username);
-		 */		User org = UserService.findByUsername1(username);
+		 */		Optional<User> org = UserService.findById(Integer.parseInt(userid));
 		if (org == null) {
 			/*
 			 * //log.info("User with [username={}] not found! Response: [{}]", username,
