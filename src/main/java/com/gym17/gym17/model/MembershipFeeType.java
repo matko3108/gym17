@@ -26,19 +26,20 @@ public class MembershipFeeType implements java.io.Serializable {
 	private String description;
 	private String name;
 	private byte validityPeriod;
-	
+	private String externalid;
 	private Set<CustomerMembershipFee> customerMembershipFees = new HashSet<CustomerMembershipFee>(0);
 
 	public MembershipFeeType() {
 	}
 
-	public MembershipFeeType(long amount, String name, byte validityPeriod) {
+	public MembershipFeeType(long amount, String name, byte validityPeriod, String externalid) {
 		this.amount = amount;
 		this.name = name;
 		this.validityPeriod = validityPeriod;
+		this.externalid = externalid;
 	}
 
-	public MembershipFeeType(long amount, String description, String name, byte validityPeriod,
+	public MembershipFeeType(long amount, String description, String name, byte validityPeriod, String externalid,
 			Set<CustomerMembershipFee> customerMembershipFees) {
 		this.amount = amount;
 		this.description = description;
@@ -103,6 +104,16 @@ public class MembershipFeeType implements java.io.Serializable {
 	public void setCustomerMembershipFees(Set<CustomerMembershipFee> customerMembershipFees) {
 		this.customerMembershipFees = customerMembershipFees;
 	}
+	
+	@Column(name = "externalid", length = 50)
+	public String getExternalid() {
+		return this.externalid;
+	}
+
+	public void setExternalid(String externalid) {
+		this.externalid = externalid;
+	}
+
 
 
 }
