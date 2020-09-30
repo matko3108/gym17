@@ -14,6 +14,6 @@ import src.main.java.com.gym17.gym17.model.User;
 @Repository
 public interface MembershipFeeTypeRepository extends JpaRepository<MembershipFeeType, Integer> {
 
-	@Query("SELECT t FROM MembershipFeeType t WHERE t.externalId = :externalId") 
+	@Query("SELECT t FROM MembershipFeeType t WHERE t.externalid = :externalId") 
 	Optional<MembershipFeeType> findByIdExternalId(String externalId);
 }
