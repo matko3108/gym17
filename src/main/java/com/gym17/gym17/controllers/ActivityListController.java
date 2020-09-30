@@ -34,8 +34,8 @@ public class ActivityListController {
 		return ActivityList;
 	}
 	@GetMapping(path = "/v1/activityList/{activityList}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> findById(@PathVariable("activityListid") String activityListid) {
-		Optional<ActivityList> org = ActivityListService.findById(Integer.parseInt(activityListid));
+	public ResponseEntity<?> findById(@PathVariable("activityList") String activityList) {
+		Optional<ActivityList> org = ActivityListService.findById(Integer.parseInt(activityList));
 		if (org == null) {
 			return ResponseEntity.ok().body(new ErrorResponse(ErrorType.ACTIVITY_NOT_FOUND));
 		}

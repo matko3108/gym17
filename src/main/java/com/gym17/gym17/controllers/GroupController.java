@@ -38,8 +38,8 @@ public class GroupController {
 	}
 	
 	@GetMapping(path = "/v1/Group/{Group}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> findById(@PathVariable("Groupid") String Groupid) {
-		Optional<Group> org = GroupService.findById(Integer.parseInt(Groupid));
+	public ResponseEntity<?> findById(@PathVariable("Group") String Group) {
+		Optional<Group> org = GroupService.findById(Integer.parseInt(Group));
 		if (org == null) {
 			return ResponseEntity.ok().body(new ErrorResponse(ErrorType.ACTIVITY_NOT_FOUND));
 		}
