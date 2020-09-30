@@ -1,10 +1,13 @@
 package src.main.java.com.gym17.gym17.controllers;
 
+import java.util.Base64;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,9 +18,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import src.main.java.com.gym17.gym17.model.CustomerMembershipFee;
+import src.main.java.com.gym17.gym17.model.JwtAuthenticationRequest;
 import src.main.java.com.gym17.gym17.model.LoginCredentials;
 import src.main.java.com.gym17.gym17.model.MembershipFeeType;
+import src.main.java.com.gym17.gym17.model.Token;
 import src.main.java.com.gym17.gym17.model.User;
 import src.main.java.com.gym17.gym17.model.UserData;
 import src.main.java.com.gym17.gym17.model.UserMembershipData;
@@ -26,19 +34,23 @@ import src.main.java.com.gym17.gym17.response.ErrorType;
 import src.main.java.com.gym17.gym17.service.UserService;
 import src.main.java.com.gym17.gym17.service.MembershipFeeTypeService;
 import src.main.java.com.gym17.gym17.service.CustomerMembershipFeeService;
+import src.main.java.com.gym17.gym17.service.TokenService;
 
 
 
 @RestController
 @RequestMapping("")
 public class UserController {
-
+	@Value("${security.jwt.token.secret-key:secret}")
+	private String secretKey = "secret";
 
 	private UserService UserService;
 	@Autowired
 	private MembershipFeeTypeService MembershipFeeTypeService;
 	@Autowired
 	private CustomerMembershipFeeService CustomerMembershipFeeService;
+	@Autowired
+	private TokenService TokenService;
 	
 	@Autowired
 	public UserController(UserService UserService) {
@@ -138,7 +150,7 @@ public class UserController {
 
 	@PostMapping("/v1/user")
 	public ResponseEntity<Object> saveUser(@RequestBody UserData userdata) {
-
+		
 		Optional<User> User = UserService.findByExternalId(userdata.getUser().getExternalId());
 		if (User.isPresent()) {
 			User usersaved = UserService.updateExternalUser(userdata.getUser(), User);
@@ -214,5 +226,34 @@ public class UserController {
 		 * username, org);
 		 */		return ResponseEntity.ok().body(org);
 	}
+	
+	@PostMapping("/auth/signin")
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest) {
+		Optional<Token> token = TokenService.findBylicence(authenticationRequest.getLicenceName());
+		if(token.isPresent()) {
+			if(authenticationRequest.getUsername().equals("1klik") && authenticationRequest.getPassword().equals("LG9bq2VJMC")) {
+				return ResponseEntity.ok().body(token.get().getToken());
+			}else {
+				return ResponseEntity.ok().body(new ErrorResponse(ErrorType.BAD_CREDENTIALS));
+			}
+		}else {
+			if(authenticationRequest.getUsername().equals("1klik") && authenticationRequest.getPassword().equals("LG9bq2VJMC")) {
+				secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
 
+				Claims claims = Jwts.claims().setSubject(authenticationRequest.getUsername());
+				claims.put("licence", authenticationRequest.getLicenceName());
+				Date now = new Date();
+				String generatedtoken = Jwts.builder()//
+						.setClaims(claims)//
+						.setIssuedAt(now)//
+						.signWith(SignatureAlgorithm.HS256, secretKey)//
+						.compact();
+				Token newToken = new Token(authenticationRequest.getLicenceName(), generatedtoken);
+				TokenService.saveToken(newToken);
+				return ResponseEntity.ok().body(newToken.getToken());
+			}else {
+				return ResponseEntity.ok().body(new ErrorResponse(ErrorType.BAD_CREDENTIALS));
+			}
+		}
+	}
 }
