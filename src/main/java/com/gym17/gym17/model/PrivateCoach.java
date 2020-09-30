@@ -32,9 +32,9 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class PrivateCoach implements java.io.Serializable {
 
 	private Integer id;
-	@JsonIgnoreProperties("privateCoaches")
+	@JsonIgnoreProperties(value = {"groupCustomers", "privateCoaches", "customerMembershipFees"})
 	private UserCustomer userCustomer;
-	@JsonIgnoreProperties("privateCoaches")
+	@JsonIgnoreProperties(value = {"groupWorkers", "privateCoaches", "userWorkerWorkerRightses"})
 	private UserWorker userWorker;
 	private String description;
 	private Date end;

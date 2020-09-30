@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class UserWorker implements java.io.Serializable {
 
 	private int id;
-	@JsonIgnoreProperties("userWorker")
+	@JsonIgnoreProperties(value = {"userWorker", "activityLists", "userCustomer"})
 	private User user;
 	@JsonIgnoreProperties("userWorkers")
 	private WorkerType workerType;

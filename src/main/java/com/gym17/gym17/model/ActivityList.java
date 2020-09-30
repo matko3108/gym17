@@ -28,7 +28,7 @@ public class ActivityList implements java.io.Serializable {
 	private Integer id;
 	@JsonIgnoreProperties("activityLists")
 	private ActivityType activityType;
-	@JsonIgnoreProperties("activityLists")
+	@JsonIgnoreProperties(value={"activityLists", "userCustomer", "userWorker"})
 	private User user;
 	private Boolean active;
 	private Date createDate;
