@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,6 +32,7 @@ import src.main.java.com.gym17.gym17.model.UserData;
 import src.main.java.com.gym17.gym17.model.UserMembershipData;
 import src.main.java.com.gym17.gym17.response.ErrorResponse;
 import src.main.java.com.gym17.gym17.response.ErrorType;
+import src.main.java.com.gym17.gym17.response.TokenResponse;
 import src.main.java.com.gym17.gym17.service.UserService;
 import src.main.java.com.gym17.gym17.service.MembershipFeeTypeService;
 import src.main.java.com.gym17.gym17.service.CustomerMembershipFeeService;
@@ -149,8 +151,10 @@ public class UserController {
 		}
 
 	@PostMapping("/v1/user")
-	public ResponseEntity<Object> saveUser(@RequestBody UserData userdata) {
-		
+	public ResponseEntity<Object> saveUser(@RequestHeader("Authorization") String auth, @RequestBody UserData userdata) {
+		if(auth != null ) {
+			Optional<Token> token = TokenService.findBytoken(auth.replace("Bearer ", ""));
+		if(token.isPresent()) {
 		Optional<User> User = UserService.findByExternalId(userdata.getUser().getExternalId());
 		if (User.isPresent()) {
 			User usersaved = UserService.updateExternalUser(userdata.getUser(), User);
@@ -162,15 +166,21 @@ public class UserController {
 			return ResponseEntity.ok().body(usersaved);
 			//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
 		}
+		}
+		return ResponseEntity.ok().body(new ErrorResponse(ErrorType.BAD_TOKEN));
 
+		}
+		return ResponseEntity.ok().body(new ErrorResponse(ErrorType.BAD_TOKEN));
 		//UserService.update(User.get(), data);
 		//log.info("Requested User successfully updated! Response: [{}].", User.get());
 		//return ResponseEntity.ok().body(User.get());
 	}
 	
 	@PostMapping("/v1/userMembership")
-	public ResponseEntity<Object> saveUserMebership(@RequestBody UserMembershipData userMembershipdata) {
-
+	public ResponseEntity<Object> saveUserMebership(@RequestHeader("Authorization") String auth, @RequestBody UserMembershipData userMembershipdata) {
+		if(auth != null ) {
+			Optional<Token> token = TokenService.findBytoken(auth.replace("Bearer ", ""));
+		if(token.isPresent()) {
 		Optional<User> User = UserService.findByExternalId(userMembershipdata.getUser_id());
 		Optional<MembershipFeeType> MembershipFeeType = MembershipFeeTypeService.findByExternalId(userMembershipdata.getUser_id());
 		if (User.isPresent() && MembershipFeeType.isPresent()) {
@@ -191,7 +201,12 @@ public class UserController {
 			}
 			//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
 		}
-		return null;
+		
+		}
+		return ResponseEntity.ok().body(new ErrorResponse(ErrorType.BAD_TOKEN));
+
+		}
+		return ResponseEntity.ok().body(new ErrorResponse(ErrorType.BAD_TOKEN));
 
 		//UserService.update(User.get(), data);
 		//log.info("Requested User successfully updated! Response: [{}].", User.get());
@@ -224,7 +239,7 @@ public class UserController {
 		/*
 		 * //log.info("User with [username={}] found successfully! Response: [{}]",
 		 * username, org);
-		 */		return ResponseEntity.ok().body(org);
+		 */		return ResponseEntity.ok().body(org.get());
 	}
 	
 	@PostMapping("/auth/signin")
@@ -233,7 +248,8 @@ public class UserController {
 		Optional<Token> token = TokenService.findBylicence(authenticationRequest.getLicenceName());
 		if(token.isPresent()) {
 			if(authenticationRequest.getUsername().equals("1klik") && authenticationRequest.getPassword().equals("LG9bq2VJMC")) {
-				return ResponseEntity.ok().body(token.get().getToken());
+				TokenResponse tokenResponse = new TokenResponse(token.get().getToken());
+				return ResponseEntity.ok().body(tokenResponse);
 			}else {
 				return ResponseEntity.ok().body(new ErrorResponse(ErrorType.BAD_CREDENTIALS));
 			}
@@ -251,7 +267,8 @@ public class UserController {
 						.compact();
 				Token newToken = new Token(authenticationRequest.getLicenceName(), generatedtoken);
 				TokenService.saveToken(newToken);
-				return ResponseEntity.ok().body(newToken.getToken());
+				TokenResponse tokenResponse = new TokenResponse(newToken.getToken());
+				return ResponseEntity.ok().body(tokenResponse);
 			}else {
 				return ResponseEntity.ok().body(new ErrorResponse(ErrorType.BAD_CREDENTIALS));
 			}

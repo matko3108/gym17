@@ -35,5 +35,9 @@ public class TokenService {
 		return TokenRepository.findByLicence(licenceName);
 
 	}
+	public Optional<Token> findBytoken(String token) {
+		return TokenRepository.findBytoken(token);
+
+	}
 
 }

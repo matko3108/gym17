@@ -48,7 +48,7 @@ public class Token implements java.io.Serializable {
 		this.licenceName = licenceName;
 	}
 
-	@Column(name = "token", length = 100)
+	@Column(name = "token", length = 300)
 	public String getToken() {
 		return this.token;
 	}

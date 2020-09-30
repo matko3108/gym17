@@ -40,7 +40,7 @@ public class ActivityListController {
 			return ResponseEntity.ok().body(new ErrorResponse(ErrorType.ACTIVITY_NOT_FOUND));
 		}
 
-		return ResponseEntity.ok().body(org);
+		return ResponseEntity.ok().body(org.get());
 	}
 	
 }
