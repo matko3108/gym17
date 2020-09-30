@@ -179,6 +179,7 @@ public class UserController {
 			}
 			//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
 		}
+		return null;
 
 		//UserService.update(User.get(), data);
 		//log.info("Requested User successfully updated! Response: [{}].", User.get());
