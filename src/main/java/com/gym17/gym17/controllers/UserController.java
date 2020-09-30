@@ -15,12 +15,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import src.main.java.com.gym17.gym17.model.CustomerMembershipFee;
 import src.main.java.com.gym17.gym17.model.LoginCredentials;
+import src.main.java.com.gym17.gym17.model.MembershipFeeType;
 import src.main.java.com.gym17.gym17.model.User;
 import src.main.java.com.gym17.gym17.model.UserData;
+import src.main.java.com.gym17.gym17.model.UserMembershipData;
 import src.main.java.com.gym17.gym17.response.ErrorResponse;
 import src.main.java.com.gym17.gym17.response.ErrorType;
 import src.main.java.com.gym17.gym17.service.UserService;
+import src.main.java.com.gym17.gym17.service.MembershipFeeTypeService;
+import src.main.java.com.gym17.gym17.service.CustomerMembershipFeeService;
+
+
 
 @RestController
 @RequestMapping("")
@@ -28,7 +35,11 @@ public class UserController {
 
 
 	private UserService UserService;
-
+	@Autowired
+	private MembershipFeeTypeService MembershipFeeTypeService;
+	@Autowired
+	private CustomerMembershipFeeService CustomerMembershipFeeService;
+	
 	@Autowired
 	public UserController(UserService UserService) {
 		this.UserService = UserService;
@@ -42,7 +53,7 @@ public class UserController {
 		return UserList;
 	}
 	
-	@GetMapping("/v1/user/customerlist")
+	//@GetMapping("/v1/user/customerlist")
 	public Iterable<User> customerlist() {
 		//log.info("Requested: a list of Users.");
 		Iterable<User> UserList = UserService.customerlist();
@@ -50,7 +61,7 @@ public class UserController {
 		return UserList;
 	}
 
-	@GetMapping("/v1/user/workerlist")
+	//@GetMapping("/v1/user/workerlist")
 	public Iterable<User> workerlist() {
 		//log.info("Requested: a list of Users.");
 		Iterable<User> UserList = UserService.workerlist();
@@ -137,6 +148,35 @@ public class UserController {
 		}else {
 			User usersaved = UserService.saveNewUser(userdata);
 			return ResponseEntity.ok().body(usersaved);
+			//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
+		}
+
+		//UserService.update(User.get(), data);
+		//log.info("Requested User successfully updated! Response: [{}].", User.get());
+		//return ResponseEntity.ok().body(User.get());
+	}
+	
+	@PostMapping("/v1/userMembership")
+	public ResponseEntity<Object> saveUserMebership(@RequestBody UserMembershipData userMembershipdata) {
+
+		Optional<User> User = UserService.findByExternalId(userMembershipdata.getUser_id());
+		Optional<MembershipFeeType> MembershipFeeType = MembershipFeeTypeService.findByExternalId(userMembershipdata.getUser_id());
+		if (User.isPresent() && MembershipFeeType.isPresent()) {
+			CustomerMembershipFee customerMembershipFee = new CustomerMembershipFee();
+			customerMembershipFee.setMembershipFeeType(MembershipFeeType.get());
+			customerMembershipFee.setUserCustomer(User.get().getUserCustomer());
+			customerMembershipFee.setEndDate(userMembershipdata.getEnd_date());
+			customerMembershipFee.setStartDate(userMembershipdata.getStart_date());
+			CustomerMembershipFeeService.saveCustomerMembershipFee(customerMembershipFee);
+			
+			return ResponseEntity.ok().body("");
+			//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
+		}else {
+			if(!User.isPresent()) {
+				return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
+			}else if(!MembershipFeeType.isPresent()) {
+				return ResponseEntity.ok().body(new ErrorResponse(ErrorType.MEMBERSHIP_NOT_FOUND));
+			}
 			//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
 		}
 

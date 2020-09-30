@@ -22,7 +22,9 @@ import src.main.java.com.gym17.gym17.repositories.UserTypeRepository;
 @Service
 public class UserService {
 	private UserRepository UserRepository;
+	@Autowired
 	private UserCustomerRepository UserCustomerRepository;
+	@Autowired
 	private UserTypeRepository UserTypeRepository;
 
 
