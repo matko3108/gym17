@@ -27,8 +27,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class User implements java.io.Serializable {
 
 	private Integer id;
-	@JsonIgnoreProperties("users")
+	@JsonIgnoreProperties(value={"users","hibernateLazyInitializer"})
 	private Address address;
+	@JsonIgnoreProperties(value={"hibernateLazyInitializer"})
 	private UserType userType;
 	private String lastname;
 	private String name;

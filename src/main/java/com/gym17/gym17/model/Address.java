@@ -37,6 +37,7 @@ public class Address implements java.io.Serializable {
 	@JsonIgnoreProperties
 	@JsonView
 	private Set<User> users = new HashSet<User>(0);
+	
 	public Address() {
 	}
 

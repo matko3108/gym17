@@ -125,7 +125,7 @@ public class UserController {
 		if (User.isPresent()) {
 			if(User.get().getPassword().equals(data.getPassword())) {
 				User.get().setPassword(null);
-				return ResponseEntity.ok().body(User);
+				return ResponseEntity.ok().body(User.get());
 
 			}
 			return ResponseEntity.ok().body(new ErrorResponse(ErrorType.BAD_CREDENTIALS));
