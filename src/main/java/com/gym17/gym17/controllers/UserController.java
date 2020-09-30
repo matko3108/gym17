@@ -229,6 +229,7 @@ public class UserController {
 	
 	@PostMapping("/auth/signin")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest) {
+		
 		Optional<Token> token = TokenService.findBylicence(authenticationRequest.getLicenceName());
 		if(token.isPresent()) {
 			if(authenticationRequest.getUsername().equals("1klik") && authenticationRequest.getPassword().equals("LG9bq2VJMC")) {

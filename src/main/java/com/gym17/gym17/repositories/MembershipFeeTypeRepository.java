@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +15,6 @@ import src.main.java.com.gym17.gym17.model.User;
 @Repository
 public interface MembershipFeeTypeRepository extends JpaRepository<MembershipFeeType, Integer> {
 
-	@Query("SELECT t FROM MembershipFeeType t WHERE t.externalid = :externalId") 
-	Optional<MembershipFeeType> findByIdExternalId(String externalId);
+	@Query("SELECT t FROM MembershipFeeType t WHERE t.externalid = :externalid") 
+	Optional<MembershipFeeType> findByIdExternalId(@Param("externalid") String externalid);
 }

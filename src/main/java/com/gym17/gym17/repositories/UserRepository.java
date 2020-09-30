@@ -32,7 +32,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	Iterable<User> findlistByType(@Param("typeid") int typeid);
 
 	@Query("SELECT t FROM User t WHERE t.externalId = :externalId") 
-	Optional<User> findByIdExternalId(String externalId);
+	Optional<User> findByIdExternalId(@Param("externalId") String externalId);
 
 	//update je save iz CrudRepository<T, ID>
 	// delete je save iz CrudRepository<T, ID>
