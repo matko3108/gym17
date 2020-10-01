@@ -23,9 +23,9 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class GroupWorker implements java.io.Serializable {
 
 	private Integer id;
-	@JsonIgnoreProperties("groupWorkers")
+	@JsonIgnoreProperties(value = {"groupWorkers", "hibernateLazyInitializer"})
 	private Group group;
-	@JsonIgnoreProperties(value = {"groupWorkers", "privateCoaches", "userWorkerWorkerRightses"})
+	@JsonIgnoreProperties(value = {"groupWorkers", "privateCoaches", "userWorkerWorkerRightses", "hibernateLazyInitializer"})
 	private UserWorker userWorker;
 
 	public GroupWorker() {

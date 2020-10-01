@@ -15,6 +15,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
@@ -27,8 +28,10 @@ public class GroupWeekdays implements java.io.Serializable {
 	private Integer id;
 	@JsonIgnoreProperties("groupWeekdayses")
 	private Group group;
+	@JsonIgnoreProperties(value = {"hibernateLazyInitializer"})
 	private Weekdays weekdays;
 	private Integer duration;
+	 @JsonFormat(pattern="HH:mm:ss")
 	private Date hour;
 
 	public GroupWeekdays() {

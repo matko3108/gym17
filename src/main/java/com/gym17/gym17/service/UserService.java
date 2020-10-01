@@ -135,8 +135,24 @@ public class UserService {
 	}
 
 	public User updateExternalUser(User newuser, Optional<User> olduser) {
-		// TODO Auto-generated method stub
-		return null;
+		User NewUser = fillnewUser(newuser, olduser.get());
+		User saveduser = UserRepository.save(NewUser);
+		saveduser.setPassword(null);
+		return saveduser;
+	}
+
+	private User fillnewUser(User newuser, User user) {
+		user.setName(newuser.getName());
+		user.setLastname(newuser.getLastname());
+		user.setEmail(newuser.getEmail());
+		user.setPhone(newuser.getPhone());
+		user.getAddress().setAdressLine(newuser.getAddress().getAdressLine());
+		user.getAddress().setCity(newuser.getAddress().getCity());
+		user.getAddress().setCountry(newuser.getAddress().getCountry());
+		user.getAddress().setZip(newuser.getAddress().getZip());
+
+		return user;
+		
 	}
 	
 }

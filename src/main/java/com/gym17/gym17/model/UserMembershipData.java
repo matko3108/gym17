@@ -2,10 +2,14 @@ package src.main.java.com.gym17.gym17.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class UserMembershipData {
 	private String user_id;
 	private String membership_id;
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date start_date;
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date end_date;
 	public String getUser_id() {
 		return user_id;

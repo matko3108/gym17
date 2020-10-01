@@ -17,6 +17,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -29,17 +30,19 @@ public class Group implements java.io.Serializable {
 
 	private Integer id;
 	private Boolean active;
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date created;
 	private String description;
 	private Integer maxCustomer;
 	private String name;
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date start;
 	private Integer valid;
-	@JsonIgnoreProperties("group")
+	@JsonIgnoreProperties(value = {"group", "hibernateLazyInitializer"})
 	private Set<GroupWeekdays> groupWeekdayses = new HashSet<GroupWeekdays>(0);
-	@JsonIgnoreProperties("group")
+	@JsonIgnoreProperties(value = {"group", "hibernateLazyInitializer"})
 	private Set<GroupCustomer> groupCustomers = new HashSet<GroupCustomer>(0);
-	@JsonIgnoreProperties("group")
+	@JsonIgnoreProperties(value = {"group", "hibernateLazyInitializer"})
 	private Set<GroupWorker> groupWorkers = new HashSet<GroupWorker>(0);
 
 	public Group() {

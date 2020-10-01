@@ -159,10 +159,14 @@ public class UserController {
 		if (User.isPresent()) {
 			User usersaved = UserService.updateExternalUser(userdata.getUser(), User);
 			//log.info("Response: [{}].", ErrorType.USER_NOT_FOUND.toString());
+			usersaved.setUserCustomer(null);
+			usersaved.setUserWorker(null);
 			return ResponseEntity.ok().body(usersaved);
 			//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
 		}else {
 			User usersaved = UserService.saveNewUser(userdata);
+			usersaved.setUserCustomer(null);
+			usersaved.setUserWorker(null);
 			return ResponseEntity.ok().body(usersaved);
 			//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
 		}
@@ -191,7 +195,11 @@ public class UserController {
 			customerMembershipFee.setStartDate(userMembershipdata.getStart_date());
 			CustomerMembershipFeeService.saveCustomerMembershipFee(customerMembershipFee);
 			
-			return ResponseEntity.ok().body("");
+			customerMembershipFee.getUserCustomer().setGroupCustomers(null);
+			customerMembershipFee.getUserCustomer().setPrivateCoaches(null);
+			customerMembershipFee.getUserCustomer().getUser().setUserCustomer(null);
+			customerMembershipFee.getUserCustomer().getUser().setUserWorker(null);
+			return ResponseEntity.ok().body(customerMembershipFee);
 			//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
 		}else {
 			if(!User.isPresent()) {

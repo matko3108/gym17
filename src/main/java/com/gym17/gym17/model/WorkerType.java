@@ -24,7 +24,7 @@ public class WorkerType implements java.io.Serializable {
 	private Integer id;
 	private String description;
 	private String name;
-	@JsonIgnoreProperties("workerType")
+	@JsonIgnoreProperties(value = {"workerType", "hibernateLazyInitializer"})
 	private Set<UserWorker> userWorkers = new HashSet<UserWorker>(0);
 
 	public WorkerType() {

@@ -30,16 +30,16 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class UserWorker implements java.io.Serializable {
 
 	private int id;
-	@JsonIgnoreProperties(value = {"userWorker", "activityLists", "userCustomer"})
+	@JsonIgnoreProperties(value = {"userWorker", "activityLists", "userCustomer", "hibernateLazyInitializer"})
 	private User user;
-	@JsonIgnoreProperties("userWorkers")
+	@JsonIgnoreProperties(value = {"userWorkers", "hibernateLazyInitializer"})
 	private WorkerType workerType;
 	private String additionalData;
-	@JsonIgnoreProperties(value = {"userWorker","userCustomer"})
+	@JsonIgnoreProperties(value = {"userWorker","userCustomer", "hibernateLazyInitializer"})
 	private Set<PrivateCoach> privateCoaches = new HashSet<PrivateCoach>(0);
-	@JsonIgnoreProperties("userWorker")
+	@JsonIgnoreProperties(value = {"userWorker", "hibernateLazyInitializer"})
 	private Set<UserWorkerWorkerRights> userWorkerWorkerRightses = new HashSet<UserWorkerWorkerRights>(0);
-	@JsonIgnoreProperties(value = {"groupWorkers", "userWorker","groupCustomers"})
+	@JsonIgnoreProperties(value = {"groupWorkers", "userWorker","groupCustomers", "hibernateLazyInitializer"})
 	private Set<GroupWorker> groupWorkers = new HashSet<GroupWorker>(0);
 
 	public UserWorker() {

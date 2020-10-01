@@ -15,6 +15,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -28,8 +29,10 @@ public class UserWorkerWorkerRights implements java.io.Serializable {
 	private Integer id;
 	@JsonIgnoreProperties("userWorkerWorkerRightses")
 	private UserWorker userWorker;
+	@JsonIgnoreProperties(value = {"hibernateLazyInitializer"})
 	private WorkerRights workerRights;
 	private Boolean active;
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date created;
 
 	public UserWorkerWorkerRights() {

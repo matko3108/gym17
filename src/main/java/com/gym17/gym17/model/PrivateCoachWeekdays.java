@@ -17,6 +17,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -28,10 +29,12 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class PrivateCoachWeekdays implements java.io.Serializable {
 
 	private Integer id;
-	@JsonIgnoreProperties("privateCoachWeekdayses")
+	@JsonIgnoreProperties(value={"privateCoachWeekdayses","hibernateLazyInitializer"})
 	private PrivateCoach privateCoach;
+	@JsonIgnoreProperties(value={"hibernateLazyInitializer"})
 	private Weekdays weekdays;
 	private Integer duradion;
+	 @JsonFormat(pattern="HH:mm:ss")
 	private Date hour;
 
 	public PrivateCoachWeekdays() {
@@ -55,7 +58,7 @@ public class PrivateCoachWeekdays implements java.io.Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_private_coach")
 	public PrivateCoach getPrivateCoach() {
 		return this.privateCoach;

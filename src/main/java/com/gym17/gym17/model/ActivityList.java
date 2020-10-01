@@ -15,6 +15,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -31,6 +32,7 @@ public class ActivityList implements java.io.Serializable {
 	@JsonIgnoreProperties(value={"activityLists", "userCustomer", "userWorker"})
 	private User user;
 	private Boolean active;
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date createDate;
 	private String description;
 	private String name;

@@ -24,7 +24,7 @@ public class GroupCustomer implements java.io.Serializable {
 	private Integer id;
 	@JsonIgnoreProperties("groupCustomers")
 	private Group group;
-	@JsonIgnoreProperties(value = {"groupCustomers", "privateCoaches", "customerMembershipFees"})
+	@JsonIgnoreProperties(value = {"groupCustomers", "privateCoaches", "customerMembershipFees", "hibernateLazyInitializer"})
 	private UserCustomer userCustomer;
 
 	public GroupCustomer() {

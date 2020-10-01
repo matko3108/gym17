@@ -15,6 +15,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -30,7 +31,9 @@ public class CustomerMembershipFee implements java.io.Serializable {
 	private MembershipFeeType membershipFeeType;
 	@JsonIgnoreProperties("customerMembershipFees")
 	private UserCustomer userCustomer;
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date endDate;
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date startDate;
 
 	public CustomerMembershipFee() {

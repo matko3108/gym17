@@ -20,6 +20,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -32,12 +33,14 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class PrivateCoach implements java.io.Serializable {
 
 	private Integer id;
-	@JsonIgnoreProperties(value = {"groupCustomers", "privateCoaches", "customerMembershipFees"})
+	@JsonIgnoreProperties(value = {"groupCustomers", "privateCoaches", "customerMembershipFees", "hibernateLazyInitializer"})
 	private UserCustomer userCustomer;
-	@JsonIgnoreProperties(value = {"groupWorkers", "privateCoaches", "userWorkerWorkerRightses"})
+	@JsonIgnoreProperties(value = {"groupWorkers", "privateCoaches", "userWorkerWorkerRightses", "hibernateLazyInitializer"})
 	private UserWorker userWorker;
 	private String description;
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date end;
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date start;
 	@JsonIgnoreProperties("privateCoach")
 	private Set<PrivateCoachWeekdays> privateCoachWeekdayses = new HashSet<PrivateCoachWeekdays>(0);
