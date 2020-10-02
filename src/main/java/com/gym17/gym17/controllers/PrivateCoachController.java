@@ -22,6 +22,7 @@ import src.main.java.com.gym17.gym17.model.PrivateCoachWeekdays;
 import src.main.java.com.gym17.gym17.model.Weekdays;
 import src.main.java.com.gym17.gym17.response.ErrorResponse;
 import src.main.java.com.gym17.gym17.response.ErrorType;
+import src.main.java.com.gym17.gym17.response.ResponseStatus;
 import src.main.java.com.gym17.gym17.service.PrivateCoachService;
 import src.main.java.com.gym17.gym17.service.PrivateCoachWeekdaysService;
 import src.main.java.com.gym17.gym17.service.WeekdaysService;
@@ -119,7 +120,7 @@ public class PrivateCoachController {
 
 		PrivateCoachService.delete(PrivateCoach.get());
 		//log.info("Requested User successfully deleted! Response: [{}].", User.get());
-		return ResponseEntity.ok().body(PrivateCoach.get());
+		return ResponseEntity.ok().body(new ResponseStatus(true));
 	}
 	
 	@DeleteMapping("/v1/PrivateCoachWeekday/{PrivateCoachWeekdays}")
@@ -138,6 +139,6 @@ public class PrivateCoachController {
 
 		PrivateCoachWeekdaysService.delete(PrivateCoachWeekday.get());
 		//log.info("Requested User successfully deleted! Response: [{}].", User.get());
-		return ResponseEntity.ok().body(PrivateCoachWeekday.get());
+		return ResponseEntity.ok().body(new ResponseStatus(true));
 	}
 }

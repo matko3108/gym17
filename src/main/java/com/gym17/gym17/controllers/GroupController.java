@@ -22,6 +22,7 @@ import src.main.java.com.gym17.gym17.model.PrivateCoachWeekdays;
 import src.main.java.com.gym17.gym17.model.User;
 import src.main.java.com.gym17.gym17.response.ErrorResponse;
 import src.main.java.com.gym17.gym17.response.ErrorType;
+import src.main.java.com.gym17.gym17.response.ResponseStatus;
 import src.main.java.com.gym17.gym17.service.GroupService;
 import src.main.java.com.gym17.gym17.service.GroupWorkerService;
 import src.main.java.com.gym17.gym17.service.GroupCustomerService;
@@ -110,7 +111,7 @@ public class GroupController {
 
 		GroupService.delete(Group.get());
 		//log.info("Requested User successfully deleted! Response: [{}].", User.get());
-		return ResponseEntity.ok().body(Group.get());
+		return ResponseEntity.ok().body(new ResponseStatus(true));
 	}
 	
 	
@@ -172,7 +173,7 @@ public class GroupController {
 
 		GroupWeekDaysService.delete(GroupWeekday.get());
 		//log.info("Requested User successfully deleted! Response: [{}].", User.get());
-		return ResponseEntity.ok().body(GroupWeekday.get());
+		return ResponseEntity.ok().body(new ResponseStatus(true));
 	}
 	
 	@DeleteMapping("/v1/groupWorker/{GroupWorker}")
@@ -191,7 +192,7 @@ public class GroupController {
 
 		GroupWorkerService.delete(GroupWorkerget.get());
 		//log.info("Requested User successfully deleted! Response: [{}].", User.get());
-		return ResponseEntity.ok().body(GroupWorkerget.get());
+		return ResponseEntity.ok().body(new ResponseStatus(true));
 	}
 	
 	@DeleteMapping("/v1/groupCustomer/{groupCustomer}")
@@ -210,6 +211,6 @@ public class GroupController {
 
 		GroupCustomerService.delete(GroupCustomerget.get());
 		//log.info("Requested User successfully deleted! Response: [{}].", User.get());
-		return ResponseEntity.ok().body(GroupCustomerget.get());
+		return ResponseEntity.ok().body(new ResponseStatus(true));
 	}
 }

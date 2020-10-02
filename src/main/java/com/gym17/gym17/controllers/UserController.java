@@ -32,6 +32,7 @@ import src.main.java.com.gym17.gym17.model.UserData;
 import src.main.java.com.gym17.gym17.model.UserMembershipData;
 import src.main.java.com.gym17.gym17.response.ErrorResponse;
 import src.main.java.com.gym17.gym17.response.ErrorType;
+import src.main.java.com.gym17.gym17.response.ResponseStatus;
 import src.main.java.com.gym17.gym17.response.TokenResponse;
 import src.main.java.com.gym17.gym17.service.UserService;
 import src.main.java.com.gym17.gym17.service.MembershipFeeTypeService;
@@ -101,7 +102,7 @@ public class UserController {
 
 		UserService.delete(User.get());
 		//log.info("Requested User successfully deleted! Response: [{}].", User.get());
-		return ResponseEntity.ok().body(User.get());
+		return ResponseEntity.ok().body(new ResponseStatus(true));
 	}
 
 	@PostMapping("/v1/user/update")
