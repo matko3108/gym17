@@ -27,7 +27,7 @@ public class WeekdaysController {
 		this.WeekdaysService = WeekdaysService;
 	}
 
-	@GetMapping("/v1/Weekdays/list")
+	@GetMapping("/v1/weekdays/list")
 	public Iterable<Weekdays> list() {
 		Iterable<Weekdays> Weekdays = WeekdaysService.list();
 		return Weekdays;

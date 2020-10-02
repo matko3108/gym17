@@ -84,7 +84,7 @@ public class UserController {
 	}
 	
 
-	@DeleteMapping("/v1/delete/{UserId}")
+	@DeleteMapping("/v1/user/{UserId}")
 	public ResponseEntity<Object> deleteUser(@PathVariable("UserId") String UserId) {
 
 		/*
