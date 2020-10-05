@@ -26,7 +26,7 @@ public class GroupWeekDaysService {
 	}
 	
 	public GroupWeekdays saveGroupWeekdays(GroupWeekdays data) {
-		return GroupWeekDaysRepository.save(data);
+		return GroupWeekDaysRepository.saveAndFlush(data);
 	}
 	public void delete(GroupWeekdays GroupWeekdays) {
 		GroupWeekDaysRepository.delete(GroupWeekdays);				

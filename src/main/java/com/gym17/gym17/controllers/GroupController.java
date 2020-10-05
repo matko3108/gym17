@@ -16,10 +16,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import src.main.java.com.gym17.gym17.model.Group;
 import src.main.java.com.gym17.gym17.model.GroupCustomer;
+import src.main.java.com.gym17.gym17.model.GroupCustomerNew;
 import src.main.java.com.gym17.gym17.model.GroupWeekdays;
+import src.main.java.com.gym17.gym17.model.GroupWeekdaysNew;
 import src.main.java.com.gym17.gym17.model.GroupWorker;
+import src.main.java.com.gym17.gym17.model.GroupWorkerNew;
 import src.main.java.com.gym17.gym17.model.PrivateCoachWeekdays;
 import src.main.java.com.gym17.gym17.model.User;
+import src.main.java.com.gym17.gym17.model.UserCustomer;
+import src.main.java.com.gym17.gym17.model.UserWorker;
+import src.main.java.com.gym17.gym17.model.Weekdays;
 import src.main.java.com.gym17.gym17.response.ErrorResponse;
 import src.main.java.com.gym17.gym17.response.ErrorType;
 import src.main.java.com.gym17.gym17.response.ResponseStatus;
@@ -27,6 +33,9 @@ import src.main.java.com.gym17.gym17.service.GroupService;
 import src.main.java.com.gym17.gym17.service.GroupWorkerService;
 import src.main.java.com.gym17.gym17.service.GroupCustomerService;
 import src.main.java.com.gym17.gym17.service.GroupWeekDaysService;
+import src.main.java.com.gym17.gym17.service.UserCustomerService;
+import src.main.java.com.gym17.gym17.service.UserWorkerService;
+import src.main.java.com.gym17.gym17.service.WeekdaysService;
 
 
 @RestController
@@ -38,6 +47,13 @@ public class GroupController {
 	private GroupCustomerService GroupCustomerService;
 	@Autowired
 	private GroupWeekDaysService GroupWeekDaysService;
+	@Autowired
+	private UserCustomerService UserCustomerService;
+	@Autowired
+	private UserWorkerService UserWorkerService;
+	@Autowired
+	private WeekdaysService WeekdaysService;
+	
 
 	private GroupService GroupService;
 
@@ -49,7 +65,6 @@ public class GroupController {
 	@GetMapping("/v1/group/list")
 	public Iterable<Group> list() {
 		Iterable<Group> Group = GroupService.list();
-	     
 		return Group;
 	}
 	
@@ -110,9 +125,12 @@ public class GroupController {
 		 * info("Requested: update User with a specifid id. Request data: [UserId={}]",
 		 * UserId);
 		 */
+		Optional<UserCustomer> UserCustomer =  UserCustomerService.findById(data.getUserCustomer().getId());
+		data.setUserCustomer(UserCustomer.get());
 		GroupCustomer GroupCustomersaved = GroupCustomerService.saveGroupCustomer(data);
 			//log.info("Response: [{}].", ErrorType.USER_NOT_FOUND.toString());
-			return ResponseEntity.ok().body(GroupCustomersaved);
+		Optional<Group> Group = GroupService.findByIdnew(GroupCustomersaved.getGroup().getId());
+		return ResponseEntity.ok().body(Group.get());
 			//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
 		}
 	
@@ -123,11 +141,16 @@ public class GroupController {
 		 * log.
 		 * info("Requested: update User with a specifid id. Request data: [UserId={}]",
 		 * UserId);
+		 * 
 		 */
+		Optional<UserWorker> UserWorker =  UserWorkerService.findById(data.getUserWorker().getId());
+		data.setUserWorker(UserWorker.get());
 		GroupWorker GroupWorkersaved = GroupWorkerService.saveGroupWorker(data);
 			//log.info("Response: [{}].", ErrorType.USER_NOT_FOUND.toString());
-			return ResponseEntity.ok().body(GroupWorkersaved);
-			//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
+		Optional<Group> Group = GroupService.findById(GroupWorkersaved.getGroup().getId());
+
+		return ResponseEntity.ok().body(Group.get());
+		//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
 		}
 	
 	@PostMapping("/v1/groupWeekdays")
@@ -138,10 +161,13 @@ public class GroupController {
 		 * info("Requested: update User with a specifid id. Request data: [UserId={}]",
 		 * UserId);
 		 */
+		Optional<Weekdays> Weekdays =  WeekdaysService.findById(data.getWeekdays().getId());
+		data.setWeekdays(Weekdays.get());
 		GroupWeekdays GroupWeekdayssaved = GroupWeekDaysService.saveGroupWeekdays(data);
 			//log.info("Response: [{}].", ErrorType.USER_NOT_FOUND.toString());
-			return ResponseEntity.ok().body(GroupWeekdayssaved);
-			//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
+		Optional<Group> Group = GroupService.findById(GroupWeekdayssaved.getGroup().getId());
+		return ResponseEntity.ok().body(Group.get());
+		//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
 		}
 	
 	@DeleteMapping("/v1/groupWeekdays/{groupWeekdays}")

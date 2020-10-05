@@ -26,7 +26,7 @@ public class GroupWorkerService {
 	}
 	
 	public GroupWorker saveGroupWorker(GroupWorker data) {
-		return GroupWorkerRepository.save(data);
+		return GroupWorkerRepository.saveAndFlush(data);
 	}
 	public void delete(GroupWorker GroupWorker) {
 		GroupWorkerRepository.delete(GroupWorker);				

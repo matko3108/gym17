@@ -26,7 +26,7 @@ public class GroupCustomerService {
 	}
 	
 	public GroupCustomer saveGroupCustomer(GroupCustomer data) {
-		return GroupCustomerRepository.save(data);
+		return GroupCustomerRepository.saveAndFlush(data);
 	}
 	public void delete(GroupCustomer GroupCustomer) {
 		GroupCustomerRepository.delete(GroupCustomer);				

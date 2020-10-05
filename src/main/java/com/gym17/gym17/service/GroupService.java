@@ -26,10 +26,14 @@ public class GroupService {
 	}
 	
 	public Group saveGroup(Group data) {
-		return GroupRepository.save(data);
+		return GroupRepository.saveAndFlush(data);
 	}
 	public void delete(Group group) {
 		GroupRepository.delete(group);				
+	}
+	public Optional<Group> findByIdnew(Integer id) {
+		return GroupRepository.findByIdnew(id);
+
 	}
 
 }

@@ -10,10 +10,15 @@ import src.main.java.com.gym17.gym17.model.UserCustomer;
 import src.main.java.com.gym17.gym17.model.UserCustomerList;
 import src.main.java.com.gym17.gym17.repositories.UserCustomerListRepository;
 import src.main.java.com.gym17.gym17.repositories.UserRepository;
+import src.main.java.com.gym17.gym17.repositories.UserCustomerRepository;
+
 
 @Service
 public class UserCustomerService {
 	private UserCustomerListRepository UserCustomerListRepository;
+	@Autowired
+	private UserCustomerRepository UserCustomerRepository;
+
 
 	@Autowired
 	public UserCustomerService(UserCustomerListRepository UserCustomerListRepository) {
@@ -24,10 +29,10 @@ public class UserCustomerService {
 		return userCollection;
 	}
 
-	/*
-	 * public Optional<UserCustomer> findById(int parseInt) { return
-	 * UserCustomerRepository.findById(parseInt); }
-	 * 
+	
+	  public Optional<UserCustomer> findById(int parseInt) { return
+	  UserCustomerRepository.findById(parseInt); }
+	  /* 
 	 * public void delete(UserCustomer userCustomer) {
 	 * UserCustomerRepository.delete(userCustomer);
 	 * 
