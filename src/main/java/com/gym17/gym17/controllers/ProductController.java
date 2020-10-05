@@ -1,18 +1,37 @@
 package src.main.java.com.gym17.gym17.controllers;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import src.main.java.com.gym17.gym17.model.Group;
 import src.main.java.com.gym17.gym17.model.Product;
+import src.main.java.com.gym17.gym17.model.ProductType;
+import src.main.java.com.gym17.gym17.response.ErrorResponse;
+import src.main.java.com.gym17.gym17.response.ErrorType;
+import src.main.java.com.gym17.gym17.response.ResponseStatus;
+import src.main.java.com.gym17.gym17.service.MembershipFeeTypeService;
 import src.main.java.com.gym17.gym17.service.ProductService;
+import src.main.java.com.gym17.gym17.service.ProductTypeService;
+import src.main.java.com.gym17.gym17.service.ProductDiscountService;
+
 
 @RestController
 @RequestMapping("")
 public class ProductController {
+	@Autowired
+	private ProductTypeService ProductTypeService;
+	@Autowired
+	private ProductDiscountService ProductDiscountService;
 
-
+	
 	private ProductService ProductService;
 
 	@Autowired
@@ -20,11 +39,58 @@ public class ProductController {
 		this.ProductService = ProductService;
 	}
 
-	@GetMapping("/v1/Product/list")
+	@GetMapping("/v1/product/list")
 	public Iterable<Product> list() {
 		Iterable<Product> Product = ProductService.list();
 		return Product;
 	}
 
+	@GetMapping(path = "/v1/product/{Product}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> findById(@PathVariable("Product") String Product) {
+		Optional<Product> org = ProductService.findById(Integer.parseInt(Product));
+		if (org == null) {
+			return ResponseEntity.ok().body(new ErrorResponse(ErrorType.ACTIVITY_NOT_FOUND));
+		}
+
+		return ResponseEntity.ok().body(org.get());
+	}
+	
+
+	@DeleteMapping("/v1/product/{Product}")
+	public ResponseEntity<Object> deleteProduct(@PathVariable("Product") String Product) {
+
+		/*
+		 * log.
+		 * info("Requested: delete User with a specifid id. Request data: [UserId={}]",
+		 * UserId);
+		 */
+
+		Optional<Product> org = ProductService.findById(Integer.parseInt(Product));
+		if (!org.isPresent()) {
+			//log.info("Response: [{}].", ErrorType.USER_NOT_FOUND.toString());
+			return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
+		}
+
+		ProductService.delete(org.get());
+		//log.info("Requested User successfully deleted! Response: [{}].", User.get());
+		return ResponseEntity.ok().body(new ResponseStatus(true));
+	}
+	
+	
+	@GetMapping("/v1/productType/list")
+	public Iterable<ProductType> ProductTypelist() {
+		Iterable<ProductType> ProductType = ProductTypeService.list();
+		return ProductType;
+	}
+
+	@GetMapping(path = "/v1/productType/{productType}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> findByIdProductType(@PathVariable("productType") String productType) {
+		Optional<ProductType> org = ProductTypeService.findById(Integer.parseInt(productType));
+		if (org == null) {
+			return ResponseEntity.ok().body(new ErrorResponse(ErrorType.ACTIVITY_NOT_FOUND));
+		}
+
+		return ResponseEntity.ok().body(org.get());
+	}
 	
 }
