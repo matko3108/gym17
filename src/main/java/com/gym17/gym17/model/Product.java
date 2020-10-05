@@ -1,5 +1,5 @@
 package src.main.java.com.gym17.gym17.model;
-// Generated Sep 28, 2020, 5:24:32 PM by Hibernate Tools 4.3.5.Final
+// Generated Oct 5, 2020, 5:18:11 PM by Hibernate Tools 4.3.5.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -9,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -20,9 +22,9 @@ import javax.persistence.Table;
 public class Product implements java.io.Serializable {
 
 	private Integer id;
+	private ProductType productType;
 	private String name;
 	private String description;
-	private Integer fkType;
 	private Long basePrice;
 	private Integer productPdv;
 	private Long priceWithPdv;
@@ -33,12 +35,12 @@ public class Product implements java.io.Serializable {
 	public Product() {
 	}
 
-	public Product(String name, String description, Integer fkType, Long basePrice, Integer productPdv,
+	public Product(ProductType productType, String name, String description, Long basePrice, Integer productPdv,
 			Long priceWithPdv, Set<ProductPdv> productPdvs, Set<ProductDiscount> productDiscounts,
 			Set<ProductPrice> productPrices) {
+		this.productType = productType;
 		this.name = name;
 		this.description = description;
-		this.fkType = fkType;
 		this.basePrice = basePrice;
 		this.productPdv = productPdv;
 		this.priceWithPdv = priceWithPdv;
@@ -59,6 +61,16 @@ public class Product implements java.io.Serializable {
 		this.id = id;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "fk_type")
+	public ProductType getProductType() {
+		return this.productType;
+	}
+
+	public void setProductType(ProductType productType) {
+		this.productType = productType;
+	}
+
 	@Column(name = "name", length = 50)
 	public String getName() {
 		return this.name;
@@ -75,15 +87,6 @@ public class Product implements java.io.Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	@Column(name = "fk_type")
-	public Integer getFkType() {
-		return this.fkType;
-	}
-
-	public void setFkType(Integer fkType) {
-		this.fkType = fkType;
 	}
 
 	@Column(name = "base_price", precision = 10, scale = 0)

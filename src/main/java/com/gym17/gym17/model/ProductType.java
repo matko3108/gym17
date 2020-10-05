@@ -1,11 +1,15 @@
 package src.main.java.com.gym17.gym17.model;
-// Generated Sep 28, 2020, 5:24:32 PM by Hibernate Tools 4.3.5.Final
+// Generated Oct 5, 2020, 5:18:11 PM by Hibernate Tools 4.3.5.Final
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -18,13 +22,15 @@ public class ProductType implements java.io.Serializable {
 	private Integer id;
 	private String name;
 	private String description;
+	private Set<Product> products = new HashSet<Product>(0);
 
 	public ProductType() {
 	}
 
-	public ProductType(String name, String description) {
+	public ProductType(String name, String description, Set<Product> products) {
 		this.name = name;
 		this.description = description;
+		this.products = products;
 	}
 
 	@Id
@@ -55,6 +61,15 @@ public class ProductType implements java.io.Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productType")
+	public Set<Product> getProducts() {
+		return this.products;
+	}
+
+	public void setProducts(Set<Product> products) {
+		this.products = products;
 	}
 
 }

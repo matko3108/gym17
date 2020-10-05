@@ -1,5 +1,5 @@
 package src.main.java.com.gym17.gym17.model;
-// Generated Sep 28, 2020, 5:24:32 PM by Hibernate Tools 4.3.5.Final
+// Generated Oct 5, 2020, 5:18:11 PM by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -24,26 +24,30 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class ProductDiscount implements java.io.Serializable {
 
 	private Integer id;
-	private Discount discount;
 	private Product product;
+	private Integer discountPercent;
 	private String name;
-	private String discount_1;
+	private String discountPrice;
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date validFrom;
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date validTo;
+	private String discount;
+	private Integer fkDiscount;
 
 	public ProductDiscount() {
 	}
 
-	public ProductDiscount(Discount discount, Product product, String name, String discount_1, Date validFrom,
-			Date validTo) {
-		this.discount = discount;
+	public ProductDiscount(Product product, Integer discountPercent, String name, String discountPrice, Date validFrom,
+			Date validTo, String discount, Integer fkDiscount) {
 		this.product = product;
+		this.discountPercent = discountPercent;
 		this.name = name;
-		this.discount_1 = discount_1;
+		this.discountPrice = discountPrice;
 		this.validFrom = validFrom;
 		this.validTo = validTo;
+		this.discount = discount;
+		this.fkDiscount = fkDiscount;
 	}
 
 	@Id
@@ -59,16 +63,6 @@ public class ProductDiscount implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "fk_discount")
-	public Discount getDiscount() {
-		return this.discount;
-	}
-
-	public void setDiscount(Discount discount) {
-		this.discount = discount;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_product")
 	public Product getProduct() {
 		return this.product;
@@ -76,6 +70,15 @@ public class ProductDiscount implements java.io.Serializable {
 
 	public void setProduct(Product product) {
 		this.product = product;
+	}
+
+	@Column(name = "discount_percent")
+	public Integer getDiscountPercent() {
+		return this.discountPercent;
+	}
+
+	public void setDiscountPercent(Integer discountPercent) {
+		this.discountPercent = discountPercent;
 	}
 
 	@Column(name = "name", length = 50)
@@ -87,13 +90,13 @@ public class ProductDiscount implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@Column(name = "discount", length = 250)
-	public String getDiscount_1() {
-		return this.discount_1;
+	@Column(name = "discount_price", length = 250)
+	public String getDiscountPrice() {
+		return this.discountPrice;
 	}
 
-	public void setDiscount_1(String discount_1) {
-		this.discount_1 = discount_1;
+	public void setDiscountPrice(String discountPrice) {
+		this.discountPrice = discountPrice;
 	}
 
 	@Temporal(TemporalType.DATE)
@@ -114,6 +117,24 @@ public class ProductDiscount implements java.io.Serializable {
 
 	public void setValidTo(Date validTo) {
 		this.validTo = validTo;
+	}
+
+	@Column(name = "discount", length = 250)
+	public String getDiscount() {
+		return this.discount;
+	}
+
+	public void setDiscount(String discount) {
+		this.discount = discount;
+	}
+
+	@Column(name = "fk_discount")
+	public Integer getFkDiscount() {
+		return this.fkDiscount;
+	}
+
+	public void setFkDiscount(Integer fkDiscount) {
+		this.fkDiscount = fkDiscount;
 	}
 
 }
