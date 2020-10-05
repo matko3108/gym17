@@ -49,19 +49,6 @@ public class GroupController {
 	@GetMapping("/v1/group/list")
 	public Iterable<Group> list() {
 		Iterable<Group> Group = GroupService.list();
-		
-		Group.forEach(new Consumer<Group>() { 
-	    	  
-	            @Override
-	            public void accept(Group t) 
-	            { 
-	            	t.setGroupCustomers(null);
-	            	t.setGroupWeekdayses(null);
-	            	t.setGroupWorkers(null);
-	            }
-
-	  
-	        }); 
 	     
 		return Group;
 	}
