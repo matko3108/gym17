@@ -27,7 +27,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class ActivityList implements java.io.Serializable {
 
 	private Integer id;
-	@JsonIgnoreProperties("activityLists")
+	@JsonIgnoreProperties(value={"activityLists","hibernateLazyInitializer"})
 	private ActivityType activityType;
 	@JsonIgnoreProperties(value={"activityLists", "userCustomer", "userWorker"})
 	private User user;

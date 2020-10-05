@@ -3,6 +3,8 @@ package src.main.java.com.gym17.gym17.model;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -101,7 +103,7 @@ public class UserWorker implements java.io.Serializable {
 	public void setAdditionalData(String additionalData) {
 		this.additionalData = additionalData;
 	}
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userWorker")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userWorker",cascade = CascadeType.ALL)
 	public Set<PrivateCoach> getPrivateCoaches() {
 		return this.privateCoaches;
 	}
@@ -109,7 +111,7 @@ public class UserWorker implements java.io.Serializable {
 	public void setPrivateCoaches(Set<PrivateCoach> privateCoaches) {
 		this.privateCoaches = privateCoaches;
 	}
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userWorker")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userWorker", cascade = CascadeType.REMOVE)
 	public Set<UserWorkerWorkerRights> getUserWorkerWorkerRightses() {
 		return this.userWorkerWorkerRightses;
 	}
@@ -118,7 +120,7 @@ public class UserWorker implements java.io.Serializable {
 		this.userWorkerWorkerRightses = userWorkerWorkerRightses;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userWorker")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userWorker", cascade = CascadeType.ALL)
 	public Set<GroupWorker> getGroupWorkers() {
 		return this.groupWorkers;
 	}

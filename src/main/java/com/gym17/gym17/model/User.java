@@ -183,7 +183,7 @@ public class User implements java.io.Serializable {
 		this.userWorker = userWorker;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.REMOVE)
 	public Set<ActivityList> getActivityLists() {
 		return this.activityLists;
 	}
