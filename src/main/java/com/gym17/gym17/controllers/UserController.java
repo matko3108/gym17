@@ -187,7 +187,7 @@ public class UserController {
 			Optional<Token> token = TokenService.findBytoken(auth.replace("Bearer ", ""));
 		if(token.isPresent()) {
 		Optional<User> User = UserService.findByExternalId(userMembershipdata.getUser_id());
-		Optional<MembershipFeeType> MembershipFeeType = MembershipFeeTypeService.findByExternalId(userMembershipdata.getUser_id());
+		Optional<MembershipFeeType> MembershipFeeType = MembershipFeeTypeService.findByExternalId(userMembershipdata.getMembership_id());
 		if (User.isPresent() && MembershipFeeType.isPresent()) {
 			CustomerMembershipFee customerMembershipFee = new CustomerMembershipFee();
 			customerMembershipFee.setMembershipFeeType(MembershipFeeType.get());
@@ -283,4 +283,36 @@ public class UserController {
 			}
 		}
 	}
+	
+	@PostMapping("/v1/Membership")
+	public ResponseEntity<Object> saveMebership(@RequestHeader("Authorization") String auth, @RequestBody MembershipFeeType MembershipFeeTypeNew) {
+		if(auth != null ) {
+			Optional<Token> token = TokenService.findBytoken(auth.replace("Bearer ", ""));
+		if(token.isPresent()) {
+		Optional<MembershipFeeType> MembershipFeeType = MembershipFeeTypeService.findByExternalId(MembershipFeeTypeNew.getExternalid());
+		if (MembershipFeeType.isPresent()) {
+			MembershipFeeType.get().setAmount(MembershipFeeTypeNew.getAmount());
+			MembershipFeeType.get().setDescription(MembershipFeeTypeNew.getDescription());
+			MembershipFeeType.get().setName(MembershipFeeTypeNew.getName());
+			MembershipFeeType saveMembershipFeeType = MembershipFeeTypeService.saveMembershipFeeType(MembershipFeeType.get());
+
+			return ResponseEntity.ok().body(saveMembershipFeeType);
+
+			//return ResponseEntity.ok().MembershipFeeTypeNew(new ErrorResponse(ErrorType.USER_NOT_FOUND));
+		}else {
+			MembershipFeeType saveMembershipFeeType = MembershipFeeTypeService.saveMembershipFeeType(MembershipFeeTypeNew);
+			return ResponseEntity.ok().body(saveMembershipFeeType);
+
+			//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
+		}
+		
+		}
+		return ResponseEntity.ok().body(new ErrorResponse(ErrorType.BAD_TOKEN));
+
+		}
+		return ResponseEntity.ok().body(new ErrorResponse(ErrorType.BAD_TOKEN));
+	}
+		//UserService.update(User.get(), data);
+		//log.info("Requested User successfully updated! Response: [{}].", User.get());
+		//return ResponseEntity.ok().body
 }

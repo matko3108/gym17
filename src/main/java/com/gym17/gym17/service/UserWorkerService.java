@@ -10,6 +10,7 @@ import src.main.java.com.gym17.gym17.model.UserWorker;
 import src.main.java.com.gym17.gym17.repositories.UserCustomerRepository;
 import src.main.java.com.gym17.gym17.repositories.UserWorkerListRepository;
 import src.main.java.com.gym17.gym17.repositories.UserWorkerRepository;
+import src.main.java.com.gym17.gym17.repositories.WorkerTypeRepository;
 
 
 @Service
@@ -17,13 +18,15 @@ public class UserWorkerService {
 	private UserWorkerListRepository UserWorkerListRepository;
 	@Autowired
 	private UserWorkerRepository UserWorkerRepository;
+	@Autowired
+	private WorkerTypeRepository WorkerTypeRepository;
 	
 	@Autowired
 	public UserWorkerService(UserWorkerListRepository UserWorkerListRepository) {
 		this.UserWorkerListRepository = UserWorkerListRepository;
 	}
-	public Iterable<UserWorkerList> list() {
-		Iterable<UserWorkerList> userCollection = UserWorkerListRepository.findAll();
+	public Iterable<UserWorker> list() {
+		Iterable<UserWorker> userCollection = UserWorkerRepository.findAll();
 		return userCollection;
 	}
 
@@ -41,5 +44,10 @@ public class UserWorkerService {
 	 * 
 	 * }
 	 */
+	public Iterable<UserWorker> coachlist() {
+		// TODO Auto-generated method stub
+		Iterable<UserWorker> userCollection = UserWorkerRepository.findCoaches();
+		return userCollection;
+		}
 
 }

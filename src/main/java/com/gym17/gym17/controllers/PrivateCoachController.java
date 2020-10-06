@@ -19,12 +19,16 @@ import org.springframework.web.bind.annotation.RestController;
 import src.main.java.com.gym17.gym17.model.PrivateCoach;
 import src.main.java.com.gym17.gym17.model.PrivateCoachWeekday;
 import src.main.java.com.gym17.gym17.model.PrivateCoachWeekdays;
+import src.main.java.com.gym17.gym17.model.UserCustomer;
+import src.main.java.com.gym17.gym17.model.UserWorker;
 import src.main.java.com.gym17.gym17.model.Weekdays;
 import src.main.java.com.gym17.gym17.response.ErrorResponse;
 import src.main.java.com.gym17.gym17.response.ErrorType;
 import src.main.java.com.gym17.gym17.response.ResponseStatus;
 import src.main.java.com.gym17.gym17.service.PrivateCoachService;
 import src.main.java.com.gym17.gym17.service.PrivateCoachWeekdaysService;
+import src.main.java.com.gym17.gym17.service.UserCustomerService;
+import src.main.java.com.gym17.gym17.service.UserWorkerService;
 import src.main.java.com.gym17.gym17.service.WeekdaysService;
 
 
@@ -36,6 +40,11 @@ public class PrivateCoachController {
 	private PrivateCoachWeekdaysService PrivateCoachWeekdaysService;
 	@Autowired
 	private WeekdaysService WeekdaysService;
+	@Autowired
+	private UserCustomerService UserCustomerService;
+	@Autowired
+	private UserWorkerService UserWorkerService;
+	
 	private PrivateCoachService PrivateCoachService;
 
 	@Autowired
@@ -68,6 +77,10 @@ public class PrivateCoachController {
 		 * info("Requested: update User with a specifid id. Request data: [UserId={}]",
 		 * UserId);
 		 */
+		Optional<UserWorker> UserWorker =  UserWorkerService.findById(data.getUserWorker().getId());
+			data.setUserWorker(UserWorker.get());
+			Optional<UserCustomer> UserCustomer =  UserCustomerService.findById(data.getUserCustomer().getId());
+			data.setUserCustomer(UserCustomer.get());
 			PrivateCoach PrivateCoachsaved = PrivateCoachService.savePrivateCoach(data);
 			//log.info("Response: [{}].", ErrorType.USER_NOT_FOUND.toString());
 			return ResponseEntity.ok().body(PrivateCoachsaved);

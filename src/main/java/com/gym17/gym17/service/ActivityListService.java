@@ -24,5 +24,10 @@ public class ActivityListService {
 	public Optional<ActivityList> findById(int parseInt) {
 		return ActivityListRepository.findById(parseInt);
 	}
+	public ActivityList save(ActivityList activityList) {
+		return ActivityListRepository.save(activityList);
+		// TODO Auto-generated method stub
+		
+	}
 
 }

@@ -33,13 +33,12 @@ public class ProductDiscount implements java.io.Serializable {
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date validTo;
 	private String discount;
-	private Integer fkDiscount;
 
 	public ProductDiscount() {
 	}
 
 	public ProductDiscount(Product product, Integer discountPercent, String name, String discountPrice, Date validFrom,
-			Date validTo, String discount, Integer fkDiscount) {
+			Date validTo, String discount) {
 		this.product = product;
 		this.discountPercent = discountPercent;
 		this.name = name;
@@ -47,7 +46,6 @@ public class ProductDiscount implements java.io.Serializable {
 		this.validFrom = validFrom;
 		this.validTo = validTo;
 		this.discount = discount;
-		this.fkDiscount = fkDiscount;
 	}
 
 	@Id
@@ -126,15 +124,6 @@ public class ProductDiscount implements java.io.Serializable {
 
 	public void setDiscount(String discount) {
 		this.discount = discount;
-	}
-
-	@Column(name = "fk_discount")
-	public Integer getFkDiscount() {
-		return this.fkDiscount;
-	}
-
-	public void setFkDiscount(Integer fkDiscount) {
-		this.fkDiscount = fkDiscount;
 	}
 
 }
