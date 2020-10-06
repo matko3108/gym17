@@ -111,7 +111,9 @@ public class PrivateCoachController {
 		PrivateCoachWeekdays PrivateCoachWeekdays = new PrivateCoachWeekdays(PrivateCoach.get(),weekdays.get(), data.getDuradion(), start);
 		PrivateCoachWeekdays PrivateCoachWeekdaysnew = PrivateCoachWeekdaysService.savePrivateCoachWeekdays(PrivateCoachWeekdays);
 		//log.info("Response: [{}].", ErrorType.USER_NOT_FOUND.toString());
-			return ResponseEntity.ok().body(PrivateCoachWeekdaysnew);
+		Optional<PrivateCoach> PrivateCoachsaved = PrivateCoachService.findById(data.getPrivateCoach());
+	
+		return ResponseEntity.ok().body(PrivateCoachsaved.get());
 			//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
 		}
 	
