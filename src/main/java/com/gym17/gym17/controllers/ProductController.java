@@ -123,7 +123,7 @@ public class ProductController {
 		 * info("Requested: update User with a specifid id. Request data: [UserId={}]",
 		 * UserId);
 		 */
-		Optional<ProductType> ProductType = ProductTypeService.findById(Integer.parseInt(productType));
+		Optional<ProductType> ProductType = ProductTypeService.findById(data.getProductType().getId());
 
 		data.setProductType(ProductType.get());
 		Product Productnew = ProductService.saveProduct(data);

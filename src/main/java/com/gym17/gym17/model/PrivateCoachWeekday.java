@@ -33,7 +33,7 @@ public class PrivateCoachWeekday {
 	}
 	@Override
 	public String toString() {
-		return "PrivateCoachWeekday [privateCoach=" + privateCoach + ", weekdays=" + weekdays + ", duradion=" + duradion
+		return "PrivateCoachWeekday [privateCoach=" + privateCoach + ", weekdays=" + weekdays + ", duration=" + duration
 				+ ", hour=" + hour + "]";
 	}
 	
