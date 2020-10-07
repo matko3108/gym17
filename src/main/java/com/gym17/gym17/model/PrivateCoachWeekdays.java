@@ -33,17 +33,17 @@ public class PrivateCoachWeekdays implements java.io.Serializable {
 	private PrivateCoach privateCoach;
 	@JsonIgnoreProperties(value={"hibernateLazyInitializer"})
 	private Weekdays weekdays;
-	private Integer duradion;
+	private Integer duration;
 	 @JsonFormat(pattern="HH:mm:ss")
 	private Date hour;
 
 	public PrivateCoachWeekdays() {
 	}
 
-	public PrivateCoachWeekdays(PrivateCoach privateCoach, Weekdays weekdays, Integer duradion, Date hour) {
+	public PrivateCoachWeekdays(PrivateCoach privateCoach, Weekdays weekdays, Integer duration, Date hour) {
 		this.privateCoach = privateCoach;
 		this.weekdays = weekdays;
-		this.duradion = duradion;
+		this.duration = duration;
 		this.hour = hour;
 	}
 
@@ -78,12 +78,12 @@ public class PrivateCoachWeekdays implements java.io.Serializable {
 	}
 
 	@Column(name = "duradion")
-	public Integer getDuradion() {
-		return this.duradion;
+	public Integer getDuration() {
+		return this.duration;
 	}
 
-	public void setDuradion(Integer duradion) {
-		this.duradion = duradion;
+	public void setDuration(Integer duration) {
+		this.duration = duration;
 	}
 
 	@Temporal(TemporalType.TIME)
