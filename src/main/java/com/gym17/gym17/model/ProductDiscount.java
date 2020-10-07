@@ -25,7 +25,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class ProductDiscount implements java.io.Serializable {
 
 	private Integer id;
-	@JsonIgnore
 	private Product product;
 	private Integer discountPercent;
 	private String name;
