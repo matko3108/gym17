@@ -115,6 +115,23 @@ public class ProductController {
 			//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
 		}
 	
+	@PostMapping("/v1/product")
+	public ResponseEntity<Object> saveproduct(@RequestBody Product data) {
+
+		/*
+		 * log.
+		 * info("Requested: update User with a specifid id. Request data: [UserId={}]",
+		 * UserId);
+		 */
+		Optional<ProductType> ProductType = ProductTypeService.findById(Integer.parseInt(productType));
+
+		data.setProductType(ProductType.get());
+		Product Productnew = ProductService.saveProduct(data);
+		return ResponseEntity.ok().body(Productnew);
+			//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
+		}
+	
+	
 	@DeleteMapping("/v1/productDiscount/{productDiscount}")
 	public ResponseEntity<Object> deleteproductDiscount(@PathVariable("productDiscount") String productDiscount) {
 

@@ -5,7 +5,7 @@ import java.util.Date;
 public class PrivateCoachWeekday {
 	private int privateCoach;
 	private int weekdays;
-	private int duradion;
+	private int duration;
 	private String hour;
 	public int getPrivateCoach() {
 		return privateCoach;
@@ -19,11 +19,11 @@ public class PrivateCoachWeekday {
 	public void setWeekdays(int weekdays) {
 		this.weekdays = weekdays;
 	}
-	public int getDuradion() {
-		return duradion;
+	public int getDuration() {
+		return duration;
 	}
-	public void setDuradion(int duradion) {
-		this.duradion = duradion;
+	public void setDuration(int duration) {
+		this.duration = duration;
 	}
 	public String getHour() {
 		return hour;
