@@ -21,6 +21,7 @@ import src.main.java.com.gym17.gym17.model.Token;
 import src.main.java.com.gym17.gym17.model.User;
 import src.main.java.com.gym17.gym17.response.ErrorResponse;
 import src.main.java.com.gym17.gym17.response.ErrorType;
+import src.main.java.com.gym17.gym17.response.ResponseStatus;
 import src.main.java.com.gym17.gym17.service.ActivityListService;
 import src.main.java.com.gym17.gym17.service.TokenService;
 import src.main.java.com.gym17.gym17.service.UserService;
@@ -74,7 +75,7 @@ public class ActivityListController {
 			ActivityList.setUser(UserService.findByExternalId(ActivityListData.getUser_id()).get());
 			ActivityListService.save(ActivityList);
 
-			return ResponseEntity.ok().body(ActivityListData);
+			return ResponseEntity.ok().body(new ResponseStatus(true));
 
 		}
 		return ResponseEntity.ok().body(new ErrorResponse(ErrorType.BAD_TOKEN));

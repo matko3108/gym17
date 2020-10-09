@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 public class Address implements java.io.Serializable {
 
 	private Integer id;
-	private String adressLine;
+	private String addressLine;
 	private String city;
 	private String country;
 	private String zip;
@@ -43,13 +43,13 @@ public class Address implements java.io.Serializable {
 	public Address() {
 	}
 
-	public Address(String adressLine, String city) {
-		this.adressLine = adressLine;
+	public Address(String addressLine, String city) {
+		this.addressLine = addressLine;
 		this.city = city;
 	}
 
-	public Address(String adressLine, String city, String country, String zip, Set<User> users) {
-		this.adressLine = adressLine;
+	public Address(String addressLine, String city, String country, String zip, Set<User> users) {
+		this.addressLine = addressLine;
 		this.city = city;
 		this.country = country;
 		this.zip = zip;
@@ -69,12 +69,12 @@ public class Address implements java.io.Serializable {
 	}
 
 	@Column(name = "adress_line", nullable = false)
-	public String getAdressLine() {
-		return this.adressLine;
+	public String getAddressLine() {
+		return this.addressLine;
 	}
 
-	public void setAdressLine(String adressLine) {
-		this.adressLine = adressLine;
+	public void setAddressLine(String addressLine) {
+		this.addressLine = addressLine;
 	}
 
 	@Column(name = "city", nullable = false)

@@ -162,13 +162,15 @@ public class UserController {
 			//log.info("Response: [{}].", ErrorType.USER_NOT_FOUND.toString());
 			usersaved.setUserCustomer(null);
 			usersaved.setUserWorker(null);
-			return ResponseEntity.ok().body(usersaved);
+			return ResponseEntity.ok().body(new ResponseStatus(true));
+
 			//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
 		}else {
 			User usersaved = UserService.saveNewUser(userdata);
 			usersaved.setUserCustomer(null);
 			usersaved.setUserWorker(null);
-			return ResponseEntity.ok().body(usersaved);
+			return ResponseEntity.ok().body(new ResponseStatus(true));
+
 			//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
 		}
 		}
@@ -200,7 +202,7 @@ public class UserController {
 			customerMembershipFee.getUserCustomer().setPrivateCoaches(null);
 			customerMembershipFee.getUserCustomer().getUser().setUserCustomer(null);
 			customerMembershipFee.getUserCustomer().getUser().setUserWorker(null);
-			return ResponseEntity.ok().body(customerMembershipFee);
+			return ResponseEntity.ok().body(new ResponseStatus(true));
 			//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
 		}else {
 			if(!User.isPresent()) {
@@ -263,7 +265,7 @@ public class UserController {
 				return ResponseEntity.ok().body(new ErrorResponse(ErrorType.BAD_CREDENTIALS));
 			}
 		}else {
-			if(authenticationRequest.getUsername().equals("1klik") && authenticationRequest.getPassword().equals("LG9bq2VJMC")) {
+			if(authenticationRequest.getUsername().equals("1klik") && authenticationRequest.getPassword().equals("1klik_LG9bq2VJMC")) {
 				secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
 
 				Claims claims = Jwts.claims().setSubject(authenticationRequest.getUsername());
@@ -284,7 +286,7 @@ public class UserController {
 		}
 	}
 	
-	@PostMapping("/v1/Membership")
+	@PostMapping("/v1/membership")
 	public ResponseEntity<Object> saveMebership(@RequestHeader("Authorization") String auth, @RequestBody MembershipFeeType MembershipFeeTypeNew) {
 		if(auth != null ) {
 			Optional<Token> token = TokenService.findBytoken(auth.replace("Bearer ", ""));
@@ -296,12 +298,12 @@ public class UserController {
 			MembershipFeeType.get().setName(MembershipFeeTypeNew.getName());
 			MembershipFeeType saveMembershipFeeType = MembershipFeeTypeService.saveMembershipFeeType(MembershipFeeType.get());
 
-			return ResponseEntity.ok().body(saveMembershipFeeType);
+			return ResponseEntity.ok().body(new ResponseStatus(true));
 
 			//return ResponseEntity.ok().MembershipFeeTypeNew(new ErrorResponse(ErrorType.USER_NOT_FOUND));
 		}else {
 			MembershipFeeType saveMembershipFeeType = MembershipFeeTypeService.saveMembershipFeeType(MembershipFeeTypeNew);
-			return ResponseEntity.ok().body(saveMembershipFeeType);
+			return ResponseEntity.ok().body(new ResponseStatus(true));
 
 			//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
 		}

@@ -146,7 +146,7 @@ public class UserService {
 		user.setLastname(newuser.getLastname());
 		user.setEmail(newuser.getEmail());
 		user.setPhone(newuser.getPhone());
-		user.getAddress().setAdressLine(newuser.getAddress().getAdressLine());
+		user.getAddress().setAddressLine(newuser.getAddress().getAddressLine());
 		user.getAddress().setCity(newuser.getAddress().getCity());
 		user.getAddress().setCountry(newuser.getAddress().getCountry());
 		user.getAddress().setZip(newuser.getAddress().getZip());
