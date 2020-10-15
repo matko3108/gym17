@@ -191,8 +191,7 @@ public class UserController {
 	public ResponseEntity<Object> saveUserWorker(@RequestBody UserData userdata) {
 	
 			User usersaved = UserService.saveNewUserWorker(userdata);
-			Optional<UserWorker> UserWorker = UserWorkerService.findById(usersaved.getId());
-			return ResponseEntity.ok().body(UserWorker.get());
+			return ResponseEntity.ok().body(usersaved);
 
 			//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
 		
