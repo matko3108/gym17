@@ -106,6 +106,18 @@ public class UserService {
 		}
 		}
 	
+
+	public User saveNewUserWorker(UserData data) {
+		
+			User user = UserRepository.save(data.getUser());
+			user.setUserWorker(new UserWorker(user));
+			//user.setUserType(UserTypeRepository.);
+			UserRepository.save(user);
+			user.setPassword(null);
+			return user;
+			
+		}
+	
 	public User updateUser(User user) {
 		 User updateduser = UserRepository.save(user);
 		 updateduser.setPassword(null);

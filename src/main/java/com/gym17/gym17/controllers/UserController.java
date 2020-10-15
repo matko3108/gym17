@@ -30,6 +30,7 @@ import src.main.java.com.gym17.gym17.model.Token;
 import src.main.java.com.gym17.gym17.model.User;
 import src.main.java.com.gym17.gym17.model.UserData;
 import src.main.java.com.gym17.gym17.model.UserMembershipData;
+import src.main.java.com.gym17.gym17.model.UserWorker;
 import src.main.java.com.gym17.gym17.response.ErrorResponse;
 import src.main.java.com.gym17.gym17.response.ErrorType;
 import src.main.java.com.gym17.gym17.response.ResponseStatus;
@@ -38,6 +39,7 @@ import src.main.java.com.gym17.gym17.service.UserService;
 import src.main.java.com.gym17.gym17.service.MembershipFeeTypeService;
 import src.main.java.com.gym17.gym17.service.CustomerMembershipFeeService;
 import src.main.java.com.gym17.gym17.service.TokenService;
+import src.main.java.com.gym17.gym17.service.UserWorkerService;
 
 
 
@@ -54,6 +56,8 @@ public class UserController {
 	private CustomerMembershipFeeService CustomerMembershipFeeService;
 	@Autowired
 	private TokenService TokenService;
+	@Autowired
+	private UserWorkerService UserWorkerService;
 	
 	@Autowired
 	public UserController(UserService UserService) {
@@ -179,6 +183,20 @@ public class UserController {
 		}
 		return ResponseEntity.ok().body(new ErrorResponse(ErrorType.BAD_TOKEN));
 		//UserService.update(User.get(), data);
+		//log.info("Requested User successfully updated! Response: [{}].", User.get());
+		//return ResponseEntity.ok().body(User.get());
+	}
+	
+	@PostMapping("/v1/userWorker/create")
+	public ResponseEntity<Object> saveUserWorker(@RequestBody UserData userdata) {
+	
+			User usersaved = UserService.saveNewUser(userdata);
+			Optional<UserWorker> UserWorker = UserWorkerService.findById(usersaved.getId());
+			return ResponseEntity.ok().body(UserWorker.get());
+
+			//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
+		
+				//UserService.update(User.get(), data);
 		//log.info("Requested User successfully updated! Response: [{}].", User.get());
 		//return ResponseEntity.ok().body(User.get());
 	}
