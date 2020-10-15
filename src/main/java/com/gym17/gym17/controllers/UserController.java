@@ -190,7 +190,7 @@ public class UserController {
 	@PostMapping("/v1/userWorker/create")
 	public ResponseEntity<Object> saveUserWorker(@RequestBody UserData userdata) {
 	
-			User usersaved = UserService.saveNewUser(userdata);
+			User usersaved = UserService.saveNewUserWorker(userdata);
 			Optional<UserWorker> UserWorker = UserWorkerService.findById(usersaved.getId());
 			return ResponseEntity.ok().body(UserWorker.get());
 
