@@ -62,6 +62,16 @@ public class UserWorkerController {
 		return UserWorker;
 	}
 	
+
+	@GetMapping("/v1/userRights/list")
+	public Iterable<WorkerRights> rightslist() {
+		// log.info("Requested: a list of UserCustomers.");
+		Iterable<WorkerRights> WorkerRights = WorkerRightsService.list();
+		// log.info("Response contains the following list of UserCustomers: [{}]",
+		// UserCustomerList);
+		return WorkerRights;
+	}
+	
 	@PostMapping("/v1/userworkerrights")
 	public ResponseEntity<Object> saveuserworkerrights(@RequestBody UserWorkerWorkerRights UserWorkerWorkerRights) {
 
