@@ -80,7 +80,7 @@ public class UserController {
 		return UserList;
 	}
 
-	//@GetMapping("/v1/user/workerlist")
+	@GetMapping("/v1/user/workerlist")
 	public Iterable<User> workerlist() {
 		//log.info("Requested: a list of Users.");
 		Iterable<User> UserList = UserService.workerlist();

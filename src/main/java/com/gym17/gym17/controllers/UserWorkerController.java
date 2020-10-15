@@ -43,7 +43,7 @@ public class UserWorkerController {
 		this.UserWorkerService = UserCustomerService;
 	}
 
-	@GetMapping("/v1/userworker/list")
+	//@GetMapping("/v1/userworker/list")
 	public Iterable<UserWorker> list() {
 		// log.info("Requested: a list of UserCustomers.");
 		Iterable<UserWorker> UserWorker = UserWorkerService.list();
