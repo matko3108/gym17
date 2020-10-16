@@ -92,6 +92,8 @@ public class UserService {
 		
 		if(data.getUserType().equals("WORKER")) {
 			User user = UserRepository.save(data.getUser());
+			user.setUserType(UserTypeRepository.findById(11).get());
+
 			user.setUserWorker(new UserWorker(user));
 			//user.setUserType(UserTypeRepository.);
 			UserRepository.save(user);
@@ -100,6 +102,8 @@ public class UserService {
 			
 		}else {
 			User user = UserRepository.save(data.getUser());
+			user.setUserType(UserTypeRepository.findById(1).get());
+
 			user.setUserCustomer(new UserCustomer(user));
 			UserRepository.save(user);
 			user.setPassword(null);
@@ -111,6 +115,7 @@ public class UserService {
 	public User saveNewUserWorker(UserWorkerData userdata) {
 		
 			User user = UserRepository.save(userdata.getUser());
+			user.setUserType(UserTypeRepository.findById(11).get());
 			user.setUserWorker(new UserWorker(user, userdata.getWorkerType()));
 			//user.setUserType(UserTypeRepository.);
 			UserRepository.save(user);
