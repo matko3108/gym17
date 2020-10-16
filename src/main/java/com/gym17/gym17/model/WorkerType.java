@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -27,6 +28,7 @@ public class WorkerType implements java.io.Serializable {
 	private String description;
 	private String name;
 	@JsonIgnoreProperties(value = {"workerType", "hibernateLazyInitializer"})
+	@JsonIgnore
 	private Set<UserWorker> userWorkers = new HashSet<UserWorker>(0);
 
 	public WorkerType() {
