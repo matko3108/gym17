@@ -53,6 +53,11 @@ public class UserWorker implements java.io.Serializable {
 	public UserWorker(User user) {
 		this.user = user;
 	}
+	
+	public UserWorker(User user, WorkerType workerType) {
+		this.user = user;
+		this.workerType = workerType;
+	}
 
 	public UserWorker(User user, WorkerType workerType, String additionalData, Set<PrivateCoach> privateCoaches,
 			Set<UserWorkerWorkerRights> userWorkerWorkerRightses, Set<GroupWorker> groupWorkers) {

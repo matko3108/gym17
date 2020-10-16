@@ -31,6 +31,8 @@ import src.main.java.com.gym17.gym17.model.User;
 import src.main.java.com.gym17.gym17.model.UserData;
 import src.main.java.com.gym17.gym17.model.UserMembershipData;
 import src.main.java.com.gym17.gym17.model.UserWorker;
+import src.main.java.com.gym17.gym17.model.UserWorkerData;
+import src.main.java.com.gym17.gym17.model.WorkerType;
 import src.main.java.com.gym17.gym17.response.ErrorResponse;
 import src.main.java.com.gym17.gym17.response.ErrorType;
 import src.main.java.com.gym17.gym17.response.ResponseStatus;
@@ -40,8 +42,7 @@ import src.main.java.com.gym17.gym17.service.MembershipFeeTypeService;
 import src.main.java.com.gym17.gym17.service.CustomerMembershipFeeService;
 import src.main.java.com.gym17.gym17.service.TokenService;
 import src.main.java.com.gym17.gym17.service.UserWorkerService;
-
-
+import src.main.java.com.gym17.gym17.service.UserWorkerTypeService;
 
 @RestController
 @RequestMapping("")
@@ -58,6 +59,8 @@ public class UserController {
 	private TokenService TokenService;
 	@Autowired
 	private UserWorkerService UserWorkerService;
+	@Autowired
+	private UserWorkerTypeService UserWorkerTypeService;
 	
 	@Autowired
 	public UserController(UserService UserService) {
@@ -80,6 +83,14 @@ public class UserController {
 		return UserList;
 	}
 
+	@GetMapping("/v1/user/workertypelist")
+	public Iterable<WorkerType> workertypelist() {
+		//log.info("Requested: a list of Users.");
+		Iterable<WorkerType> WorkerTypelist = UserWorkerTypeService.list();
+		//log.info("Response contains the following list of Users: [{}]", UserList);
+		return WorkerTypelist;
+	}
+	
 	@GetMapping("/v1/user/workerlist")
 	public Iterable<User> workerlist() {
 		//log.info("Requested: a list of Users.");
@@ -87,6 +98,7 @@ public class UserController {
 		//log.info("Response contains the following list of Users: [{}]", UserList);
 		return UserList;
 	}
+	
 	
 
 	@DeleteMapping("/v1/user/{UserId}")
@@ -188,8 +200,10 @@ public class UserController {
 	}
 	
 	@PostMapping("/v1/userWorker/create")
-	public ResponseEntity<Object> saveUserWorker(@RequestBody UserData userdata) {
+	public ResponseEntity<Object> saveUserWorker(@RequestBody UserWorkerData userdata) {
 	
+			Optional<WorkerType> workerType = UserWorkerTypeService.findById(userdata.getWorkerType().getId());
+			userdata.setWorkerType(workerType.get());
 			User usersaved = UserService.saveNewUserWorker(userdata);
 			return ResponseEntity.ok().body(usersaved);
 

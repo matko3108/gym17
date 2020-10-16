@@ -6,6 +6,7 @@ import src.main.java.com.gym17.gym17.model.UserCustomer;
 import src.main.java.com.gym17.gym17.model.UserData;
 import src.main.java.com.gym17.gym17.model.UserType;
 import src.main.java.com.gym17.gym17.model.UserWorker;
+import src.main.java.com.gym17.gym17.model.UserWorkerData;
 
 import java.util.Iterator;
 import java.util.Optional;
@@ -107,10 +108,10 @@ public class UserService {
 		}
 	
 
-	public User saveNewUserWorker(UserData data) {
+	public User saveNewUserWorker(UserWorkerData userdata) {
 		
-			User user = UserRepository.save(data.getUser());
-			user.setUserWorker(new UserWorker(user));
+			User user = UserRepository.save(userdata.getUser());
+			user.setUserWorker(new UserWorker(user, userdata.getWorkerType()));
 			//user.setUserType(UserTypeRepository.);
 			UserRepository.save(user);
 			user.setPassword(null);
