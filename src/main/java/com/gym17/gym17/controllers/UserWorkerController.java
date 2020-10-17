@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import src.main.java.com.gym17.gym17.model.Group;
 import src.main.java.com.gym17.gym17.model.GroupWeekdays;
+import src.main.java.com.gym17.gym17.model.User;
 import src.main.java.com.gym17.gym17.model.UserWorker;
 import src.main.java.com.gym17.gym17.model.UserWorkerList;
 import src.main.java.com.gym17.gym17.model.UserWorkerWorkerRights;
@@ -25,6 +26,8 @@ import src.main.java.com.gym17.gym17.response.ResponseStatus;
 import src.main.java.com.gym17.gym17.service.UserWorkerWorkerRightsService;
 import src.main.java.com.gym17.gym17.service.UserWorkerService;
 import src.main.java.com.gym17.gym17.service.WorkerRightsService;
+import src.main.java.com.gym17.gym17.service.UserService;
+
 
 
 
@@ -35,6 +38,8 @@ public class UserWorkerController {
 	private UserWorkerWorkerRightsService UserWorkerWorkerRightsService;
 	@Autowired
 	private WorkerRightsService WorkerRightsService;
+	@Autowired
+	private UserService UserService;
 	
 	private UserWorkerService UserWorkerService;
 
@@ -89,7 +94,8 @@ public class UserWorkerController {
 		
 		UserWorkerWorkerRightsService.saveUserWorkerWorkerRights(UserWorkerWorkerRights);
 		Optional<UserWorker> UserWorkernew = UserWorkerService.findById(UserWorkerWorkerRights.getUserWorker().getId());
-		return ResponseEntity.ok().body(UserWorkernew.get());
+		Optional<User> User = UserService.findById(UserWorker.get().getId());
+		return ResponseEntity.ok().body(User.get());
 		//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
 		}
 	
