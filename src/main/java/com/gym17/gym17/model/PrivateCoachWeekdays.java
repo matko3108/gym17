@@ -77,7 +77,7 @@ public class PrivateCoachWeekdays implements java.io.Serializable {
 		this.weekdays = weekdays;
 	}
 
-	@Column(name = "duradion")
+	@Column(name = "duration")
 	public Integer getDuration() {
 		return this.duration;
 	}
