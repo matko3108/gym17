@@ -143,6 +143,30 @@ public class UserController {
 		return ResponseEntity.ok().body(User.get());
 	}
 	
+	@PostMapping("/v1/user/updateCredentials")
+	public ResponseEntity<Object> updateCredentialsUser(@RequestBody User data) {
+
+		/*
+		 * log.
+		 * info("Requested: update User with a specifid id. Request data: [UserId={}]",
+		 * UserId);
+		 */
+
+		Optional<User> User = UserService.findById(data.getId());
+		if (User.isPresent()) {
+			User.get().setPassword(data.getPassword());
+			User.get().setUsername(data.getUsername());
+			User usersaved = UserService.saveUserCredentials(User.get());
+			//log.info("Response: [{}].", ErrorType.USER_NOT_FOUND.toString());
+			return ResponseEntity.ok().body(usersaved);
+			//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
+		}
+
+		//UserService.update(User.get(), data);
+		//log.info("Requested User successfully updated! Response: [{}].", User.get());
+		return ResponseEntity.ok().body(User.get());
+	}
+	
 	@PostMapping("/v1/userworker/login")
 	public ResponseEntity<Object> userLogin(@RequestBody LoginCredentials data) {
 
