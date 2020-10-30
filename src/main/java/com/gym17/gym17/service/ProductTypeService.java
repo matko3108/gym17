@@ -31,5 +31,9 @@ public class ProductTypeService {
 	public void delete(ProductType ProductType) {
 		ProductTypeRepository.delete(ProductType);				
 	}
+	public Optional<ProductType> findByName(String productByType) {
+		return ProductTypeRepository.findByName(productByType);
+
+	}
 
 }

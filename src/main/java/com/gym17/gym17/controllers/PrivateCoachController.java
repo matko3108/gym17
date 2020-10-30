@@ -68,6 +68,16 @@ public class PrivateCoachController {
 		return ResponseEntity.ok().body(org.get());
 	}
 	
+	@GetMapping(path = "/v1/PrivateCoachByCustomer/{PrivateCoachByCustomer}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> findByCustomer(@PathVariable("PrivateCoachByCustomer") String PrivateCoachByCustomer) {
+		Optional<PrivateCoach> org = PrivateCoachService.findByCustomer(Integer.parseInt(PrivateCoachByCustomer));
+		if (org == null) {
+			return ResponseEntity.ok().body(new ErrorResponse(ErrorType.ACTIVITY_NOT_FOUND));
+		}
+
+		return ResponseEntity.ok().body(org.get());
+	}
+	
 
 	@PostMapping("/v1/PrivateCoach")
 	public ResponseEntity<Object> savePrivateCoach(@RequestBody PrivateCoach data) {

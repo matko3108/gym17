@@ -32,4 +32,11 @@ public class ProductService {
 		ProductRepository.delete(Product);				
 	}
 
+	public Iterable<Product> findAllById(Iterable<Integer> ids) {
+		return ProductRepository.findAllById(ids);				
+	}
+	public Iterable<Product> findByTypeId(Integer id) {
+		return ProductRepository.findByTypeId(id);				
+
+	}
 }

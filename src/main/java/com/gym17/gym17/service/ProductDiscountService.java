@@ -3,8 +3,11 @@ package src.main.java.com.gym17.gym17.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
+import src.main.java.com.gym17.gym17.model.PrivateCoach;
 import src.main.java.com.gym17.gym17.model.ProductDiscount;
 import src.main.java.com.gym17.gym17.repositories.ProductDiscountRepository;
 
@@ -31,5 +34,12 @@ public class ProductDiscountService {
 	public void delete(ProductDiscount ProductDiscount) {
 		ProductDiscountRepository.delete(ProductDiscount);				
 	}
+	
+	public Iterable<Integer> listProductId() {
+		Iterable<Integer> ProductDiscountCollection = ProductDiscountRepository.findAllProducts();
+		return ProductDiscountCollection;
+	}
+	
+	
 
 }

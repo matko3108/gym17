@@ -60,6 +60,25 @@ public class ProductController {
 		return ResponseEntity.ok().body(org.get());
 	}
 	
+	@GetMapping(path = "/v1/productByType/{productByType}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> findproductByType(@PathVariable("productByType") String productByType) {
+		if(!productByType.equals("Akcija")) {
+			Optional<ProductType> org = ProductTypeService.findByName(productByType);
+			if (org == null) {
+				return ResponseEntity.ok().body(new ErrorResponse(ErrorType.ACTIVITY_NOT_FOUND));
+			}
+			Iterable<Product> product = ProductService.findByTypeId(org.get().getId());
+			return ResponseEntity.ok().body(product);
+			
+		}else {
+			Iterable<Integer> ProductDiscount = ProductDiscountService.listProductId();
+			Iterable<Product> product = ProductService.findAllById(ProductDiscount);
+			return ResponseEntity.ok().body(product);
+		}
+		
+
+	}
+	
 
 	@DeleteMapping("/v1/product/{Product}")
 	public ResponseEntity<Object> deleteProduct(@PathVariable("Product") String Product) {
