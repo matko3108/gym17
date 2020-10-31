@@ -31,7 +31,7 @@ public class PrivateCoachService {
 	public void delete(PrivateCoach PrivateCoach) {
 		PrivateCoachRepository.delete(PrivateCoach);				
 	}
-	public Optional<PrivateCoach> findByCustomer(int parseInt) {
+	public Iterable<PrivateCoach> findByCustomer(int parseInt) {
 		return PrivateCoachRepository.findByCustomer(parseInt);
 	}
 

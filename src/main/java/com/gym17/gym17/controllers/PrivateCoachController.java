@@ -70,12 +70,8 @@ public class PrivateCoachController {
 	
 	@GetMapping(path = "/v1/PrivateCoachByCustomer/{PrivateCoachByCustomer}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> findByCustomer(@PathVariable("PrivateCoachByCustomer") String PrivateCoachByCustomer) {
-		Optional<PrivateCoach> org = PrivateCoachService.findByCustomer(Integer.parseInt(PrivateCoachByCustomer));
-		if (org == null) {
-			return ResponseEntity.ok().body(new ErrorResponse(ErrorType.ACTIVITY_NOT_FOUND));
-		}
-
-		return ResponseEntity.ok().body(org.get());
+		Iterable<PrivateCoach> org = PrivateCoachService.findByCustomer(Integer.parseInt(PrivateCoachByCustomer));
+		return ResponseEntity.ok().body(org);
 	}
 	
 
