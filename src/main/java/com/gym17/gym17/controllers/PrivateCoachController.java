@@ -68,6 +68,12 @@ public class PrivateCoachController {
 		return ResponseEntity.ok().body(org.get());
 	}
 	
+	@GetMapping(path = "/v1/PrivateCoachByCustomer/{PrivateCoachByCustomer}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> findByCustomer(@PathVariable("PrivateCoachByCustomer") String PrivateCoachByCustomer) {
+		Iterable<PrivateCoach> org = PrivateCoachService.findByCustomer(Integer.parseInt(PrivateCoachByCustomer));
+		return ResponseEntity.ok().body(org);
+	}
+	
 
 	@PostMapping("/v1/PrivateCoach")
 	public ResponseEntity<Object> savePrivateCoach(@RequestBody PrivateCoach data) {

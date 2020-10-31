@@ -111,6 +111,12 @@ public class UserService {
 		}
 		}
 	
+	public User saveUserCredentials(User data) {
+			User user = UserRepository.save(data);
+			return user;
+		
+		}
+	
 
 	public User saveNewUserWorker(UserWorkerData userdata) {
 		
