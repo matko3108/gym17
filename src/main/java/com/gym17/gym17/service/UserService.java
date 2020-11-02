@@ -178,5 +178,11 @@ public class UserService {
 		return user;
 		
 	}
+
+	public Optional<User> findByEmail(String userByEmail) {
+		Optional<User> optOrg = UserRepository.findByEmail(userByEmail);
+		return optOrg;
+
+	}
 	
 }

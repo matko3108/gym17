@@ -31,5 +31,9 @@ public class CustomerMembershipFeeService {
 	public void delete(CustomerMembershipFee CustomerMembershipFee) {
 		CustomerMembershipFeeRepository.delete(CustomerMembershipFee);				
 	}
+	public void deleteOldEntety() {
+		// TODO Auto-generated method stub
+		CustomerMembershipFeeRepository.deleteOldEntety();
+	}
 
 }

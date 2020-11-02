@@ -37,7 +37,6 @@ public class ActivityListController {
 	private UserService UserService;
 	@Autowired
 	private ActivityTypeService ActivityTypeService;
-
 	
 	private ActivityListService ActivityListService;
 
