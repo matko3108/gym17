@@ -39,6 +39,10 @@ public class ProductDiscountService {
 		Iterable<Integer> ProductDiscountCollection = ProductDiscountRepository.findAllProducts();
 		return ProductDiscountCollection;
 	}
+	public void deleteOldEntety() {
+		// TODO Auto-generated method stub
+		ProductDiscountRepository.deleteOldEntety();
+	}
 	
 	
 

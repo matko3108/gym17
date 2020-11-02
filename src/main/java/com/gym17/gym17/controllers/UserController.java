@@ -308,6 +308,25 @@ public class UserController {
 		 */		return ResponseEntity.ok().body(org.get());
 	}
 	
+	@GetMapping(path = "/v1/userByEmail/{userByEmail}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> findByEmail(@PathVariable("userByEmail") String userByEmail) {
+		/*
+		 * //log.info("Requested: User with [username={}]", username);
+		 */		Optional<User> org = UserService.findByEmail(userByEmail);
+		if (org == null) {
+			/*
+			 * //log.info("User with [username={}] not found! Response: [{}]", username,
+			 * ErrorType.USER_NOT_FOUND.toString());
+			 */
+			return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
+		}
+
+		/*
+		 * //log.info("User with [username={}] found successfully! Response: [{}]",
+		 * username, org);
+		 */		return ResponseEntity.ok().body(org.get());
+	}
+	
 	@PostMapping("/auth/signin")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest) {
 		

@@ -34,6 +34,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	@Query("SELECT t FROM User t WHERE t.externalId = :externalId") 
 	Optional<User> findByIdExternalId(@Param("externalId") String externalId);
 
+	@Query("SELECT t FROM User t WHERE t.email = :userByEmail") 
+	Optional<User> findByEmail(@Param("userByEmail") String userByEmail);
+
 	//update je save iz CrudRepository<T, ID>
 	// delete je save iz CrudRepository<T, ID>
 }

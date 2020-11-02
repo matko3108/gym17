@@ -17,4 +17,7 @@ public interface PrivateCoachRepository extends JpaRepository<PrivateCoach, Inte
 
 	@Query(value = "SELECT * FROM private_coach t WHERE t.fk_customer = :parseInt", nativeQuery = true)
 	Iterable<PrivateCoach> findByCustomer(@Param("parseInt") int parseInt);
+
+	@Query(value = "SELECT * FROM private_coach WHERE end IS NOT NULL AND end < NOW()", nativeQuery = true)
+	Iterable<PrivateCoach> getOldEntety();
 }

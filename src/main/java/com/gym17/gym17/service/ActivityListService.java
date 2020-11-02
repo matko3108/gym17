@@ -29,5 +29,9 @@ public class ActivityListService {
 		// TODO Auto-generated method stub
 		
 	}
+	public void deleteOldEntety() {
+		// TODO Auto-generated method stub
+		ActivityListRepository.deleteOldEntety();
+	}
 
 }

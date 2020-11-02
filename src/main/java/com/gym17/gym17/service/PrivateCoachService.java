@@ -34,5 +34,14 @@ public class PrivateCoachService {
 	public Iterable<PrivateCoach> findByCustomer(int parseInt) {
 		return PrivateCoachRepository.findByCustomer(parseInt);
 	}
+	public Iterable<PrivateCoach> getOldEntety() {
+		return PrivateCoachRepository.getOldEntety();
+
+	}
+	public void deleteOldEntety(Iterable<PrivateCoach> privateCoachs) {
+		// TODO Auto-generated method stub
+		PrivateCoachRepository.deleteAll(privateCoachs);
+		
+	}
 
 }
