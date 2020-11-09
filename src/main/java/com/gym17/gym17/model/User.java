@@ -92,7 +92,7 @@ public class User implements java.io.Serializable {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_user_type")
 	public UserType getUserType() {
 		return this.userType;
