@@ -7,7 +7,7 @@
         <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.password">396fcf88</property>
-        <property name="hibernate.connection.url">jdbc:mysql://eu-cdbr-west-03.cleardb.net:3306/heroku_4ee2ecbe460bfa4</property>
+        <property name="hibernate.connection.url">jdbc:mysql://us-mm-dca-b3dce46d20ed.g5.cleardb.net:3306/heroku_4ee2ecbe460bfa4</property>
         <property name="hibernate.connection.username">b5966e54b499e4</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
         <property name="hibernate.search.autoregister_listeners">true</property>
