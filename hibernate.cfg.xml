@@ -36,4 +36,5 @@
         <mapping class="src.main.java.com.gym17.gym17.model.User" />
         <mapping class="src.main.java.com.gym17.gym17.model.Weekdays" />
     </session-factory>
+    
 </hibernate-configuration>

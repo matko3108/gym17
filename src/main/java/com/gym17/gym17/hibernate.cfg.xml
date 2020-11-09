@@ -36,4 +36,5 @@
         <mapping class="model.Weekdays" />
         <mapping class="model.Contact" />
     </session-factory>
+    
 </hibernate-configuration>
