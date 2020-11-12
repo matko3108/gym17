@@ -83,7 +83,7 @@ public class User implements java.io.Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_adress")
 	public Address getAddress() {
 		return this.address;
@@ -92,7 +92,7 @@ public class User implements java.io.Serializable {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_user_type")
 	public UserType getUserType() {
 		return this.userType;
@@ -165,7 +165,7 @@ public class User implements java.io.Serializable {
 		this.externalId = externalId;
 	}
 	
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
 	public UserCustomer getUserCustomer() {
 		return this.userCustomer;
 	}
@@ -174,7 +174,7 @@ public class User implements java.io.Serializable {
 		this.userCustomer = userCustomer;
 	}
 	
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
 	public UserWorker getUserWorker() {
 		return this.userWorker;
 	}

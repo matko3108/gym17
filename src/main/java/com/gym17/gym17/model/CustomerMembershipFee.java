@@ -59,7 +59,7 @@ public class CustomerMembershipFee implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_membership_fee", nullable = false)
 	public MembershipFeeType getMembershipFeeType() {
 		return this.membershipFeeType;
@@ -69,15 +69,15 @@ public class CustomerMembershipFee implements java.io.Serializable {
 		this.membershipFeeType = membershipFeeType;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "fk_user", nullable = false)
-	public UserCustomer getUserCustomer() {
-		return this.userCustomer;
-	}
-
-	public void setUserCustomer(UserCustomer userCustomer) {
-		this.userCustomer = userCustomer;
-	}
+	
+	  @ManyToOne(fetch = FetchType.LAZY)
+	  
+	  @JoinColumn(name = "fk_user", nullable = false) public UserCustomer
+	  getUserCustomer() { return this.userCustomer; }
+	  
+	  public void setUserCustomer(UserCustomer userCustomer) { this.userCustomer =
+	  userCustomer; }
+	 
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "end_date", nullable = false, length = 19)

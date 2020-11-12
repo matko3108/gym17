@@ -50,18 +50,16 @@ public class GroupWorker implements java.io.Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
+	  @ManyToOne(fetch = FetchType.LAZY)
+	  
+	  @JoinColumn(name = "fk_group", nullable = false) public Group getGroup() {
+	  return this.group; }
+	  
+	  public void setGroup(Group group) { this.group = group; }
+	 
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "fk_group", nullable = false)
-	public Group getGroup() {
-		return this.group;
-	}
-
-	public void setGroup(Group group) {
-		this.group = group;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_worker", nullable = false)
 	public UserWorker getUserWorker() {
 		return this.userWorker;

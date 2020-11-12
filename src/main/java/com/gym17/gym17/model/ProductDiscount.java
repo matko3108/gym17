@@ -61,15 +61,14 @@ public class ProductDiscount implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "fk_product")
-	public Product getProduct() {
-		return this.product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
+	
+	  @ManyToOne(fetch = FetchType.LAZY)
+	  
+	  @JoinColumn(name = "fk_product") public Product getProduct() { return
+	  this.product; }
+	  
+	  public void setProduct(Product product) { this.product = product; }
+	 
 
 	@Column(name = "discount_percent")
 	public Integer getDiscountPercent() {

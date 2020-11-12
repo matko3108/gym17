@@ -24,11 +24,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class UserCustomerList implements java.io.Serializable {
 
 	private int id;
-	@JsonIgnoreProperties("userCustomer")
+	@JsonIgnoreProperties(value={"userCustomer", "userWorker","activityLists","hibernateLazyInitializer"})
 	private User user;
 	private String additionalData;
-	@JsonIgnoreProperties("userCustomer")
-	private Set<CustomerMembershipFee> customerMembershipFees = new HashSet<CustomerMembershipFee>(0);
 
 	public UserCustomerList() {
 	}
@@ -37,10 +35,9 @@ public class UserCustomerList implements java.io.Serializable {
 		this.user = user;
 	}
 
-	public UserCustomerList(User user, String additionalData, Set<CustomerMembershipFee> customerMembershipFees, Set<UserMembershipFee> userMembershipFees) {
+	public UserCustomerList(User user, String additionalData) {
 		this.user = user;
 		this.additionalData = additionalData;
-		this.customerMembershipFees = customerMembershipFees;
 	}
 
 	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "user"))
@@ -56,7 +53,7 @@ public class UserCustomerList implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@PrimaryKeyJoinColumn
 	public User getUser() {
 		return this.user;
@@ -74,15 +71,7 @@ public class UserCustomerList implements java.io.Serializable {
 	public void setAdditionalData(String additionalData) {
 		this.additionalData = additionalData;
 	}
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userCustomer", cascade = CascadeType.ALL)
-	public Set<CustomerMembershipFee> getCustomerMembershipFees() {
-		return this.customerMembershipFees;
-	}
 
-	public void setCustomerMembershipFees(Set<CustomerMembershipFee> customerMembershipFees) {
-		this.customerMembershipFees = customerMembershipFees;
-	}
 
 
 }

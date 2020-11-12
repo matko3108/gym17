@@ -27,12 +27,12 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class ActivityList implements java.io.Serializable {
 
 	private Integer id;
-	@JsonIgnoreProperties(value={"activityLists","hibernateLazyInitializer"})
+	@JsonIgnoreProperties(value = { "activityLists", "hibernateLazyInitializer" })
 	private ActivityType activityType;
 	@JsonIgnoreProperties(value={"activityLists", "userCustomer", "userWorker"})
 	private User user;
 	private Boolean active;
-	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date createDate;
 	private String description;
 	private String name;
@@ -43,14 +43,14 @@ public class ActivityList implements java.io.Serializable {
 
 	public ActivityList(ActivityType activityType, User user, String name) {
 		this.activityType = activityType;
-		this.user = user;
+		// this.user = user;
 		this.name = name;
 	}
 
 	public ActivityList(ActivityType activityType, User user, Boolean active, Date createDate, String description,
 			String name, Integer validityPeriod) {
 		this.activityType = activityType;
-		this.user = user;
+		// this.user = user;
 		this.active = active;
 		this.createDate = createDate;
 		this.description = description;
@@ -70,7 +70,7 @@ public class ActivityList implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_activity_type", nullable = false)
 	public ActivityType getActivityType() {
 		return this.activityType;
@@ -80,12 +80,12 @@ public class ActivityList implements java.io.Serializable {
 		this.activityType = activityType;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "fk_user", nullable = false)
-	public User getUser() {
-		return this.user;
-	}
-
+	
+	  @ManyToOne(fetch = FetchType.LAZY)
+	  
+	  @JoinColumn(name = "fk_user", nullable = false) public User getUser() {
+	  return this.user; }
+	 
 	public void setUser(User user) {
 		this.user = user;
 	}

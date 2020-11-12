@@ -63,18 +63,17 @@ public class UserWorkerWorkerRights implements java.io.Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
+	  @ManyToOne(fetch = FetchType.LAZY)
+	  
+	  @JoinColumn(name = "fk_worker", nullable = false) public UserWorker
+	  getUserWorker() { return this.userWorker; }
+	  
+	  public void setUserWorker(UserWorker userWorker) { this.userWorker =
+	  userWorker; }
+	 
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "fk_worker", nullable = false)
-	public UserWorker getUserWorker() {
-		return this.userWorker;
-	}
-
-	public void setUserWorker(UserWorker userWorker) {
-		this.userWorker = userWorker;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_rights", nullable = false)
 	public WorkerRights getWorkerRights() {
 		return this.workerRights;

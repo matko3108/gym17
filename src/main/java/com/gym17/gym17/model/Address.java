@@ -39,7 +39,7 @@ public class Address implements java.io.Serializable {
 	@JsonIgnoreProperties
 	@JsonView
 	private Set<User> users = new HashSet<User>(0);
-	
+
 	public Address() {
 	}
 
@@ -53,7 +53,7 @@ public class Address implements java.io.Serializable {
 		this.city = city;
 		this.country = country;
 		this.zip = zip;
-		this.users = users;
+		// this.users = users;
 	}
 
 	@Id
@@ -104,7 +104,7 @@ public class Address implements java.io.Serializable {
 		this.zip = zip;
 	}
 	
-	
+	  
 	  @OneToMany(fetch = FetchType.LAZY, mappedBy = "address", cascade =
 	  CascadeType.ALL) public Set<User> getUsers() { return this.users; }
 	  

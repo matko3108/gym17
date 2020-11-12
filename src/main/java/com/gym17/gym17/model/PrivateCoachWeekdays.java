@@ -58,16 +58,18 @@ public class PrivateCoachWeekdays implements java.io.Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "fk_private_coach")
-	public PrivateCoach getPrivateCoach() {
-		return this.privateCoach;
-	}
 
-	public void setPrivateCoach(PrivateCoach privateCoach) {
-		this.privateCoach = privateCoach;
-	}
-	@ManyToOne(fetch = FetchType.LAZY)
+	
+	  @ManyToOne(fetch = FetchType.EAGER)
+	  
+	  @JoinColumn(name = "fk_private_coach") public PrivateCoach getPrivateCoach()
+	  { return this.privateCoach; }
+	  
+	  public void setPrivateCoach(PrivateCoach privateCoach) { this.privateCoach =
+	  privateCoach; }
+	 
+	
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_weekday")
 	public Weekdays getWeekdays() {
 		return this.weekdays;

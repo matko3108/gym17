@@ -76,7 +76,7 @@ public class PrivateCoach implements java.io.Serializable {
 		this.id = id;
 	}
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_customer", nullable = false)
 	public UserCustomer getUserCustomer() {
 		return this.userCustomer;
@@ -85,7 +85,7 @@ public class PrivateCoach implements java.io.Serializable {
 	public void setUserCustomer(UserCustomer userCustomer) {
 		this.userCustomer = userCustomer;
 	}
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_worker", nullable = false)
 	public UserWorker getUserWorker() {
 		return this.userWorker;

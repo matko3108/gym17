@@ -57,7 +57,7 @@ public class WorkerRights implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_rights_type")
 	public WorkerRightsType getWorkerRightsType() {
 		return this.workerRightsType;

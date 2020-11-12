@@ -60,7 +60,7 @@ public class UserWorkerList implements java.io.Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@PrimaryKeyJoinColumn
 	public User getUser() {
 		return this.user;
@@ -69,7 +69,7 @@ public class UserWorkerList implements java.io.Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_worker_type")
 	public WorkerType getWorkerType() {
 		return this.workerType;

@@ -58,15 +58,13 @@ public class GroupWeekdays implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "fk_group")
-	public Group getGroup() {
-		return this.group;
-	}
-
-	public void setGroup(Group group) {
-		this.group = group;
-	}
+	
+	  @ManyToOne(fetch = FetchType.LAZY)
+	  
+	  @JoinColumn(name = "fk_group") public Group getGroup() { return this.group; }
+	  
+	  public void setGroup(Group group) { this.group = group; }
+	 
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_weekday")
