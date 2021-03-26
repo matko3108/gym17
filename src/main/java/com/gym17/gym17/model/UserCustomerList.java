@@ -19,8 +19,6 @@ import org.hibernate.annotations.Parameter;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import src.test.java.com.gym17.gym17.UserListCustomer;
-
 @Entity
 @Table(name = "user_customer", catalog = "heroku_4ee2ecbe460bfa4")
 public class UserCustomerList implements java.io.Serializable {

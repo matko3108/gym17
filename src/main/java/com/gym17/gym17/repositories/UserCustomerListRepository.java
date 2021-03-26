@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import src.main.java.com.gym17.gym17.model.User;
 import src.main.java.com.gym17.gym17.model.UserCustomerList;
-import src.test.java.com.gym17.gym17.UserListCustomer;
+import src.main.java.com.gym17.gym17.model.UserListCustomer;
 
 @RepositoryRestResource(exported = false)
 @Repository

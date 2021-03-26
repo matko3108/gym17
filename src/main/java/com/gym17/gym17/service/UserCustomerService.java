@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 import src.main.java.com.gym17.gym17.model.User;
 import src.main.java.com.gym17.gym17.model.UserCustomer;
 import src.main.java.com.gym17.gym17.model.UserCustomerList;
+import src.main.java.com.gym17.gym17.model.UserListCustomer;
 import src.main.java.com.gym17.gym17.repositories.UserCustomerListRepository;
 import src.main.java.com.gym17.gym17.repositories.UserRepository;
-import src.test.java.com.gym17.gym17.UserListCustomer;
 import src.main.java.com.gym17.gym17.repositories.UserCustomerRepository;
 
 

@@ -1,4 +1,4 @@
-package src.test.java.com.gym17.gym17;
+package src.main.java.com.gym17.gym17.model;
 
 public interface UserListCustomer {
 	 Integer getid();

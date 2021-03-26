@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import src.main.java.com.gym17.gym17.model.UserCustomer;
 import src.main.java.com.gym17.gym17.model.UserCustomerList;
+import src.main.java.com.gym17.gym17.model.UserListCustomer;
 import src.main.java.com.gym17.gym17.response.ErrorResponse;
 import src.main.java.com.gym17.gym17.response.ErrorType;
 import src.main.java.com.gym17.gym17.service.UserCustomerService;
-import src.test.java.com.gym17.gym17.UserListCustomer;
 
 @RestController
 @RequestMapping("")
