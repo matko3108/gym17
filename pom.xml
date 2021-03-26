@@ -14,7 +14,9 @@
 	<name>gym17</name>
 	<description>Demo project for Spring Boot</description>
 
-
+<properties>
+		<java.version>14</java.version>
+	</properties>
 
 
 	<dependencies>
