@@ -26,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Table(name = "activity_list", catalog = "heroku_4ee2ecbe460bfa4")
 public class ActivityList implements java.io.Serializable {
 
+	
 	private Integer id;
 	@JsonIgnoreProperties(value = { "activityLists", "hibernateLazyInitializer" })
 	private ActivityType activityType;
