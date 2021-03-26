@@ -31,10 +31,14 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	@Query(value = "SELECT * FROM User t WHERE t.fk_user_type = :typeid", nativeQuery = true)
 	Iterable<User> findlistByType(@Param("typeid") int typeid);
 
+
+	@Query(value = "SELECT * FROM User t WHERE t.fk_user_type = 11", nativeQuery = true)
+	Iterable<User> findlistWorkers();
+	
 	@Query("SELECT t FROM User t WHERE t.externalId = :externalId") 
 	Optional<User> findByIdExternalId(@Param("externalId") String externalId);
 
-	@Query("SELECT t FROM User t WHERE t.email = :userByEmail") 
+	@Query(value = "SELECT * FROM User t WHERE t.email = :userByEmail AND t.fk_user_type = 1", nativeQuery = true)
 	Optional<User> findByEmail(@Param("userByEmail") String userByEmail);
 
 	//update je save iz CrudRepository<T, ID>

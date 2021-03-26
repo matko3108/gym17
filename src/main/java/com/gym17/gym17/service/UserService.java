@@ -146,7 +146,7 @@ public class UserService {
 	}
 
 	public Iterable<User> workerlist() {
-		Iterable<User> userCollection = UserRepository.findlistByType(11);
+		Iterable<User> userCollection = UserRepository.findlistWorkers();
 		return userCollection;
 	}
 

@@ -18,6 +18,7 @@ import src.main.java.com.gym17.gym17.model.UserCustomerList;
 import src.main.java.com.gym17.gym17.response.ErrorResponse;
 import src.main.java.com.gym17.gym17.response.ErrorType;
 import src.main.java.com.gym17.gym17.service.UserCustomerService;
+import src.test.java.com.gym17.gym17.UserListCustomer;
 
 @RestController
 @RequestMapping("")
@@ -31,9 +32,9 @@ public class UserCustomerController {
 	}
 
 	@GetMapping("/v1/usercustomer/list")
-	public Iterable<UserCustomerList> list() {
+	public Iterable<UserListCustomer> list() {
 		// log.info("Requested: a list of UserCustomers.");
-		Iterable<UserCustomerList> UserCustomerList = UserCustomerService.list();
+		Iterable<UserListCustomer> UserCustomerList = UserCustomerService.list();
 		// log.info("Response contains the following list of UserCustomers: [{}]",
 		// UserCustomerList);
 		return UserCustomerList;

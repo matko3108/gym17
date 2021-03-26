@@ -19,26 +19,19 @@ import org.hibernate.annotations.Parameter;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import src.test.java.com.gym17.gym17.UserListCustomer;
+
 @Entity
 @Table(name = "user_customer", catalog = "heroku_4ee2ecbe460bfa4")
 public class UserCustomerList implements java.io.Serializable {
 
 	private int id;
-	@JsonIgnoreProperties(value={"userCustomer", "userWorker","activityLists","hibernateLazyInitializer"})
-	private User user;
-	private String additionalData;
+	//@JsonIgnoreProperties(value={"userCustomer", "userWorker","activityLists","hibernateLazyInitializer"})
 
 	public UserCustomerList() {
 	}
 
-	public UserCustomerList(User user) {
-		this.user = user;
-	}
 
-	public UserCustomerList(User user, String additionalData) {
-		this.user = user;
-		this.additionalData = additionalData;
-	}
 
 	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "user"))
 	@Id
@@ -52,26 +45,6 @@ public class UserCustomerList implements java.io.Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	@OneToOne(fetch = FetchType.EAGER)
-	@PrimaryKeyJoinColumn
-	public User getUser() {
-		return this.user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	@Column(name = "additional_data")
-	public String getAdditionalData() {
-		return this.additionalData;
-	}
-
-	public void setAdditionalData(String additionalData) {
-		this.additionalData = additionalData;
-	}
-
 
 
 }
