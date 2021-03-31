@@ -11,6 +11,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
 
 import src.main.java.com.gym17.gym17.model.User;
+import src.main.java.com.gym17.gym17.model.UserFull;
 import src.main.java.com.gym17.gym17.model.UserType;
 
 @RepositoryRestResource(exported = false)
@@ -38,8 +39,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	@Query("SELECT t FROM User t WHERE t.externalId = :externalId") 
 	Optional<User> findByIdExternalId(@Param("externalId") String externalId);
 
-	@Query(value = "SELECT * FROM User t WHERE t.email = :userByEmail AND t.fk_user_type = 1", nativeQuery = true)
-	Optional<User> findByEmail(@Param("userByEmail") String userByEmail);
 
 	//update je save iz CrudRepository<T, ID>
 	// delete je save iz CrudRepository<T, ID>

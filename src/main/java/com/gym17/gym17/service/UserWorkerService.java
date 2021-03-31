@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import src.main.java.com.gym17.gym17.model.UserWorkerList;
+import src.main.java.com.gym17.gym17.model.User;
 import src.main.java.com.gym17.gym17.model.UserWorker;
 import src.main.java.com.gym17.gym17.repositories.UserCustomerRepository;
 import src.main.java.com.gym17.gym17.repositories.UserWorkerListRepository;
@@ -49,5 +50,9 @@ public class UserWorkerService {
 		Iterable<UserWorker> userCollection = UserWorkerRepository.findCoaches();
 		return userCollection;
 		}
+	public UserWorker updateUser(UserWorker data) {
+		UserWorker updateduser = UserWorkerRepository.save(data);
+		 return updateduser;
+	}
 
 }

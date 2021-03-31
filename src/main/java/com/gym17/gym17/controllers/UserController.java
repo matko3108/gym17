@@ -29,6 +29,7 @@ import src.main.java.com.gym17.gym17.model.MembershipFeeType;
 import src.main.java.com.gym17.gym17.model.Token;
 import src.main.java.com.gym17.gym17.model.User;
 import src.main.java.com.gym17.gym17.model.UserData;
+import src.main.java.com.gym17.gym17.model.UserFull;
 import src.main.java.com.gym17.gym17.model.UserMembershipData;
 import src.main.java.com.gym17.gym17.model.UserWorker;
 import src.main.java.com.gym17.gym17.model.UserWorkerData;
@@ -312,7 +313,7 @@ public class UserController {
 	public ResponseEntity<?> findByEmail(@PathVariable("userByEmail") String userByEmail) {
 		/*
 		 * //log.info("Requested: User with [username={}]", username);
-		 */		Optional<User> org = UserService.findByEmail(userByEmail);
+		 */		Optional<UserFull> org = UserService.findByEmail(userByEmail);
 		if (org == null) {
 			/*
 			 * //log.info("User with [username={}] not found! Response: [{}]", username,

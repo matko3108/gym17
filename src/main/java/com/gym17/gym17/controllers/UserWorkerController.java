@@ -20,12 +20,14 @@ import src.main.java.com.gym17.gym17.model.UserWorkerList;
 import src.main.java.com.gym17.gym17.model.UserWorkerWorkerRights;
 import src.main.java.com.gym17.gym17.model.Weekdays;
 import src.main.java.com.gym17.gym17.model.WorkerRights;
+import src.main.java.com.gym17.gym17.model.WorkerType;
 import src.main.java.com.gym17.gym17.response.ErrorResponse;
 import src.main.java.com.gym17.gym17.response.ErrorType;
 import src.main.java.com.gym17.gym17.response.ResponseStatus;
 import src.main.java.com.gym17.gym17.service.UserWorkerWorkerRightsService;
 import src.main.java.com.gym17.gym17.service.UserWorkerService;
 import src.main.java.com.gym17.gym17.service.WorkerRightsService;
+import src.main.java.com.gym17.gym17.service.WorkerTypeService;
 import src.main.java.com.gym17.gym17.service.UserService;
 
 
@@ -40,6 +42,8 @@ public class UserWorkerController {
 	private WorkerRightsService WorkerRightsService;
 	@Autowired
 	private UserService UserService;
+	@Autowired
+	private WorkerTypeService WorkerTypeService;
 	
 	private UserWorkerService UserWorkerService;
 
@@ -57,6 +61,28 @@ public class UserWorkerController {
 		return UserWorker;
 	}
 	
+	@PostMapping("/v1/workerType/update")
+	public ResponseEntity<Object> updateWorkerType(@RequestBody UserWorker data) {
+
+		/*
+		 * log.
+		 * info("Requested: update User with a specifid id. Request data: [UserId={}]",
+		 * UserId);
+		 */
+
+		Optional<UserWorker> UserWorker = UserWorkerService.findById(data.getId());
+		if (UserWorker.isPresent()) {
+			UserWorker UserWorkerSaved = UserWorkerService.updateUser(data);
+			//log.info("Response: [{}].", ErrorType.USER_NOT_FOUND.toString());
+			Optional<User> userWorker = UserService.findById(data.getId());
+			return ResponseEntity.ok().body(userWorker.get());
+			//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
+		}
+
+		//UserService.update(User.get(), data);
+		//log.info("Requested User successfully updated! Response: [{}].", User.get());
+		return ResponseEntity.ok().body(UserWorker.get());
+	}
 
 	@GetMapping("/v1/userworkerCoach/list")
 	public Iterable<UserWorker> coachlist() {
@@ -76,6 +102,17 @@ public class UserWorkerController {
 		// UserCustomerList);
 		return WorkerRights;
 	}
+	
+
+	@GetMapping("/v1/workerType/list")
+	public Iterable<WorkerType> typelist() {
+		// log.info("Requested: a list of UserCustomers.");
+		Iterable<WorkerType> WorkerType = WorkerTypeService.list();
+		// log.info("Response contains the following list of UserCustomers: [{}]",
+		// UserCustomerList);
+		return WorkerType;
+	}
+	
 	
 	@PostMapping("/v1/userworkerrights")
 	public ResponseEntity<Object> saveuserworkerrights(@RequestBody UserWorkerWorkerRights UserWorkerWorkerRights) {
@@ -99,6 +136,7 @@ public class UserWorkerController {
 		//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
 		}
 	
+
 	@DeleteMapping("/v1/userworkerrights/{userworkerrights}")
 	public ResponseEntity<Object> deleteuserworkerrights(@PathVariable("userworkerrights") String userworkerrights) {
 

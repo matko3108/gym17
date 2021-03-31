@@ -4,6 +4,7 @@ import src.main.java.com.gym17.gym17.model.User;
 import src.main.java.com.gym17.gym17.model.UserCustomer;
 //import src.main.java.com.gym17.gym17.model.ModelUtilities;
 import src.main.java.com.gym17.gym17.model.UserData;
+import src.main.java.com.gym17.gym17.model.UserFull;
 import src.main.java.com.gym17.gym17.model.UserType;
 import src.main.java.com.gym17.gym17.model.UserWorker;
 import src.main.java.com.gym17.gym17.model.UserWorkerData;
@@ -17,6 +18,8 @@ import org.springframework.stereotype.Service;
 import src.main.java.com.gym17.gym17.repositories.UserRepository;
 import src.main.java.com.gym17.gym17.repositories.UserCustomerRepository;
 import src.main.java.com.gym17.gym17.repositories.UserTypeRepository;
+import src.main.java.com.gym17.gym17.repositories.UserFullRepository;
+
 
 
 
@@ -27,6 +30,9 @@ public class UserService {
 	private UserCustomerRepository UserCustomerRepository;
 	@Autowired
 	private UserTypeRepository UserTypeRepository;
+	@Autowired
+	private UserFullRepository UserFullRepository;
+	
 
 
 	@Autowired
@@ -179,8 +185,8 @@ public class UserService {
 		
 	}
 
-	public Optional<User> findByEmail(String userByEmail) {
-		Optional<User> optOrg = UserRepository.findByEmail(userByEmail);
+	public Optional<UserFull> findByEmail(String userByEmail) {
+		Optional<UserFull> optOrg = UserFullRepository.findByEmail(userByEmail);
 		return optOrg;
 
 	}
