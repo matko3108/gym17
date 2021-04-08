@@ -1,5 +1,5 @@
 package src.main.java.com.gym17.gym17.model;
-// Generated Apr 8, 2021, 1:25:08 PM by Hibernate Tools 5.2.12.Final
+// Generated Apr 8, 2021, 1:55:16 PM by Hibernate Tools 5.2.12.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -22,24 +22,24 @@ import javax.persistence.TemporalType;
 public class LuckyReward implements java.io.Serializable {
 
 	private Integer id;
+	private RewardStatus rewardStatus;
 	private UserCustomer userCustomer;
 	private String name;
 	private String description;
 	private Date expirationDate;
 	private String code;
-	private Integer fkRewardStatus;
 
 	public LuckyReward() {
 	}
 
-	public LuckyReward(UserCustomer userCustomer, String name, String description, Date expirationDate, String code,
-			Integer fkRewardStatus) {
+	public LuckyReward(RewardStatus rewardStatus, UserCustomer userCustomer, String name, String description,
+			Date expirationDate, String code) {
+		this.rewardStatus = rewardStatus;
 		this.userCustomer = userCustomer;
 		this.name = name;
 		this.description = description;
 		this.expirationDate = expirationDate;
 		this.code = code;
-		this.fkRewardStatus = fkRewardStatus;
 	}
 
 	@Id
@@ -52,6 +52,16 @@ public class LuckyReward implements java.io.Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "fk_reward_status")
+	public RewardStatus getRewardStatus() {
+		return this.rewardStatus;
+	}
+
+	public void setRewardStatus(RewardStatus rewardStatus) {
+		this.rewardStatus = rewardStatus;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -99,15 +109,6 @@ public class LuckyReward implements java.io.Serializable {
 
 	public void setCode(String code) {
 		this.code = code;
-	}
-
-	@Column(name = "fk_reward_status")
-	public Integer getFkRewardStatus() {
-		return this.fkRewardStatus;
-	}
-
-	public void setFkRewardStatus(Integer fkRewardStatus) {
-		this.fkRewardStatus = fkRewardStatus;
 	}
 
 }

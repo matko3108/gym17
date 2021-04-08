@@ -1,5 +1,5 @@
 package src.main.java.com.gym17.gym17.model;
-// Generated Apr 8, 2021, 1:25:08 PM by Hibernate Tools 5.2.12.Final
+// Generated Apr 8, 2021, 1:55:16 PM by Hibernate Tools 5.2.12.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -22,28 +22,28 @@ import javax.persistence.TemporalType;
 public class PrivateCoachSchedule implements java.io.Serializable {
 
 	private Integer id;
+	private PrivateCoachStatus privateCoachStatus;
 	private UserCustomer userCustomer;
 	private UserWorker userWorker;
 	private Weekdays weekdays;
 	private String description;
 	private Date start;
 	private Date end;
-	private Integer fkStatus;
 	private Integer duration;
 	private Integer hour;
 
 	public PrivateCoachSchedule() {
 	}
 
-	public PrivateCoachSchedule(UserCustomer userCustomer, UserWorker userWorker, Weekdays weekdays, String description,
-			Date start, Date end, Integer fkStatus, Integer duration, Integer hour) {
+	public PrivateCoachSchedule(PrivateCoachStatus privateCoachStatus, UserCustomer userCustomer, UserWorker userWorker,
+			Weekdays weekdays, String description, Date start, Date end, Integer duration, Integer hour) {
+		this.privateCoachStatus = privateCoachStatus;
 		this.userCustomer = userCustomer;
 		this.userWorker = userWorker;
 		this.weekdays = weekdays;
 		this.description = description;
 		this.start = start;
 		this.end = end;
-		this.fkStatus = fkStatus;
 		this.duration = duration;
 		this.hour = hour;
 	}
@@ -58,6 +58,16 @@ public class PrivateCoachSchedule implements java.io.Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "fk_status")
+	public PrivateCoachStatus getPrivateCoachStatus() {
+		return this.privateCoachStatus;
+	}
+
+	public void setPrivateCoachStatus(PrivateCoachStatus privateCoachStatus) {
+		this.privateCoachStatus = privateCoachStatus;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -117,15 +127,6 @@ public class PrivateCoachSchedule implements java.io.Serializable {
 
 	public void setEnd(Date end) {
 		this.end = end;
-	}
-
-	@Column(name = "fk_status")
-	public Integer getFkStatus() {
-		return this.fkStatus;
-	}
-
-	public void setFkStatus(Integer fkStatus) {
-		this.fkStatus = fkStatus;
 	}
 
 	@Column(name = "duration")
