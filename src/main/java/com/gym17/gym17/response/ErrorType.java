@@ -8,8 +8,9 @@ public enum ErrorType {
 	USER_NOT_FOUND("461", "User not found"),
 	ACTIVITY_NOT_FOUND("471", "Activity not found"),
 	BAD_CREDENTIALS("481", "Bad credentials"), 
-	MEMBERSHIP_NOT_FOUND("491", "Membership not found\""),
-	BAD_TOKEN("481", "Bad token");
+	MEMBERSHIP_NOT_FOUND("491", "Membership not found"),
+	BAD_TOKEN("482", "Bad token"),
+	NO_LUCKY_REWARD("492", "No Lucky rewars");
 
 
 

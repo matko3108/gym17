@@ -16,5 +16,8 @@ import src.main.java.com.gym17.gym17.model.UserCustomer;
 @Repository
 public interface UserCustomerRepository extends JpaRepository<UserCustomer, Integer> {
 
+	@Query(value = "SELECT uc.id FROM user u JOIN user_customer uc ON u.id = uc.id WHERE u.email <> '' OR u.phone <> ''", nativeQuery = true)
+	List<Integer> findValidCustomers();
+
 
 }

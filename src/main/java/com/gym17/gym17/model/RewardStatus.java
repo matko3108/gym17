@@ -21,18 +21,12 @@ public class RewardStatus implements java.io.Serializable {
 
 	private Integer id;
 	private String name;
-	private Set<LuckyReward> luckyRewards = new HashSet<LuckyReward>(0);
 
 	public RewardStatus() {
 	}
 
 	public RewardStatus(String name) {
 		this.name = name;
-	}
-
-	public RewardStatus(String name, Set<LuckyReward> luckyRewards) {
-		this.name = name;
-		this.luckyRewards = luckyRewards;
 	}
 
 	@Id
@@ -56,13 +50,6 @@ public class RewardStatus implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "rewardStatus")
-	public Set<LuckyReward> getLuckyRewards() {
-		return this.luckyRewards;
-	}
-
-	public void setLuckyRewards(Set<LuckyReward> luckyRewards) {
-		this.luckyRewards = luckyRewards;
-	}
+	
 
 }

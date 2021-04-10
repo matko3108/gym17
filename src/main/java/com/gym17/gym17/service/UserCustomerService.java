@@ -1,5 +1,6 @@
 package src.main.java.com.gym17.gym17.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,8 @@ public class UserCustomerService {
 
 	
 	  public Optional<UserCustomer> findById(int parseInt) { return
-	  UserCustomerRepository.findById(parseInt); }
+	  UserCustomerRepository.findById(parseInt); 
+	  }
 	  /* 
 	 * public void delete(UserCustomer userCustomer) {
 	 * UserCustomerRepository.delete(userCustomer);
@@ -46,5 +48,8 @@ public class UserCustomerService {
 	 * 
 	 * }
 	 */
+	public List<Integer> findValidCustomers() {
+		return UserCustomerRepository.findValidCustomers();
+		}
 
 }

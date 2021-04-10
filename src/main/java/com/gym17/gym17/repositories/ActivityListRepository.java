@@ -16,7 +16,7 @@ import src.main.java.com.gym17.gym17.model.User;
 public interface ActivityListRepository extends JpaRepository<ActivityList, Integer> {
 	@Modifying
     @Transactional 
-	@Query(value = "DELETE FROM activity_list WHERE MONTH(create_date) < MONTH(NOW() - INTERVAL 1 MONTH)", nativeQuery = true)
+	@Query(value = "DELETE FROM activity_list WHERE create_date < (NOW() - INTERVAL 1 MONTH)", nativeQuery = true)
 	void deleteOldEntety();
 
 }
