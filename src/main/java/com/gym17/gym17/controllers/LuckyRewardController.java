@@ -69,7 +69,7 @@ public class LuckyRewardController {
 	@GetMapping(path = "/v1/LuckyRewardCustomer/{LuckyRewardCustomer}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> findByCustomerId(@PathVariable("LuckyRewardCustomer") String LuckyRewardCustomer) {
 		Optional<LuckyReward> org = LuckyRewardService.findByCustomer(Integer.parseInt(LuckyRewardCustomer));
-		if (org.isEmpty()) {
+		if (!org.isPresent()) {
 			return ResponseEntity.ok().body(new ErrorResponse(ErrorType.NO_LUCKY_REWARD));
 		}
 
@@ -112,7 +112,7 @@ public class LuckyRewardController {
 		    Random rand = new Random();
 		    int randomElement = userCustomerList.get(rand.nextInt(userCustomerList.size()));
 		    Optional<LuckyReward> luckyReward = LuckyRewardService.findByCustomer(randomElement);
-		    if(luckyReward.isEmpty()) {
+		    if(!luckyReward.isPresent()) {
 		    	exists = false;
 		    	newUser = randomElement;
 		    }
@@ -143,7 +143,7 @@ public class LuckyRewardController {
 		    String randomString = sb.toString();
 		    Optional<LuckyReward> luckyReward = LuckyRewardService.findByCode(randomString);
 
-		    if(luckyReward.isEmpty()) {
+		    if(!luckyReward.isPresent()) {
 		    	codeexists = false;
 		    	randomCode = randomString;
 		    }
