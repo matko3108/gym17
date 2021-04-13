@@ -259,12 +259,7 @@ public class UserController {
 			customerMembershipFee.setUserCustomer(User.get().getUserCustomer());
 			customerMembershipFee.setEndDate(userMembershipdata.getEnd_date());
 			customerMembershipFee.setStartDate(userMembershipdata.getStart_date());
-			
-			Optional<CustomerMembershipFee> customerMembershipFeeExist = CustomerMembershipFeeService.checkCustomerMembershipFee(customerMembershipFee);
-			   DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  
-		          String startDate = dateFormat.format(customerMembershipFee.getStartDate());  
-		          String endDate = dateFormat.format(customerMembershipFee.getEndDate());  
-			if(!customerMembershipFeeExist.isPresent()) {
+		
 			CustomerMembershipFeeService.saveCustomerMembershipFee(customerMembershipFee);
 			
 			customerMembershipFee.getUserCustomer().setGroupCustomers(null);
@@ -273,9 +268,7 @@ public class UserController {
 			customerMembershipFee.getUserCustomer().getUser().setUserWorker(null);
 			return ResponseEntity.ok().body(new ResponseStatus(true));
 			//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
-			}else {
-				return ResponseEntity.ok().body(new ErrorResponse(ErrorType.MEMBERSHIP_ALREADY_EXIST));
-			}
+			
 		}else {
 			if(!User.isPresent()) {
 				return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
