@@ -65,16 +65,21 @@ public class ActivityListController {
 		if(auth != null ) {
 			Optional<Token> token = TokenService.findBytoken(auth.replace("Bearer ", ""));
 		if(token.isPresent()) {
+			Optional<User> user = UserService.findByExternalId(ActivityListData.getUser_id());
+			if(user.isPresent()) {
 			ActivityList ActivityList = new ActivityList();
 			ActivityList.setCreateDate(ActivityListData.getCreateDate());
 			ActivityList.setName(ActivityListData.getName());
 			ActivityList.setDescription(ActivityListData.getDescription());
 			ActivityList.setValidityPeriod(ActivityListData.getValidityPeriod());
 			ActivityList.setActivityType(ActivityTypeService.findByName(ActivityListData.getActivityType()));
-			ActivityList.setUser(UserService.findByExternalId(ActivityListData.getUser_id()).get());
+			ActivityList.setUser(user.get());
 			ActivityListService.save(ActivityList);
-
 			return ResponseEntity.ok().body(new ResponseStatus(true));
+
+			}else {
+				return ResponseEntity.ok().body(new ResponseStatus(true));
+			}
 
 		}
 		return ResponseEntity.ok().body(new ErrorResponse(ErrorType.BAD_TOKEN));
