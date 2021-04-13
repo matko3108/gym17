@@ -1,5 +1,7 @@
 package src.main.java.com.gym17.gym17.service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,14 @@ public class CustomerMembershipFeeService {
 	public void deleteOldEntety() {
 		// TODO Auto-generated method stub
 		CustomerMembershipFeeRepository.deleteOldEntety();
+	}
+	public Optional<CustomerMembershipFee> checkCustomerMembershipFee(CustomerMembershipFee customerMembershipFee) {
+		// TODO Auto-generated method stub
+          DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+          String startDate = dateFormat.format(customerMembershipFee.getStartDate());  
+          String endDate = dateFormat.format(customerMembershipFee.getEndDate());  
+
+		return CustomerMembershipFeeRepository.checkCustomerMembershipFee(customerMembershipFee.getUserCustomer().getId(), customerMembershipFee.getMembershipFeeType().getId(), startDate, endDate);
 	}
 
 }

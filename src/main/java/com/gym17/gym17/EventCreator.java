@@ -11,10 +11,12 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 import src.main.java.com.gym17.gym17.model.LuckyReward;
 import src.main.java.com.gym17.gym17.model.PrivateCoach;
+import src.main.java.com.gym17.gym17.model.PrivateCoachSchedule;
 import src.main.java.com.gym17.gym17.service.ActivityListService;
 import src.main.java.com.gym17.gym17.service.CustomerMembershipFeeService;
 import src.main.java.com.gym17.gym17.service.PrivateCoachService;
 import src.main.java.com.gym17.gym17.service.LuckyRewardService;
+import src.main.java.com.gym17.gym17.service.PrivateCoachScheduleService;
 
 import src.main.java.com.gym17.gym17.service.PrivateCoachWeekdaysService;
 import src.main.java.com.gym17.gym17.service.ProductDiscountService;
@@ -28,6 +30,8 @@ public class EventCreator {
 	private PrivateCoachWeekdaysService PrivateCoachWeekdaysService;
 	@Autowired
 	private PrivateCoachService PrivateCoachService;
+	@Autowired
+	private PrivateCoachScheduleService PrivateCoachScheduleService;
 	@Autowired
 	private LuckyRewardService LuckyRewardService;
 	@Autowired
@@ -48,6 +52,9 @@ public class EventCreator {
 		
 		Iterable<LuckyReward> luckyReward = LuckyRewardService.getOldEntety();
 		LuckyRewardService.deleteOldEntety(luckyReward);
+		
+		Iterable<PrivateCoachSchedule> privateCoachSchedule = PrivateCoachScheduleService.getOldEntety();
+		PrivateCoachScheduleService.clearOldEntety(privateCoachSchedule);
 	}
 	
 

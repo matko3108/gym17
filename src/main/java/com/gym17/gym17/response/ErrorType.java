@@ -10,7 +10,9 @@ public enum ErrorType {
 	BAD_CREDENTIALS("481", "Bad credentials"), 
 	MEMBERSHIP_NOT_FOUND("491", "Membership not found"),
 	BAD_TOKEN("482", "Bad token"),
-	NO_LUCKY_REWARD("492", "No Lucky rewars");
+	NO_LUCKY_REWARD("492", "No Lucky rewars"),
+	PRIVATE_COACH_NOT_FOUND("493", "Private Coach not found"),
+	MEMBERSHIP_ALREADY_EXIST("49", "Membership already exist");
 
 
 

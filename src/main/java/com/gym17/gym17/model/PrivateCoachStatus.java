@@ -21,7 +21,6 @@ public class PrivateCoachStatus implements java.io.Serializable {
 
 	private Integer id;
 	private String name;
-	private Set<PrivateCoachSchedule> privateCoachSchedules = new HashSet<PrivateCoachSchedule>(0);
 
 	public PrivateCoachStatus() {
 	}
@@ -30,10 +29,6 @@ public class PrivateCoachStatus implements java.io.Serializable {
 		this.name = name;
 	}
 
-	public PrivateCoachStatus(String name, Set<PrivateCoachSchedule> privateCoachSchedules) {
-		this.name = name;
-		this.privateCoachSchedules = privateCoachSchedules;
-	}
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -56,13 +51,5 @@ public class PrivateCoachStatus implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "privateCoachStatus")
-	public Set<PrivateCoachSchedule> getPrivateCoachSchedules() {
-		return this.privateCoachSchedules;
-	}
-
-	public void setPrivateCoachSchedules(Set<PrivateCoachSchedule> privateCoachSchedules) {
-		this.privateCoachSchedules = privateCoachSchedules;
-	}
 
 }

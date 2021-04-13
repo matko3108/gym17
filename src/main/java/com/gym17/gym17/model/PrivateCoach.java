@@ -53,6 +53,14 @@ public class PrivateCoach implements java.io.Serializable {
 		this.userWorker = userWorker;
 		this.start = start;
 	}
+	
+	public PrivateCoach(UserCustomer userCustomer, UserWorker userWorker, Date start, Date end) {
+		this.userCustomer = userCustomer;
+		this.userWorker = userWorker;
+		this.start = start;
+		this.end = end;
+	}
+
 
 	public PrivateCoach(UserCustomer userCustomer, UserWorker userWorker, String description, Date end, Date start,
 			Set<PrivateCoachWeekdays> privateCoachWeekdayses) {

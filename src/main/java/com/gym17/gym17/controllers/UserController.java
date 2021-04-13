@@ -1,5 +1,7 @@
 package src.main.java.com.gym17.gym17.controllers;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
@@ -207,11 +209,14 @@ public class UserController {
 
 			//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
 		}else {
+			if(userdata.getUserType().equals("WORKER")) {
+				return ResponseEntity.ok().body(new ResponseStatus(true));
+			}else {
 			User usersaved = UserService.saveNewUser(userdata);
 			usersaved.setUserCustomer(null);
 			usersaved.setUserWorker(null);
 			return ResponseEntity.ok().body(new ResponseStatus(true));
-
+			}
 			//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
 		}
 		}
@@ -247,11 +252,19 @@ public class UserController {
 		Optional<User> User = UserService.findByExternalId(userMembershipdata.getUser_id());
 		Optional<MembershipFeeType> MembershipFeeType = MembershipFeeTypeService.findByExternalId(userMembershipdata.getMembership_id());
 		if (User.isPresent() && MembershipFeeType.isPresent()) {
+
+			
 			CustomerMembershipFee customerMembershipFee = new CustomerMembershipFee();
 			customerMembershipFee.setMembershipFeeType(MembershipFeeType.get());
 			customerMembershipFee.setUserCustomer(User.get().getUserCustomer());
 			customerMembershipFee.setEndDate(userMembershipdata.getEnd_date());
 			customerMembershipFee.setStartDate(userMembershipdata.getStart_date());
+			
+			Optional<CustomerMembershipFee> customerMembershipFeeExist = CustomerMembershipFeeService.checkCustomerMembershipFee(customerMembershipFee);
+			   DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  
+		          String startDate = dateFormat.format(customerMembershipFee.getStartDate());  
+		          String endDate = dateFormat.format(customerMembershipFee.getEndDate());  
+			if(!customerMembershipFeeExist.isPresent()) {
 			CustomerMembershipFeeService.saveCustomerMembershipFee(customerMembershipFee);
 			
 			customerMembershipFee.getUserCustomer().setGroupCustomers(null);
@@ -260,6 +273,9 @@ public class UserController {
 			customerMembershipFee.getUserCustomer().getUser().setUserWorker(null);
 			return ResponseEntity.ok().body(new ResponseStatus(true));
 			//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
+			}else {
+				return ResponseEntity.ok().body(new ErrorResponse(ErrorType.MEMBERSHIP_ALREADY_EXIST));
+			}
 		}else {
 			if(!User.isPresent()) {
 				return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));

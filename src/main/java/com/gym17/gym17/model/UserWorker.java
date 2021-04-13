@@ -40,12 +40,8 @@ public class UserWorker implements java.io.Serializable {
 	@JsonIgnoreProperties(value = {"userWorkers", "hibernateLazyInitializer"})
 	private WorkerType workerType;
 	private String additionalData;
-	@JsonIgnoreProperties(value = {"userWorker","userCustomer", "hibernateLazyInitializer"})
-	private Set<PrivateCoach> privateCoaches = new HashSet<PrivateCoach>(0);
 	@JsonIgnoreProperties(value = {"userWorker", "hibernateLazyInitializer"})
 	private Set<UserWorkerWorkerRights> userWorkerWorkerRightses = new HashSet<UserWorkerWorkerRights>(0);
-	@JsonIgnoreProperties(value = {"groupWorkers", "userWorker","groupCustomers", "hibernateLazyInitializer"})
-	private Set<GroupWorker> groupWorkers = new HashSet<GroupWorker>(0);
 
 	public UserWorker() {
 	}
@@ -59,14 +55,12 @@ public class UserWorker implements java.io.Serializable {
 		this.workerType = workerType;
 	}
 
-	public UserWorker(User user, WorkerType workerType, String additionalData, Set<PrivateCoach> privateCoaches,
-			Set<UserWorkerWorkerRights> userWorkerWorkerRightses, Set<GroupWorker> groupWorkers) {
+	public UserWorker(User user, WorkerType workerType, String additionalData,
+			Set<UserWorkerWorkerRights> userWorkerWorkerRightses) {
 		this.user = user;
 		this.workerType = workerType;
 		this.additionalData = additionalData;
-		this.privateCoaches = privateCoaches;
 		this.userWorkerWorkerRightses = userWorkerWorkerRightses;
-		this.groupWorkers = groupWorkers;
 	}
 
 	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "user"))
@@ -108,14 +102,8 @@ public class UserWorker implements java.io.Serializable {
 	public void setAdditionalData(String additionalData) {
 		this.additionalData = additionalData;
 	}
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userWorker",cascade = CascadeType.ALL)
-	public Set<PrivateCoach> getPrivateCoaches() {
-		return this.privateCoaches;
-	}
 
-	public void setPrivateCoaches(Set<PrivateCoach> privateCoaches) {
-		this.privateCoaches = privateCoaches;
-	}
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userWorker", cascade = CascadeType.REMOVE)
 	public Set<UserWorkerWorkerRights> getUserWorkerWorkerRightses() {
 		return this.userWorkerWorkerRightses;
@@ -123,15 +111,6 @@ public class UserWorker implements java.io.Serializable {
 
 	public void setUserWorkerWorkerRightses(Set<UserWorkerWorkerRights> userWorkerWorkerRightses) {
 		this.userWorkerWorkerRightses = userWorkerWorkerRightses;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userWorker", cascade = CascadeType.ALL)
-	public Set<GroupWorker> getGroupWorkers() {
-		return this.groupWorkers;
-	}
-
-	public void setGroupWorkers(Set<GroupWorker> groupWorkers) {
-		this.groupWorkers = groupWorkers;
 	}
 
 }
