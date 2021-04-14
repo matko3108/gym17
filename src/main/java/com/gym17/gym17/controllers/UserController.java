@@ -252,14 +252,19 @@ public class UserController {
 		Optional<User> User = UserService.findByExternalId(userMembershipdata.getUser_id());
 		Optional<MembershipFeeType> MembershipFeeType = MembershipFeeTypeService.findByExternalId(userMembershipdata.getMembership_id());
 		if (User.isPresent() && MembershipFeeType.isPresent()) {
-
+			
 			
 			CustomerMembershipFee customerMembershipFee = new CustomerMembershipFee();
 			customerMembershipFee.setMembershipFeeType(MembershipFeeType.get());
 			customerMembershipFee.setUserCustomer(User.get().getUserCustomer());
 			customerMembershipFee.setEndDate(userMembershipdata.getEnd_date());
 			customerMembershipFee.setStartDate(userMembershipdata.getStart_date());
-		
+			
+			Optional<CustomerMembershipFee> customerMembershipFeeExist = CustomerMembershipFeeService.checkCustomerMembershipFee(customerMembershipFee);
+			   DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  
+		          String startDate = dateFormat.format(customerMembershipFee.getStartDate());  
+		          String endDate = dateFormat.format(customerMembershipFee.getEndDate());  
+			if(!customerMembershipFeeExist.isPresent()) {
 			CustomerMembershipFeeService.saveCustomerMembershipFee(customerMembershipFee);
 			
 			customerMembershipFee.getUserCustomer().setGroupCustomers(null);
@@ -268,7 +273,9 @@ public class UserController {
 			customerMembershipFee.getUserCustomer().getUser().setUserWorker(null);
 			return ResponseEntity.ok().body(new ResponseStatus(true));
 			//return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
-			
+			}else {
+				return ResponseEntity.ok().body(new ErrorResponse(ErrorType.MEMBERSHIP_ALREADY_EXIST));
+			}
 		}else {
 			if(!User.isPresent()) {
 				return ResponseEntity.ok().body(new ErrorResponse(ErrorType.USER_NOT_FOUND));
@@ -322,7 +329,7 @@ public class UserController {
 	public ResponseEntity<?> findByEmail(@PathVariable("userByEmail") String userByEmail) {
 		/*
 		 * //log.info("Requested: User with [username={}]", username);
-		 */		Optional<UserFull> org = UserService.findByEmail(userByEmail);
+		 */	Optional<UserFull> org = UserService.findByEmail(userByEmail);
 		if (org == null) {
 			/*
 			 * //log.info("User with [username={}] not found! Response: [{}]", username,

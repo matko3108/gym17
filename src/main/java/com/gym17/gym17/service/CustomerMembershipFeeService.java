@@ -43,6 +43,7 @@ public class CustomerMembershipFeeService {
           String startDate = dateFormat.format(customerMembershipFee.getStartDate());  
           String endDate = dateFormat.format(customerMembershipFee.getEndDate());  
 
+          
 		return CustomerMembershipFeeRepository.checkCustomerMembershipFee(customerMembershipFee.getUserCustomer().getId(), customerMembershipFee.getMembershipFeeType().getId(), startDate, endDate);
 	}
 
