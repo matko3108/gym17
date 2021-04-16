@@ -15,7 +15,7 @@ import src.main.java.com.gym17.gym17.model.UserFull;
 @Repository
 public interface UserFullRepository extends JpaRepository<UserFull, Integer> {
 
-	@Query(value = "SELECT * FROM User t WHERE t.email = :userByEmail OR t.phone = :userByEmail AND t.fk_user_type = 1", nativeQuery = true)
+	@Query(value = "SELECT * FROM User t WHERE (t.email = :userByEmail OR t.phone = :userByEmail) AND t.fk_user_type = 1", nativeQuery = true)
 	Optional<UserFull> findByEmail(@Param("userByEmail") String userByEmail);
 
 }
