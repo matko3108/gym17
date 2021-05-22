@@ -71,7 +71,7 @@ public class ActivityListController {
 			ActivityList.setCreateDate(ActivityListData.getCreateDate());
 			ActivityList.setName(ActivityListData.getName());
 			ActivityList.setDescription(ActivityListData.getDescription());
-			ActivityList.setValidityPeriod(ActivityListData.getValidityPeriod());
+			//ActivityList.setValidityPeriod(ActivityListData.getValidityPeriod());
 			ActivityList.setActivityType(ActivityTypeService.findByName(ActivityListData.getActivityType()));
 			ActivityList.setUser(user.get());
 			ActivityListService.save(ActivityList);
