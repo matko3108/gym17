@@ -37,7 +37,7 @@ public class ActivityList implements java.io.Serializable {
 	private Date createDate;
 	private String description;
 	private String name;
-	private Integer validityPeriod;
+	//private Integer validityPeriod;
 
 	public ActivityList() {
 	}
@@ -49,14 +49,14 @@ public class ActivityList implements java.io.Serializable {
 	}
 
 	public ActivityList(ActivityType activityType, User user, Boolean active, Date createDate, String description,
-			String name, Integer validityPeriod) {
+			String name) {
 		this.activityType = activityType;
 		// this.user = user;
 		this.active = active;
 		this.createDate = createDate;
 		this.description = description;
 		this.name = name;
-		this.validityPeriod = validityPeriod;
+		//this.validityPeriod = validityPeriod;
 	}
 
 	@Id
@@ -128,13 +128,6 @@ public class ActivityList implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@Column(name = "validity_period")
-	public Integer getValidityPeriod() {
-		return this.validityPeriod;
-	}
 
-	public void setValidityPeriod(Integer validityPeriod) {
-		this.validityPeriod = validityPeriod;
-	}
 
 }
